@@ -1,0 +1,46 @@
+input {
+  border: none;
+  border-bottom: 1px solid #D2D9E1;
+}
+
+.fieldStyle {
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+}
+.fieldStyle p {
+  margin: 0;
+}
+.fieldStyle .field-form-item {
+  padding: 3px;
+}
+.fieldStyle .field-form-item input {
+  width: 100%;
+}
+.fieldStyle .border-style {
+  padding: 10px 0;
+}
+.fieldStyle .radioItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem;
+}
+.fieldStyle .form-item {
+  padding: 10px;
+}
+
+.height-width-button {
+  padding: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.height-width-button input {
+  width: 50px;
+}
+
+input:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=fieldStyles.component.css.map */

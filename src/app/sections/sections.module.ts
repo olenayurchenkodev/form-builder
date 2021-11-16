@@ -1,9 +1,9 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {ComponentPortal, Portal, PortalModule, TemplatePortal} from '@angular/cdk/portal';
+import {NgModule} from '@angular/core';
+import {PortalModule} from '@angular/cdk/portal';
 import {BrowserModule} from "@angular/platform-browser";
 
-
 import {SectionsComponent} from "./sections.component";
+import {AccordionModule} from '../../components/accordion/accordion.module'
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import {SectionsComponent} from "./sections.component";
   ],
   imports: [
     BrowserModule,
-    PortalModule
+    PortalModule,
+    AccordionModule
   ],
   providers: [],
   exports: [

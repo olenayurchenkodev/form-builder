@@ -1,0 +1,41 @@
+input{
+  border: none;
+  border-bottom: 1px solid #D2D9E1;
+}
+.fieldStyle{
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  p{
+    margin: 0;
+  }
+  .field-form-item{
+    padding: 3px;
+    input{
+      width: 100%;
+    }
+  }
+  .border-style{
+    padding: 10px 0;
+  }
+  .radioItem{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem;
+  }
+  .form-item{
+    padding: 10px;
+  }
+}
+.height-width-button{
+  padding: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  input{
+    width: 50px;
+  }
+}
+input:focus{
+  outline: none;
+}

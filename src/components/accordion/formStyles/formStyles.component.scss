@@ -1,0 +1,17 @@
+.formStyle{
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  .field-form-item{
+    input{
+      width: 100%;
+    }
+  }
+}
+input{
+  border: none;
+  border-bottom: 1px solid #D2D9E1;
+}
+input:focus{
+  outline: none;
+}
