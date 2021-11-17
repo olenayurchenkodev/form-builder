@@ -1,19 +1,21 @@
-<form class="formStyle">
+<div class="form-container">
+  <div class="form-styles">
 
-  <div class="form-item field-form-item">
-    <label for="font-size">Font size:</label>
-    <input type="text" id="font-size">
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>Font colour</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Font type</mat-label>
+      <mat-select>
+        <mat-option value="font_one">Montserrat</mat-option>
+        <mat-option value="font_two">Times new roman</mat-option>
+        <mat-option value="font_three">Roboto</mat-option>
+        <mat-option value="font_four">Open Sans</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
-
-  <div class="form-item field-form-item">
-    <label for="font-weight">Font weight:</label>
-    <input type="text" id="font-weight">
-  </div>
-
-  <div class="form-item field-form-item">
-    <label for="colour-back">Colour background</label>
-    <input type="text" id="colour-back">
-  </div>
-
-</form>
+</div>
 

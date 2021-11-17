@@ -1,17 +1,13 @@
-.formStyle{
-  width: 70%;
+.form-container{
+  width: 90%;
+  display: block;
   margin: auto;
-  padding: 10px;
-  .field-form-item{
-    input{
-      width: 100%;
-    }
+}
+.form-styles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  mat-form-field{
+    width: 100%;
   }
-}
-input{
-  border: none;
-  border-bottom: 1px solid #D2D9E1;
-}
-input:focus{
-  outline: none;
 }
