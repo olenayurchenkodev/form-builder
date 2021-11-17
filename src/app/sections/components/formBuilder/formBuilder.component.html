@@ -9,25 +9,31 @@
     id="formList"
     (cdkDropListDropped)="drop($event)"
   >
+    <h2>Form Label</h2>
     <div class="box" *ngFor="let item of form" cdkDrag>
 
       <input-input-card
+        class="formItem"
         *ngIf="item === 'Input'"
       ></input-input-card>
 
       <textarea-input-card
+        class="formItem"
         *ngIf="item === 'Textarea'"
       ></textarea-input-card>
 
       <button-input-card
+        class="formItem"
         *ngIf="item === 'Button'"
       ></button-input-card>
 
       <checkbox-input-card
+        class="formItem"
         *ngIf="item === 'Checkbox'"
       ></checkbox-input-card>
 
       <select-input-card
+        class="formItem"
       *ngIf="item === 'Select option'"
       ></select-input-card>
 
