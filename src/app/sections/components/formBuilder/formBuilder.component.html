@@ -1,0 +1,44 @@
+<div class="form-builder">
+  <h3>Form Builder</h3>
+
+  <div
+    class="list"
+    cdkDropList
+    [cdkDropListData]="form"
+    cdkDropListConnectedTo="inputsList"
+    id="formList"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="box" *ngFor="let item of form" cdkDrag>
+
+      <input-input-card
+        *ngIf="item === 'Input'"
+      ></input-input-card>
+
+      <textarea-input-card
+        *ngIf="item === 'Textarea'"
+      ></textarea-input-card>
+
+      <button-input-card
+        *ngIf="item === 'Button'"
+      ></button-input-card>
+
+      <checkbox-input-card
+        *ngIf="item === 'Checkbox'"
+      ></checkbox-input-card>
+
+      <select-input-card
+      *ngIf="item === 'Select option'"
+      ></select-input-card>
+
+    </div>
+  </div>
+
+  <div class="submission">
+    <button
+      mat-button
+      *ngIf="form.length != 0"
+    >Save Form</button>
+  </div>
+
+</div>

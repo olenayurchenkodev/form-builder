@@ -3,9 +3,9 @@ import {PortalModule} from '@angular/cdk/portal';
 import {BrowserModule} from "@angular/platform-browser";
 
 import {SectionsComponent} from "./sections.component";
-import {AccordionModule} from '../../components/accordion/accordion.module'
-import {InputCardModule} from "../../components/inputCard/inputCard.module";
-import {FormBuilderModule} from "../../components/formBuilder/formBuilder.module";
+import {AccordionModule} from './components/accordion/accordion.module';
+import {InputCardModule} from "./components/inputCard/inputCard.module";
+import {FormBuilderModule} from "./components/formBuilder/formBuilder.module";
 
 
 @NgModule({

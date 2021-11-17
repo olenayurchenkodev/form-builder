@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'form-builder-root',
@@ -14,13 +14,12 @@ export class FormBuilderComponent {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(
+      copyArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
-
     }
   }
 
