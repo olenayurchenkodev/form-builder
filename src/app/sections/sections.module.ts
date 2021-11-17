@@ -4,6 +4,8 @@ import {BrowserModule} from "@angular/platform-browser";
 
 import {SectionsComponent} from "./sections.component";
 import {AccordionModule} from '../../components/accordion/accordion.module'
+import {InputCardModule} from "../../components/inputCard/inputCard.module";
+import {FormBuilderModule} from "../../components/formBuilder/formBuilder.module";
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import {AccordionModule} from '../../components/accordion/accordion.module'
   imports: [
     BrowserModule,
     PortalModule,
-    AccordionModule
+    AccordionModule,
+    InputCardModule,
+    FormBuilderModule
   ],
   providers: [],
   exports: [

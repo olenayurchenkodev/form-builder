@@ -1,0 +1,15 @@
+<div class="form-builder">
+  <h3>Input types</h3>
+
+  <div
+    class="list"
+    cdkDropList
+    [cdkDropListData]="inputs"
+    cdkDropListConnectedTo="formList"
+    id="inputsList"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="box" *ngFor="let item of inputs" cdkDrag>{{ item }}</div>
+  </div>
+
+</div>
