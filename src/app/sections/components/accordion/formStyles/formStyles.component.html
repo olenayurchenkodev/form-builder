@@ -1,21 +1,39 @@
 <div class="form-container">
-  <div class="form-styles">
+  <form [formGroup]="formStyle" class="form-styles">
 
     <mat-form-field appearance="fill">
-      <mat-label>Font colour</mat-label>
-      <input matInput>
+      <mat-label>Colour</mat-label>
+      <input matInput value="111111" formControlName="colour">
+<!--      <span matPrefix>#</span>-->
+      <span matSuffix>hex</span>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Font type</mat-label>
-      <mat-select>
-        <mat-option value="font_one">Montserrat</mat-option>
-        <mat-option value="font_two">Times new roman</mat-option>
-        <mat-option value="font_three">Roboto</mat-option>
-        <mat-option value="font_four">Open Sans</mat-option>
+      <mat-select formControlName="font" [(value)]="selected">
+        <mat-option *ngFor="let font of fonts" [value]="font.value">
+          {{ font.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-  </div>
+    <div class="height-width-button">
+      <mat-form-field appearance="fill">
+        <mat-label>Font Size</mat-label>
+        <input matInput formControlName="fontSize">
+        <span matSuffix>px</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Font Weight</mat-label>
+        <input matInput formControlName="fontWeight">
+        <span matSuffix>px</span>
+      </mat-form-field>
+    </div>
+
+    <div class="submission">
+      <button mat-button (click)=sendStyles() >Submit</button>
+    </div>
+
+  </form>
 </div>
 

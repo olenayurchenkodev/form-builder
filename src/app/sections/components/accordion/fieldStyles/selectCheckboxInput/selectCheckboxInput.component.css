@@ -4,15 +4,18 @@
   margin: auto;
 }
 
-.form-styles {
+.field-styles {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.form-styles mat-form-field {
+.field-styles .form-item {
   width: 100%;
 }
-.form-styles .submission {
+.field-styles .form-item mat-checkbox {
+  padding-bottom: 1.34375em;
+}
+.field-styles .submission {
   display: block;
   margin: auto;
 }
@@ -26,4 +29,4 @@
   width: 45%;
 }
 
-/*# sourceMappingURL=formStyles.component.css.map */
+/*# sourceMappingURL=selectCheckboxInput.component.css.map */

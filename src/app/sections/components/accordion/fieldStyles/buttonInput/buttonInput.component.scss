@@ -3,12 +3,15 @@
   display: block;
   margin: auto;
 }
-.form-styles {
+.field-styles {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  mat-form-field{
+  .form-item{
     width: 100%;
+    mat-checkbox{
+      padding-bottom: 1.34375em;
+    }
   }
   .submission{
     display: block;

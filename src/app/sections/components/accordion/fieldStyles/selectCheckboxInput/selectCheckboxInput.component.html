@@ -1,0 +1,38 @@
+
+
+<div class="form-container">
+  <form [formGroup]="formStyle" class="field-styles">
+
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>Label</mat-label>
+      <input matInput formControlName="label">
+    </mat-form-field>
+
+    <div class="height-width-button">
+      <mat-form-field appearance="fill">
+        <mat-label>Width</mat-label>
+        <input matInput formControlName="width">
+        <span matSuffix>px</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Height</mat-label>
+        <input matInput formControlName="height">
+        <span matSuffix>px</span>
+      </mat-form-field>
+    </div>
+
+    <section class="form-item">
+      <mat-checkbox class="example-margin" formControlName="required">Required Field!</mat-checkbox>
+    </section>
+
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>New option</mat-label>
+      <input matInput formControlName="newOption">
+    </mat-form-field>
+
+    <div class="submission" >
+      <button mat-button (click)=sendStyles()>Submit</button>
+    </div>
+
+  </form>
+</div>

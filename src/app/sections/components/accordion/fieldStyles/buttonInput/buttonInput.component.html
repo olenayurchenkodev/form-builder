@@ -1,0 +1,41 @@
+
+<div class="form-container">
+  <form class="field-styles">
+
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>Label</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <div class="height-width-button">
+      <mat-form-field appearance="fill">
+        <mat-label>Width</mat-label>
+        <input matInput>
+        <span matSuffix>px</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Height</mat-label>
+        <input matInput>
+        <span matSuffix>px</span>
+      </mat-form-field>
+    </div>
+
+    <section class="form-item">
+      <mat-checkbox class="example-margin">Required Field!</mat-checkbox>
+    </section>
+
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>Border Style</mat-label>
+      <mat-select>
+        <mat-option value="border_one">None</mat-option>
+        <mat-option value="border_two">Dotted line</mat-option>
+        <mat-option value="border_three">Permanent line</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="submission" >
+      <button mat-button >Submit</button>
+    </div>
+
+  </form>
+</div>
