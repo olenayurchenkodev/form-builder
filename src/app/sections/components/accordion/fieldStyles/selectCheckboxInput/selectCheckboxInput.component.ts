@@ -1,6 +1,6 @@
-import { Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedService} from "../../../../../../services/share.service";
+import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyles.service";
 
 
 @Component({
@@ -9,21 +9,27 @@ import {SharedService} from "../../../../../../services/share.service";
   styleUrls: ['./selectCheckboxInput.component.scss']
 })
 export class SelectCheckboxInputComponent {
+  @Input() id: any = null;
 
   formStyle = new FormGroup({
     label: new FormControl(),
-    placeholder: new FormControl()
+    width: new FormControl(),
+    height: new FormControl(),
+    required: new FormControl(),
+    newOption: new FormControl()
+
   })
 
-  constructor(private sharedService:SharedService) { }
+  constructor(private sharedStyleService:SharedFieldStyleService) { }
 
   sendStyles(){
-    this.sharedService.sendMessage([
+    this.sharedStyleService.sendMessage([
       this.formStyle.get('label')?.value,
       this.formStyle.get('width')?.value,
       this.formStyle.get('height')?.value,
       this.formStyle.get('required')?.value,
-      this.formStyle.get('newOption')?.value
+      this.formStyle.get('newOption')?.value,
+      this.id
     ]);
   }
 

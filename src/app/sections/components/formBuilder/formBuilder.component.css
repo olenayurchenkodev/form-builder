@@ -14,7 +14,6 @@
 .form-builder .formItem {
   width: 90%;
   padding: 10px;
-  background: #fbfbfb;
 }
 
 .submission {
@@ -47,6 +46,7 @@
   cursor: move;
   background: white;
   font-size: 14px;
+  background: none;
 }
 
 .cdk-drag-preview {
@@ -57,7 +57,6 @@
 .cdk-drag-preview .formItem {
   width: 90%;
   padding: 10px;
-  background: #fbfbfb;
 }
 
 .cdk-drag-placeholder {
@@ -74,11 +73,6 @@
 
 .list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.custom-style {
-  background-color: #fefefe;
-  font-family: Montserrat;
 }
 
 /*# sourceMappingURL=formBuilder.component.css.map */

@@ -2,32 +2,48 @@
   <form [formGroup]="formStyle" class="form-styles">
 
     <mat-form-field appearance="fill">
-      <mat-label>Colour</mat-label>
-      <input matInput value="111111" formControlName="colour">
-<!--      <span matPrefix>#</span>-->
-      <span matSuffix>hex</span>
+      <mat-label>Form label</mat-label>
+      <input matInput name="label" formControlName="label">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Font type</mat-label>
-      <mat-select formControlName="font" [(value)]="selected">
-        <mat-option *ngFor="let font of fonts" [value]="font.value">
-          {{ font.name }}
+      <mat-label>Text colour</mat-label>
+      <input matInput name="color" formControlName="colour">
+      <span matSuffix>RGB</span>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Background colour</mat-label>
+      <input matInput name="backcolor" formControlName="backcolour">
+      <span matSuffix>RGB</span>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Border style</mat-label>
+      <mat-select name="border" formControlName="border">
+        <mat-option *ngFor="let item of border" [value]="item.value">
+          {{ item.name }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="height-width-button">
+
       <mat-form-field appearance="fill">
         <mat-label>Font Size</mat-label>
-        <input matInput formControlName="fontSize">
+        <input matInput name="font-size" formControlName="fontSize">
         <span matSuffix>px</span>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>Font Weight</mat-label>
-        <input matInput formControlName="fontWeight">
-        <span matSuffix>px</span>
+        <mat-select name="font-weight" formControlName="fontWeight">
+          <mat-option *ngFor="let item of fontWeight" [value]="item.value">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+
     </div>
 
     <div class="submission">

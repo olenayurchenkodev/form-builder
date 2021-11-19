@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedService} from "../../../../../services/share.service";
+import {SharedFormStyleService} from "../../../../../services/shareFormStyles.service";
 
 
 @Component({
@@ -10,28 +10,36 @@ import {SharedService} from "../../../../../services/share.service";
 })
 export class FormStylesComponent{
 
-  selected='Times new roman'
+  border=[
+    {name: "None", value: "none"},
+    {name: "Dotted line", value: "dotted"},
+    {name: "Solid line", value: "solid"}
+  ]
 
-  fonts=[
-    {name: "Montserrat", value: "Montserrat"},
-    {name: "Open Sans", value: "Open Sans"},
-    {name: "Roboto", value: "Roboto"},
-    {name: "Times new roman", value: "Times new roman"}
+  fontWeight=[
+    {name: "Thin", value: "thin"},
+    {name: "Normal", value: "normal"},
+    {name: "Bold", value: "bold"}
   ]
 
   formStyle = new FormGroup({
+    label: new FormControl(),
     colour: new FormControl(),
-    font: new FormControl(),
+    backcolour: new FormControl(),
+    border: new FormControl(),
     fontSize: new FormControl(),
     fontWeight: new FormControl(),
   })
 
-  constructor(private sharedService:SharedService) { }
+
+  constructor(private sharedStyleService:SharedFormStyleService) { }
 
   sendStyles(){
-    this.sharedService.sendMessage([
+    this.sharedStyleService.sendMessage([
+      this.formStyle.get('label')?.value,
       this.formStyle.get('colour')?.value,
-      this.formStyle.get('font')?.value,
+      this.formStyle.get('backcolour')?.value,
+      this.formStyle.get('border')?.value,
       this.formStyle.get('fontSize')?.value,
       this.formStyle.get('fontWeight')?.value
     ]);

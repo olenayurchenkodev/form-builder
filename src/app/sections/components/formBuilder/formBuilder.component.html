@@ -2,50 +2,69 @@
   <h3>Form Builder</h3>
 
   <div
-    class="list custom-style"
+    class="list"
+    [ngStyle]="{
+          'color': formStyles[1]? formStyles[1]: '#111111',
+          'background': formStyles[2]? formStyles[2]: '#ffffff',
+          'border-style': formStyles[3]? formStyles[3]: 'solid',
+          'font-size': formStyles[4]? formStyles[4]: '18px',
+          'font-weight': formStyles[5]? formStyles[5]: 'normal'
+    }"
     cdkDropList
     [cdkDropListData]="form"
     cdkDropListConnectedTo="inputsList"
     id="formList"
     (cdkDropListDropped)="drop($event)"
   >
-    <h2>Form Label</h2>
+    <h2>{{formStyles[0]}}</h2>
     <div class="box" *ngFor="let item of form; let i = index" cdkDrag>
 
       <input-input-card
+        [label] =fieldStyles[0]
+        [placeholder]=fieldStyles[1]
+        [required]=fieldStyles[4]
+        [width] = fieldStyles[2]
+        [height]=fieldStyles[3]
+
         class="formItem"
         *ngIf="item === 'Input'"
         [id]="i"
+        (click) = selectInput(item,[i])
       ></input-input-card>
 
       <textarea-input-card
         class="formItem"
         *ngIf="item === 'Textarea'"
         [id]="i"
+        (click) = selectInput(item,[i])
       ></textarea-input-card>
 
       <button-input-card
         class="formItem"
         *ngIf="item === 'Button'"
         [id]="i"
+        (click) = selectInput(item,[i])
       ></button-input-card>
 
       <checkbox-input-card
         class="formItem"
         *ngIf="item === 'Checkbox'"
         [id]="i"
+        (click) = selectInput(item,[i])
       ></checkbox-input-card>
 
       <select-input-card
         class="formItem"
       *ngIf="item === 'Select option'"
         [id]="i"
+        (click) = selectInput(item,[i])
       ></select-input-card>
 
     </div>
   </div>
 
-  <p>{{formStyles}}</p>
+  <p>form styles: {{formStyles}}</p>
+  <p>field styles: {{fieldStyles}}</p>
 
   <div class="submission">
     <button

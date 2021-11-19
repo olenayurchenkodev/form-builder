@@ -17,6 +17,11 @@
     display: block;
     margin: auto;
   }
+  .subDelButton{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
 }
 .height-width-button{
   display: flex;

@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
 import {Subscription} from "rxjs";
-import {SharedService} from "../../../../services/share.service";
+import {SharedFormStyleService} from "../../../../services/shareFormStyles.service";
+import {SharedFieldStyleService} from "../../../../services/shareFieldStyles.service";
+import {SharedDataService} from "../../../../services/shareElemData.service";
 
 
 @Component({
@@ -11,13 +13,25 @@ import {SharedService} from "../../../../services/share.service";
 })
 export class FormBuilderComponent{
 
-  formStyles: any = '';
   form = [];
-  receiveData:Subscription;
+  click: boolean = false;
+  formStyles: any = '';
+  fieldStyles: any = '';
+  receiveFormData:Subscription;
+  receiveFieldData:Subscription;
 
-  constructor(private sharedService:SharedService) {
-    this.receiveData = this.sharedService.getClickEvent()
-      .subscribe( message => this.formStyles = message)
+  constructor(
+    private sharedFieldStyleService:SharedFieldStyleService,
+    private sharedFormStyleService:SharedFormStyleService,
+    private sharedDataService:SharedDataService
+              ) {
+    this.receiveFormData = this.sharedFormStyleService.getClickEvent()
+      .subscribe( (message: any) => this.formStyles = message)
+    // setTimeout(()=>{
+    //   console.log(this.formStyles);
+    // }, 10000)
+    this.receiveFieldData = this.sharedFieldStyleService.getClickEvent()
+      .subscribe( (message: any) => this.fieldStyles = message)
   }
 
   drop(event: CdkDragDrop<string[]|any>) {
@@ -32,5 +46,15 @@ export class FormBuilderComponent{
       );
     }
   }
+
+  selectInput(type: string, id: any){
+    this.click = true
+    this.sharedDataService.sendMessage([
+      type, id
+    ]);
+    // console.log('in form builder',type, id);
+  }
+
+
 
 }

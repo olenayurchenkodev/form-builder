@@ -17,6 +17,7 @@ import {TextareaComponent} from "./inputTypes/textarea/textarea.component";
 import {ButtonComponent} from "./inputTypes/button/button.component";
 import {CheckboxComponent} from "./inputTypes/checkbox/checkbox.component";
 import {SelectComponent} from "./inputTypes/select/select.component";
+import {CustomFormStyleDirective} from "./customStyles/customFormStyle.directive";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {SelectComponent} from "./inputTypes/select/select.component";
     TextareaComponent,
     ButtonComponent,
     CheckboxComponent,
-    SelectComponent
+    SelectComponent,
+    CustomFormStyleDirective
   ],
   imports: [
     BrowserModule,
