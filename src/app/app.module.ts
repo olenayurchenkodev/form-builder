@@ -10,6 +10,7 @@ import {PortalModule} from "@angular/cdk/portal";
 import {SectionsModule} from "./sections/sections.module";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {FormReducer} from "../store/reducers/form.reducers";
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { environment } from '../environments/environment';
     AppComponent
   ],
   imports: [
-    StoreModule.forRoot( {}),
+    StoreModule.forRoot( {FormReducer}),
     BrowserModule,
     PortalModule,
     SectionsModule,

@@ -52,6 +52,7 @@ export class FormBuilderComponent{
   }
 
   addField (id: number, typeField: string) {
+    console.log(id, typeField);
     this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
