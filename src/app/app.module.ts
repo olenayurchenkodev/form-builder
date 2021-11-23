@@ -12,8 +12,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 
-let reducers;
-
 @NgModule({
   declarations: [
     AppComponent

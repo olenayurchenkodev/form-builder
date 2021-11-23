@@ -4,6 +4,8 @@ import {Subscription} from "rxjs";
 import {SharedFormStyleService} from "../../../../services/shareFormStyles.service";
 import {SharedFieldStyleService} from "../../../../services/shareFieldStyles.service";
 import {SharedDataService} from "../../../../services/shareElemData.service";
+import {Store} from "@ngrx/store";
+import {createField} from '../../../../store/actions/form.actions'
 
 
 @Component({
@@ -21,6 +23,7 @@ export class FormBuilderComponent{
   receiveFieldData:Subscription;
 
   constructor(
+    private store: Store,
     private sharedFieldStyleService:SharedFieldStyleService,
     private sharedFormStyleService:SharedFormStyleService,
     private sharedDataService:SharedDataService
@@ -44,7 +47,12 @@ export class FormBuilderComponent{
         event.previousIndex,
         event.currentIndex,
       );
+      this.addField(this.form.length, this.form[event.currentIndex])
     }
+  }
+
+  addField (id: number, typeField: string) {
+    this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
   selectInput(type: string, id: any){
