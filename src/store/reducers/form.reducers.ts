@@ -11,7 +11,7 @@ export interface FieldStyle{
   Select?: { [key: string]: string | boolean },
 }
 
-export const initialState: any ={
+export const initialState: FieldStyle ={
   id: [],
   styles: [],
   Input: {
@@ -54,21 +54,40 @@ export const initialState: any ={
 export const FormReducer = createReducer(
   initialState,
   on(createField, (state, {id, typeField})=>{
+    let type = null;
+    if (typeField === 'Input') {type = state.Input}
+    if (typeField === 'Textarea') {type = state.Textarea}
+    if (typeField === 'Button') {type = state.Button}
+    if (typeField === 'Checkbox') {type = state.Checkbox}
+    if (typeField === 'Select') {type = state.Select}
     return  {...state,
       id: [...state.id, id],
-      styles: [ ...state.styles, state[`${typeField}`]]
+      styles: [ ...state.styles, type]
     };
   }),
   on(setField, (state, {id, typeField})=>{
     return  {...state,
-      styles: [ ...state.styles[id-1] = state[`${typeField}`]]
+      // styles: [ ...state.styles[id-1] = state[`${typeField}`]]
     };
   }),
   on(deleteField, (state, {id})=>{
     return  {...state,
-      id: [...state.id.pop(id-1)],
-      styles: [ ...state.styles.pop(id-1), ]
+      // id: [...state.id.pop(id-1)],
+      // styles: [ ...state.styles.pop(id-1), ]
     };
   })
+);
 
+// export const getFieldStyles = createSelector(
+//   createFeatureSelector('FieldStyle'),
+//   (state: FieldStyle) => {
+//     console.log(state.styles[0]);
+//     return state.styles[0];
+//   }
+// );
+export const selectFieldStyles = createFeatureSelector<FieldStyle>('FieldStyle');
+
+export const getFieldStyle = createSelector(
+  selectFieldStyles,
+  (state: FieldStyle): any => state.styles[0]
 );

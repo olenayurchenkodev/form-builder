@@ -12,7 +12,7 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() required: boolean = false;
   @Input() width: string = '';
-  @Input() height: boolean = false;
+  @Input() height: string = '';
   @Input() id: any = null;
 
 }

@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {SharedFormStyleService} from "../../../../services/shareFormStyles.service";
 import {SharedFieldStyleService} from "../../../../services/shareFieldStyles.service";
 import {SharedDataService} from "../../../../services/shareElemData.service";
-import {Store} from "@ngrx/store";
+import {select, Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
+import {getFieldStyle} from "../../../../store/reducers/form.reducers";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class FormBuilderComponent{
   fieldStyles: any = '';
   receiveFormData:Subscription;
   receiveFieldData:Subscription;
+  styles$?: Observable<any>;
 
   constructor(
     private store: Store,
@@ -54,6 +56,12 @@ export class FormBuilderComponent{
   addField (id: number, typeField: string) {
     console.log(id, typeField);
     this.store.dispatch(createField({id: id, typeField: typeField}))
+    this.styles$ = this.getField();
+    console.log(this.styles$);
+  }
+
+  getField(): Observable<string> {
+    return this.store.pipe(select(getFieldStyle));
   }
 
   selectInput(type: string, id: any){

@@ -9,6 +9,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { CommonModule } from '@angular/common';
 
 import {FormBuilderComponent} from "./formBuilder.component";
 import {InputCardModule} from "../inputCard/inputCard.module";
@@ -18,6 +19,7 @@ import {ButtonComponent} from "./inputTypes/button/button.component";
 import {CheckboxComponent} from "./inputTypes/checkbox/checkbox.component";
 import {SelectComponent} from "./inputTypes/select/select.component";
 import {CustomFormStyleDirective} from "./customStyles/customFormStyle.directive";
+import {ReactiveComponentModule} from "@ngrx/component";
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import {CustomFormStyleDirective} from "./customStyles/customFormStyle.directive
     CustomFormStyleDirective
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     CdkAccordionModule,
     MatFormFieldModule,
@@ -42,7 +45,8 @@ import {CustomFormStyleDirective} from "./customStyles/customFormStyle.directive
     MatButtonModule,
     DragDropModule,
     InputCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveComponentModule
   ],
   providers: [],
   exports: [
