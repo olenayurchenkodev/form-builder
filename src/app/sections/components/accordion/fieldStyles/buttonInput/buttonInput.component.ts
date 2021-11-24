@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyles.service";
+import {Store} from "@ngrx/store";
+import {setField} from "../../../../../../store/actions/form.actions";
 
 @Component({
   selector: 'fieldStyles-buttonInput',
@@ -8,6 +9,7 @@ import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyl
   styleUrls: ['./buttonInput.component.scss']
 })
 export class ButtonInputComponent {
+  customStyles?: { [key: string]: string | boolean };
   @Input() id: any = null;
 
   formStyle = new FormGroup({
@@ -26,18 +28,20 @@ export class ButtonInputComponent {
 
   selected = this.border[0]
 
-  constructor(private sharedStyleService:SharedFieldStyleService) { }
+  constructor(
+    private store: Store
+  ) { }
 
   sendStyles(){
-    this.sharedStyleService.sendMessage([
-      this.formStyle.get('label')?.value,
-      this.formStyle.get('width')?.value,
-      this.formStyle.get('height')?.value,
-      this.formStyle.get('required')?.value,
-      this.formStyle.get('border')?.value,
-      this.id
-    ]);
-    // console.log(this.formStyle);
+    this.customStyles = {
+      label: this.formStyle.get('label')?.value,
+      width: this.formStyle.get('width')?.value,
+      height: this.formStyle.get('height')?.value,
+      required: this.formStyle.get('required')?.value,
+      border: this.formStyle.get('border')?.value
+    }
+    this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
+    // console.log(this.customStyles);
   }
 
 }

@@ -1,9 +1,10 @@
 <div class="select">
   <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
+    <mat-label class="check-label">{{this.styles.label}}</mat-label>
     <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+      <mat-option *ngFor="let item of options" [value]="item">
+        {{ item }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 </div>

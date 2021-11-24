@@ -1,5 +1,7 @@
 <div>
 
+  {{elemData}}
+
   <fieldStyles-textInput
     [id]="elemData[1]"
     *ngIf="elemData[0] === 'Input'||elemData[0] === 'Textarea'"
@@ -16,14 +18,12 @@
   ></fieldStyles-selectCheckboxInput>
 
   <div
-    *ngIf="elemData[0] !== 'Select option'
+    *ngIf="elemData[0] !== 'Select'
     &&elemData[0] !== 'Checkbox'
     &&elemData[0] !== 'Input'
     &&elemData[0] !== 'Textarea'
     &&elemData[0] !== 'Button'"
   ><h3>Choose the element in FormBuilder</h3>
   </div>
-
-  {{elemData}}
 
 </div>

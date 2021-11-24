@@ -1,12 +1,10 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Observable, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import {SharedFormStyleService} from "../../../../services/shareFormStyles.service";
-import {SharedFieldStyleService} from "../../../../services/shareFieldStyles.service";
 import {SharedDataService} from "../../../../services/shareElemData.service";
-import {select, Store} from "@ngrx/store";
+import {Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
-import {getFieldStyle} from "../../../../store/reducers/form.reducers";
 
 
 @Component({
@@ -17,31 +15,26 @@ import {getFieldStyle} from "../../../../store/reducers/form.reducers";
 export class FormBuilderComponent{
 
   form = [];
+  ids:any = [];
   click: boolean = false;
   formStyles: any = '';
-  fieldStyles: any = '';
   receiveFormData:Subscription;
-  receiveFieldData:Subscription;
-  styles$?: Observable<any>;
 
   constructor(
     private store: Store,
-    private sharedFieldStyleService:SharedFieldStyleService,
     private sharedFormStyleService:SharedFormStyleService,
     private sharedDataService:SharedDataService
               ) {
     this.receiveFormData = this.sharedFormStyleService.getClickEvent()
       .subscribe( (message: any) => this.formStyles = message)
-    // setTimeout(()=>{
-    //   console.log(this.formStyles);
-    // }, 10000)
-    this.receiveFieldData = this.sharedFieldStyleService.getClickEvent()
-      .subscribe( (message: any) => this.fieldStyles = message)
   }
 
   drop(event: CdkDragDrop<string[]|any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      const b = this.ids[event.previousIndex];
+      this.ids[event.previousIndex] = this.ids[event.currentIndex];
+      this.ids[event.currentIndex] = b;
     } else {
       copyArrayItem(
         event.previousContainer.data,
@@ -50,18 +43,12 @@ export class FormBuilderComponent{
         event.currentIndex,
       );
       this.addField(this.form.length, this.form[event.currentIndex])
+      this.ids.splice(event.currentIndex, 0, this.form.length)
     }
   }
 
   addField (id: number, typeField: string) {
-    console.log(id, typeField);
     this.store.dispatch(createField({id: id, typeField: typeField}))
-    this.styles$ = this.getField();
-    console.log(this.styles$);
-  }
-
-  getField(): Observable<string> {
-    return this.store.pipe(select(getFieldStyle));
   }
 
   selectInput(type: string, id: any){
@@ -69,9 +56,6 @@ export class FormBuilderComponent{
     this.sharedDataService.sendMessage([
       type, id
     ]);
-    // console.log('in form builder',type, id);
   }
-
-
 
 }

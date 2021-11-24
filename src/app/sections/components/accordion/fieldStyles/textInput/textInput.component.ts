@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyles.service";
+import {setField} from "../../../../../../store/actions/form.actions";
+import {Store} from "@ngrx/store";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyl
   styleUrls: ['./textInput.component.scss']
 })
 export class TextInputComponent {
+  customStyles?: { [key: string]: string | boolean };
   @Input() id: any = null;
 
   width = [
@@ -30,20 +32,18 @@ export class TextInputComponent {
     required: new FormControl()
   })
 
-  constructor(
-    private sharedFieldStyleService:SharedFieldStyleService
-  ) {  }
+  constructor(private store: Store) {  }
 
   sendStyles(){
-    this.sharedFieldStyleService.sendMessage([
-      this.formStyle.get('label')?.value,
-      this.formStyle.get('placeholder')?.value,
-      this.formStyle.get('width')?.value,
-      this.formStyle.get('height')?.value,
-      this.formStyle.get('required')?.value,
-      this.id
-    ]);
-    // console.log(this.formStyle.value);
+    this.customStyles = {
+      label: this.formStyle.get('label')?.value,
+      placeholder: this.formStyle.get('placeholder')?.value,
+      width: this.formStyle.get('width')?.value,
+      height: this.formStyle.get('height')?.value,
+      required: this.formStyle.get('required')?.value
+    }
+    this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
+    // console.log(this.customStyles);
   }
 
   deleteElem(){

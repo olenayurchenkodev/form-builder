@@ -17,58 +17,50 @@
     (cdkDropListDropped)="drop($event)"
   >
     <h2>{{ formStyles[0] }}</h2>
-    <div class="box" *ngFor="let item of form; let i = index" cdkDrag>
+    <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
 
-      <ng-container *ngrxLet="styles$ let s">
-        {{s}}
+      <ng-container>
         <input-input-card
-
-          [label] = "fieldStyles[0]"
-          [placeholder]=fieldStyles[1]
-          [required]=fieldStyles[4]
-          [width] = fieldStyles[2]
-          [height]=fieldStyles[3]
-
           class="formItem"
-          *ngIf="item === 'Input'"
-          [id]="i"
-          (click) = selectInput(item,[i])
+          *ngIf="form[i] === 'Input'"
+          [id]="item"
+          (click) = selectInput(form[i],[item])
         ></input-input-card>
       </ng-container>
 
       <textarea-input-card
         class="formItem"
-        *ngIf="item === 'Textarea'"
-        [id]="i"
-        (click) = selectInput(item,[i])
+        *ngIf="form[i] === 'Textarea'"
+        [id]="item"
+        (click) = selectInput(form[i],[item])
       ></textarea-input-card>
 
       <button-input-card
         class="formItem"
-        *ngIf="item === 'Button'"
-        [id]="i"
-        (click) = selectInput(item,[i])
+        *ngIf="form[i] === 'Button'"
+        [id]="item"
+        (click) = selectInput(form[i],[item])
       ></button-input-card>
 
       <checkbox-input-card
         class="formItem"
-        *ngIf="item === 'Checkbox'"
-        [id]="i"
-        (click) = selectInput(item,[i])
+        *ngIf="form[i] === 'Checkbox'"
+        [id]="item"
+        (click) = selectInput(form[i],[item])
       ></checkbox-input-card>
 
       <select-input-card
         class="formItem"
-      *ngIf="item === 'Select'"
-        [id]="i"
-        (click) = selectInput(item,[i])
+      *ngIf="form[i] === 'Select'"
+        [id]="item"
+        (click) = selectInput(form[i],[item])
       ></select-input-card>
 
     </div>
   </div>
 
-  <p>form styles: {{formStyles}}</p>
-  <p>field styles: {{fieldStyles}}</p>
+<!--  <p>form styles: {{formStyles}}</p>-->
+<!--  <p>field styles: {{"soon =)"}}</p>-->
 
   <div class="submission">
     <button

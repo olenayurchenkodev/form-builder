@@ -23,7 +23,7 @@ import {AuthModule} from "./auth/auth.module";
     AppComponent
   ],
   imports: [
-    StoreModule.forRoot( {FormReducer}),
+    StoreModule.forRoot( {fieldStyles: FormReducer}),
     BrowserModule,
     PortalModule,
     SectionsModule,

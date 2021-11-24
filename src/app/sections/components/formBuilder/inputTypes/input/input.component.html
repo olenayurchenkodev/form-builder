@@ -1,8 +1,10 @@
 <div class="input">
-  <mat-form-field appearance="fill">
-    <mat-label>{{label? label: 'Input label'}}</mat-label>
-    <input matInput [placeholder]="placeholder? placeholder: ''"
-           [required]="required? required: false">
-  </mat-form-field>
+  <ng-container>
+    <mat-form-field appearance="fill">
+      <mat-label>{{this.styles.label}}</mat-label>
+      <input matInput [placeholder]="this.styles.placeholder"
+             [required]="this.styles.required">
+    </mat-form-field>
+  </ng-container>
 </div>
 

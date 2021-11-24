@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
-
+import {Component, Input, OnInit} from '@angular/core';
+import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
+import {Store} from "@ngrx/store";
 
 
 @Component({
@@ -7,12 +8,22 @@ import {Component, Input} from '@angular/core';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent {
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
-  @Input() required: boolean = false;
-  @Input() width: string = '';
-  @Input() height: string = '';
+export class InputComponent implements OnInit{
+  styles?: any
+
+  width: string = this.styles? this.styles.width: 'normal';
+  height: string = this.styles? this.styles.height: 'normal';
   @Input() id: any = null;
 
+  constructor(
+    private store: Store,
+  ) { }
+
+  ngOnInit(){
+    console.log('init id',this.id)
+    this.store.select(getFieldStyle(this.id-1))
+      .subscribe(
+        s => this.styles = s
+      )
+  }
 }

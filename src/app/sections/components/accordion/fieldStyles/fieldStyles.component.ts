@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {SharedFieldStyleService} from "../../../../../services/shareFieldStyles.service";
 import {SharedDataService} from "../../../../../services/shareElemData.service";
 import {Subscription} from "rxjs";
 
@@ -11,11 +10,10 @@ import {Subscription} from "rxjs";
 })
 export class FieldStylesComponent{
 
-  elemData: any = []
+  elemData: any[] = []
   receiveData:Subscription;
 
   constructor(
-    private sharedStyleService:SharedFieldStyleService,
     private sharedDataService:SharedDataService
   ) {
     this.receiveData = this.sharedDataService.getClickEvent()

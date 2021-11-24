@@ -1,6 +1,7 @@
 <div class="textarea">
   <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea matInput></textarea>
+    <mat-label>{{this.styles.label}}</mat-label>
+    <textarea matInput [placeholder]="this.styles.placeholder"
+              [required]="this.styles.required"></textarea>
   </mat-form-field>
 </div>

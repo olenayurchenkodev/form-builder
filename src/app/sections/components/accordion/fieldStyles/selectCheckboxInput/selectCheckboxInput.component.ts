@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyles.service";
+import {addOption, setField} from "../../../../../../store/actions/form.actions";
+import {Store} from "@ngrx/store";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {SharedFieldStyleService} from "../../../../../../services/shareFieldStyl
   styleUrls: ['./selectCheckboxInput.component.scss']
 })
 export class SelectCheckboxInputComponent {
+  customStyles?: { [key: string]: string | boolean | [] };
   @Input() id: any = null;
 
   formStyle = new FormGroup({
@@ -20,17 +22,24 @@ export class SelectCheckboxInputComponent {
 
   })
 
-  constructor(private sharedStyleService:SharedFieldStyleService) { }
+  constructor(private store: Store) { }
+
+  addOption(){
+    this.store.dispatch(addOption({
+        id: this.id,
+        option: this.formStyle.get('newOption')?.value
+      }));
+  }
 
   sendStyles(){
-    this.sharedStyleService.sendMessage([
-      this.formStyle.get('label')?.value,
-      this.formStyle.get('width')?.value,
-      this.formStyle.get('height')?.value,
-      this.formStyle.get('required')?.value,
-      this.formStyle.get('newOption')?.value,
-      this.id
-    ]);
+    this.customStyles = {
+      label: this.formStyle.get('label')?.value,
+      width: this.formStyle.get('width')?.value,
+      height: this.formStyle.get('height')?.value,
+      required: this.formStyle.get('required')?.value
+    }
+    this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
+    // console.log(this.customStyles);
   }
 
 }
