@@ -28,8 +28,17 @@
       <mat-checkbox class="example-margin" formControlName="required">Required Field!</mat-checkbox>
     </section>
 
-    <div class="newOption">
+    <div class="subDelButton">
+      <div class="submission" >
+        <button mat-button (click)=sendStyles()>Submit</button>
+      </div>
 
+      <div class="submission" >
+        <button mat-button (click)=deleteElem()>Delete</button>
+      </div>
+    </div>
+
+    <div class="newOption">
       <mat-form-field appearance="fill" class="options">
         <mat-label>New option</mat-label>
         <input matInput name="option" formControlName="newOption">
@@ -39,16 +48,6 @@
               class="add-button"
               (click)=addOption()
       >Add</button>
-    </div>
-
-    <div class="subDelButton">
-      <div class="submission" >
-        <button mat-button (click)=sendStyles()>Submit</button>
-      </div>
-
-      <div class="submission" >
-        <button mat-button>Delete</button>
-      </div>
     </div>
 
   </form>

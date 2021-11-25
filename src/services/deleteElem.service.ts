@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SharedDataService {
+export class DeleteElemService {
 
   private subject = new Subject<any>();
 

@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {setField} from "../../../../../../store/actions/form.actions";
+import {deleteField, setField} from "../../../../../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
+import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 
 
 @Component({
@@ -21,7 +22,10 @@ export class TextInputComponent {
     required: new FormControl()
   })
 
-  constructor(private store: Store) {  }
+  constructor(
+    private store: Store,
+    private deleteElemService: DeleteElemService
+  ) {  }
 
   sendStyles(){
     this.customStyles = {
@@ -36,7 +40,8 @@ export class TextInputComponent {
   }
 
   deleteElem(){
-
+    this.deleteElemService.sendMessage(this.id);
+    this.store.dispatch(deleteField({id: this.id}));
   }
 
 }

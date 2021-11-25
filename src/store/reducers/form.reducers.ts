@@ -1,8 +1,8 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import {addOption, createField, setField, setForm} from "../actions/form.actions";
+import {addOption, createField, deleteField, setField, setForm} from "../actions/form.actions";
 
 export interface FieldStyle{
-  id: number[],
+  id: string[],
   styles: any[],
   Input?: { [key: string]: string | boolean },
   Textarea?: { [key: string]: string | boolean },
@@ -37,6 +37,9 @@ export const initialState: FieldStyle ={
   },
   Checkbox:{
     label: 'label',
+    width: '100%',
+    height: '60px',
+    required: false,
     newOption: []
   },
   Select:{
@@ -71,23 +74,39 @@ export const FormReducer = createReducer(
     };
   }),
   on(setField, (state, {id, styles})=>{
-    // console.log('in reducer',state.styles[id - 1]);
-    console.log('in reducer',id, styles);
+    console.log('in reducer',state);
     let newStyles: any = {};
     for (let item in styles){
-      // console.log('in loop',styles[item]);
+      console.log('in loop',item);
       styles[item] && item !== 'newOption'?
         newStyles[item] = styles[item]:
-        newStyles[item] = state.styles[id - 1][item]
+        newStyles[item] = state.styles[state.id.indexOf(id[0])][item]
+
+      if (item === 'newOption'){ newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption}
     }
-    newStyles.newOption = state.styles[id - 1].newOption
-    console.log('in reducer',newStyles);
     let entrie = JSON.parse(JSON.stringify(state.styles));
-    entrie[id-1] = newStyles;
-    // console.log('in reducer',entrie.styles);
+    console.log('entrie', entrie);
+    entrie[state.id.indexOf(id[0])] = newStyles;
+    console.log('in reducer',entrie.styles);
     return  {...state,
       styles: entrie
     };
+  }),
+  on(deleteField, (state, {id})=>{
+    let entrieStyles = JSON.parse(JSON.stringify(state.styles));
+    let entrieIds = JSON.parse(JSON.stringify(state.id));
+    // for (let item of state.id){
+    //   if (item !== id){
+    //     entrie.id =
+    //   }
+    // }
+    entrieIds.splice(state.id.indexOf(id[0]), 1)
+    entrieStyles.splice(state.styles.indexOf(id[0]), 1)
+    // console.log(entrieIds, entrieStyles);
+    return {...state,
+      styles: entrieStyles,
+      id: entrieIds
+    }
   }),
   on(setForm, (state, {styles})=>{
     let newStyles: any = {};
@@ -106,7 +125,7 @@ export const FormReducer = createReducer(
   on(addOption, (state, {id, option})=>{
     console.log('in reducer',state.styles, option)
     let entrie = JSON.parse(JSON.stringify(state.styles));
-    entrie[id-1].newOption.push(option);
+    entrie[state.id.indexOf(id[0])].newOption.push(option);
     return {...state,
       styles: entrie
     }
@@ -116,11 +135,12 @@ export const FormReducer = createReducer(
 
 export const selectFieldStyles = createFeatureSelector<FieldStyle>('fieldStyles');
 
-export const getFieldStyle = (id: number) => createSelector(
+export const getFieldStyle = (id: string) => createSelector(
   selectFieldStyles,
   (state: FieldStyle) => {
     // console.log('in selector',id);
-    return state.styles[id];
+    // console.log('in selector',state.id);
+    return state.styles[state.id.indexOf(id)];
   }
 );
 

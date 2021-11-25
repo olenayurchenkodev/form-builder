@@ -18,15 +18,10 @@ export class SelectComponent {
   ) { }
 
   ngOnInit(){
-    // console.log('init id',this.id)
-    this.store.select(getFieldStyle(this.id-1))
+    this.store.select(getFieldStyle(this.id))
       .subscribe(
         s => this.styles = s
       )
-    console.log(this.styles.newOption);
-    setTimeout(()=>{
-      console.log(this.styles.newOption);
-    }, 10000)
   }
 
 }

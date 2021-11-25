@@ -19,10 +19,9 @@ export class InputComponent implements OnInit{
 
   ngOnInit(){
     // console.log('init id',this.id)
-    this.store.select(getFieldStyle(this.id-1))
+    this.store.select(getFieldStyle(this.id))
       .subscribe(
         s => this.styles = s
       )
-    // console.log(this.styles)
   }
 }

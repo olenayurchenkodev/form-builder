@@ -4,6 +4,9 @@ import {SharedDataService} from "../../../../services/shareElemData.service";
 import {Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
 import {getFormStyle} from "../../../../store/reducers/form.reducers";
+import {DeleteElemService} from "../../../../services/deleteElem.service";
+import {Subscription} from "rxjs";
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -17,10 +20,16 @@ export class FormBuilderComponent implements OnInit{
   form = [];
   ids:any = [];
   click: boolean = false;
+  receiveData:Subscription;
 
   constructor(
     private store: Store,
-    private sharedDataService:SharedDataService) {  }
+    private sharedDataService:SharedDataService,
+    private deleteElemService: DeleteElemService
+  ) {
+    this.receiveData = this.deleteElemService.getClickEvent()
+      .subscribe( message => this.deleteElem(message[0]))
+  }
 
   ngOnInit(){
     this.store.select(getFormStyle)
@@ -42,13 +51,21 @@ export class FormBuilderComponent implements OnInit{
         event.previousIndex,
         event.currentIndex,
       );
-      this.addField(this.form.length, this.form[event.currentIndex])
-      this.ids.splice(event.currentIndex, 0, this.form.length)
+      let id = uuidv4()
+      this.addField(id, this.form[event.currentIndex])
+      this.ids.splice(event.currentIndex, 0, id)
     }
   }
 
-  addField (id: number, typeField: string) {
+  addField (id: string, typeField: string) {
     this.store.dispatch(createField({id: id, typeField: typeField}))
+  }
+
+  deleteElem (id: number) {
+    const index = this.ids.indexOf(id);
+    console.log(index)
+    this.ids.splice(index, 1)
+    this.form.splice(index, 1)
   }
 
   selectInput(type: string, id: any){

@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {addOption, setField} from "../../../../../../store/actions/form.actions";
+import {addOption, deleteField, setField} from "../../../../../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
+import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 
 
 @Component({
@@ -22,7 +23,10 @@ export class SelectCheckboxInputComponent {
 
   })
 
-  constructor(private store: Store) { }
+  constructor(
+    private store: Store,
+    private deleteElemService: DeleteElemService
+  ) {  }
 
   addOption(){
     this.store.dispatch(addOption({
@@ -36,10 +40,16 @@ export class SelectCheckboxInputComponent {
       label: this.formStyle.get('label')?.value,
       width: `${this.formStyle.get('width')?.value}px`,
       height: `${this.formStyle.get('height')?.value}px`,
-      required: this.formStyle.get('required')?.value
+      required: this.formStyle.get('required')?.value,
+      newOption: ''
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
     // console.log(this.customStyles);
+  }
+
+  deleteElem(){
+    this.deleteElemService.sendMessage(this.id);
+    this.store.dispatch(deleteField({id: this.id}));
   }
 
 }

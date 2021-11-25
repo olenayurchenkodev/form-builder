@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {setField} from "../../../../../../store/actions/form.actions";
+import {deleteField, setField} from "../../../../../../store/actions/form.actions";
+import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 
 @Component({
   selector: 'fieldStyles-buttonInput',
@@ -29,8 +30,9 @@ export class ButtonInputComponent {
   selected = this.border[0]
 
   constructor(
-    private store: Store
-  ) { }
+    private store: Store,
+    private deleteElemService: DeleteElemService
+  ) {  }
 
   sendStyles(){
     this.customStyles = {
@@ -41,6 +43,11 @@ export class ButtonInputComponent {
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
     // console.log(this.customStyles);
+  }
+
+  deleteElem(){
+    this.deleteElemService.sendMessage(this.id);
+    this.store.dispatch(deleteField({id: this.id}));
   }
 
 }
