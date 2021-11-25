@@ -11,7 +11,7 @@ import {AuthComponent} from "./auth/auth.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  isAuth = true;
+  isAuth = false;
 
   portalComponents: Portal<any> | undefined;
 

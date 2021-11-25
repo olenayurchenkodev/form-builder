@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AuthComponent {
 
-  constructor( private http: HttpClient) { }
+  constructor( private http: HttpClient ) { }
 
   formAuth = new FormGroup({
     username: new FormControl(),
@@ -17,9 +17,14 @@ export class AuthComponent {
   })
 
   sendForm(){
-    console.log('in function');
-    this.http.post<any>('http://localhost:3000/register',
-      [this.formAuth.get('username')?.value,
-        this.formAuth.get('password')?.value])
+    // console.log(this.formAuth.value)
+    this.http.post('http://localhost:3000/register',
+      JSON.stringify([this.formAuth.get('username')?.value,
+        this.formAuth.get('password')?.value]))
+      .subscribe(res => this.getToken(res))
+  }
+
+  getToken (res: any) {
+    console.log('token!');
   }
 }

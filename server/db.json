@@ -20,12 +20,5 @@
       "password": "123",
       "id": 4
     }
-  ],
-  "forms": [
-    {
-      "id": 1,
-      "userId": 3,
-      "form": 1
-    }
   ]
 }

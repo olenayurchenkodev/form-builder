@@ -61,7 +61,7 @@ export class FormBuilderComponent implements OnInit{
     this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
-  deleteElem (id: number) {
+  deleteElem (id: string) {
     const index = this.ids.indexOf(id);
     console.log(index)
     this.ids.splice(index, 1)

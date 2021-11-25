@@ -95,14 +95,8 @@ export const FormReducer = createReducer(
   on(deleteField, (state, {id})=>{
     let entrieStyles = JSON.parse(JSON.stringify(state.styles));
     let entrieIds = JSON.parse(JSON.stringify(state.id));
-    // for (let item of state.id){
-    //   if (item !== id){
-    //     entrie.id =
-    //   }
-    // }
     entrieIds.splice(state.id.indexOf(id[0]), 1)
     entrieStyles.splice(state.styles.indexOf(id[0]), 1)
-    // console.log(entrieIds, entrieStyles);
     return {...state,
       styles: entrieStyles,
       id: entrieIds
