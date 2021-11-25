@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {SharedFormStyleService} from "../../../../../services/shareFormStyles.service";
+import {Store} from "@ngrx/store";
+import {setForm} from "../../../../../store/actions/form.actions";
 
 
 @Component({
@@ -9,6 +10,7 @@ import {SharedFormStyleService} from "../../../../../services/shareFormStyles.se
   styleUrls: ['./formStyles.component.scss']
 })
 export class FormStylesComponent{
+  customStyles?: { [key: string]: string | boolean };
 
   border=[
     {name: "None", value: "none"},
@@ -32,17 +34,19 @@ export class FormStylesComponent{
   })
 
 
-  constructor(private sharedStyleService:SharedFormStyleService) { }
+  constructor(private store: Store) {  }
 
   sendStyles(){
-    this.sharedStyleService.sendMessage([
-      this.formStyle.get('label')?.value,
-      this.formStyle.get('colour')?.value,
-      this.formStyle.get('backcolour')?.value,
-      this.formStyle.get('border')?.value,
-      this.formStyle.get('fontSize')?.value,
-      this.formStyle.get('fontWeight')?.value
-    ]);
+    this.customStyles = {
+      label: this.formStyle.get('label')?.value,
+      colour: `rgb(${this.formStyle.get('colour')?.value})`,
+      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
+      border: this.formStyle.get('border')?.value,
+      fontSize: `${this.formStyle.get('fontSize')?.value}px`,
+      fontWeight: this.formStyle.get('fontWeight')?.value
+    }
+    this.store.dispatch(setForm({styles: this.customStyles}));
+    // console.log(this.customStyles);
   }
 
 }

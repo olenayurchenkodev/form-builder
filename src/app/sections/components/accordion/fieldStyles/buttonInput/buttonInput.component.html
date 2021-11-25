@@ -4,28 +4,24 @@
 
     <mat-form-field appearance="fill" class="form-item">
       <mat-label>Label</mat-label>
-      <input matInput formControlName="label">
+      <input matInput name="label" formControlName="label">
     </mat-form-field>
 
     <div class="height-width-button">
 
       <mat-form-field appearance="fill">
         <mat-label>Width</mat-label>
-        <input matInput formControlName="width">
+        <input matInput name="width" formControlName="width">
         <span matSuffix>px</span>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Height</mat-label>
-        <input matInput formControlName="height">
+        <input matInput name="height" formControlName="height">
         <span matSuffix>px</span>
       </mat-form-field>
 
     </div>
-
-    <section class="form-item">
-      <mat-checkbox class="example-margin" formControlName="required">Required Field!</mat-checkbox>
-    </section>
 
     <mat-form-field appearance="fill" class="form-item">
       <mat-label>Border type</mat-label>

@@ -13,6 +13,9 @@ export const deleteField = createAction(
   '[Field] deleteField',
   props<{id: number}>());
 
+export const setForm = createAction(
+  '[Form] setField',
+  props<{styles: any}>());
 
 export const addOption = createAction(
   '[Option] addOption',

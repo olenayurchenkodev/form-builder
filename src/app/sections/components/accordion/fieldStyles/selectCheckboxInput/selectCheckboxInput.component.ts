@@ -34,8 +34,8 @@ export class SelectCheckboxInputComponent {
   sendStyles(){
     this.customStyles = {
       label: this.formStyle.get('label')?.value,
-      width: this.formStyle.get('width')?.value,
-      height: this.formStyle.get('height')?.value,
+      width: `${this.formStyle.get('width')?.value}px`,
+      height: `${this.formStyle.get('height')?.value}px`,
       required: this.formStyle.get('required')?.value
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));

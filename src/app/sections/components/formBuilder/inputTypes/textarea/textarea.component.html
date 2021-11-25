@@ -1,5 +1,8 @@
 <div class="textarea">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" [ngStyle]="{
+          'width': styles.width,
+          'height': styles.height
+    }">
     <mat-label>{{this.styles.label}}</mat-label>
     <textarea matInput [placeholder]="this.styles.placeholder"
               [required]="this.styles.required"></textarea>

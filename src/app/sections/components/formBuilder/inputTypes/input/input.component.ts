@@ -11,8 +11,6 @@ import {Store} from "@ngrx/store";
 export class InputComponent implements OnInit{
   styles?: any
 
-  width: string = this.styles? this.styles.width: 'normal';
-  height: string = this.styles? this.styles.height: 'normal';
   @Input() id: any = null;
 
   constructor(
@@ -20,10 +18,11 @@ export class InputComponent implements OnInit{
   ) { }
 
   ngOnInit(){
-    console.log('init id',this.id)
+    // console.log('init id',this.id)
     this.store.select(getFieldStyle(this.id-1))
       .subscribe(
         s => this.styles = s
       )
+    // console.log(this.styles)
   }
 }

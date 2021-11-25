@@ -12,23 +12,19 @@
     </mat-form-field>
 
     <div class="height-width-button">
-      <mat-form-field appearance="fill">
+
+      <mat-form-field appearance="fill" >
         <mat-label>Width</mat-label>
-        <mat-select name="width" formControlName="width">
-          <mat-option *ngFor="let item of width" [value]="item.value">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
+        <input matInput name="width" formControlName="width">
+        <span matSuffix>px</span>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" >
         <mat-label>Height</mat-label>
-        <mat-select name="height" formControlName="height">
-          <mat-option *ngFor="let item of height" [value]="item.value">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
+        <input matInput name="height" formControlName="height">
+        <span matSuffix>px</span>
       </mat-form-field>
+
     </div>
 
     <section class="form-item">

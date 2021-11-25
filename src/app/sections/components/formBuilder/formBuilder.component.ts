@@ -1,10 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Subscription} from "rxjs";
-import {SharedFormStyleService} from "../../../../services/shareFormStyles.service";
 import {SharedDataService} from "../../../../services/shareElemData.service";
 import {Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
+import {getFormStyle} from "../../../../store/reducers/form.reducers";
 
 
 @Component({
@@ -12,21 +11,22 @@ import {createField} from '../../../../store/actions/form.actions'
   templateUrl: './formBuilder.component.html',
   styleUrls: ['./formBuilder.component.scss']
 })
-export class FormBuilderComponent{
+export class FormBuilderComponent implements OnInit{
 
+  formStyles?: any
   form = [];
   ids:any = [];
   click: boolean = false;
-  formStyles: any = '';
-  receiveFormData:Subscription;
 
   constructor(
     private store: Store,
-    private sharedFormStyleService:SharedFormStyleService,
-    private sharedDataService:SharedDataService
-              ) {
-    this.receiveFormData = this.sharedFormStyleService.getClickEvent()
-      .subscribe( (message: any) => this.formStyles = message)
+    private sharedDataService:SharedDataService) {  }
+
+  ngOnInit(){
+    this.store.select(getFormStyle)
+      .subscribe(
+        s => this.formStyles = s
+      )
   }
 
   drop(event: CdkDragDrop<string[]|any>) {

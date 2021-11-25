@@ -13,17 +13,6 @@ export class TextInputComponent {
   customStyles?: { [key: string]: string | boolean };
   @Input() id: any = null;
 
-  width = [
-    {name: 'small', value: '80%'},
-    {name: 'medium', value: '90%'},
-    {name: 'large', value: '100%'}
-  ]
-  height = [
-    {name: 'small', value: '60px'},
-    {name: 'medium', value: '80px'},
-    {name: 'large', value: '100px'}
-  ]
-
   formStyle = new FormGroup({
     label: new FormControl(),
     placeholder: new FormControl(),
@@ -38,8 +27,8 @@ export class TextInputComponent {
     this.customStyles = {
       label: this.formStyle.get('label')?.value,
       placeholder: this.formStyle.get('placeholder')?.value,
-      width: this.formStyle.get('width')?.value,
-      height: this.formStyle.get('height')?.value,
+      width: `${this.formStyle.get('width')?.value}px`,
+      height: `${this.formStyle.get('height')?.value}px`,
       required: this.formStyle.get('required')?.value
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import {addOption, createField, setField} from "../actions/form.actions";
+import {addOption, createField, setField, setForm} from "../actions/form.actions";
 
 export interface FieldStyle{
   id: number[],
@@ -9,6 +9,7 @@ export interface FieldStyle{
   Button?: { [key: string]: string },
   Checkbox?: { [key: string]: string | boolean | [] },
   Select?: { [key: string]: string | boolean | [] },
+  Form?: { [key: string]: string | boolean | [] }
 }
 
 export const initialState: FieldStyle ={
@@ -17,36 +18,41 @@ export const initialState: FieldStyle ={
   Input: {
     label: 'label',
     placeholder: '',
-    width: 'normal',
-    height: 'normal',
+    width: '100%',
+    height: '60px',
     required: false
   },
   Textarea: {
     label: 'label',
     placeholder: '',
-    width: 'normal',
-    height: 'normal',
+    width: '100%',
+    height: '60px',
     required: false
   },
   Button:{
     label: 'button',
-    width: 'normal',
-    height: 'normal',
-    border: '1px solid'
+    width: '30%',
+    height: '40px',
+    border: 'none'
   },
   Checkbox:{
     label: 'label',
-    width: 'normal',
-    height: 'normal',
-    required: false,
     newOption: []
   },
   Select:{
     label: 'label',
-    width: 'normal',
-    height: 'normal',
+    width: '100%',
+    height: '30px',
     required: false,
     newOption: []
+  },
+  Form: {
+    label: 'Form Builder',
+    colour: 'black',
+    backcolour: 'white',
+    border: '1px solid',
+    fontSize: '24px',
+    fontWeight: 'normal',
   }
 };
 
@@ -66,7 +72,7 @@ export const FormReducer = createReducer(
   }),
   on(setField, (state, {id, styles})=>{
     // console.log('in reducer',state.styles[id - 1]);
-    // console.log('in reducer',id, styles);
+    console.log('in reducer',id, styles);
     let newStyles: any = {};
     for (let item in styles){
       // console.log('in loop',styles[item]);
@@ -74,7 +80,8 @@ export const FormReducer = createReducer(
         newStyles[item] = styles[item]:
         newStyles[item] = state.styles[id - 1][item]
     }
-    // console.log('in reducer',newStyles);
+    newStyles.newOption = state.styles[id - 1].newOption
+    console.log('in reducer',newStyles);
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[id-1] = newStyles;
     // console.log('in reducer',entrie.styles);
@@ -82,8 +89,22 @@ export const FormReducer = createReducer(
       styles: entrie
     };
   }),
+  on(setForm, (state, {styles})=>{
+    let newStyles: any = {};
+    if (state.Form){
+      for (let item in styles){
+        styles[item]?
+          newStyles[item] = styles[item]:
+          newStyles[item] = state.Form[item]
+      }
+      return  {...state,
+       Form: newStyles
+      };
+    }
+    return  {...state};
+  }),
   on(addOption, (state, {id, option})=>{
-    // console.log('in reducer',state.styles, option)
+    console.log('in reducer',state.styles, option)
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[id-1].newOption.push(option);
     return {...state,
@@ -98,7 +119,15 @@ export const selectFieldStyles = createFeatureSelector<FieldStyle>('fieldStyles'
 export const getFieldStyle = (id: number) => createSelector(
   selectFieldStyles,
   (state: FieldStyle) => {
-    console.log('in selector',id);
+    // console.log('in selector',id);
     return state.styles[id];
+  }
+);
+
+export const getFormStyle = createSelector(
+  selectFieldStyles,
+  (state: FieldStyle) => {
+    // console.log('selector blyat`',state.Form)
+    return state.Form;
   }
 );

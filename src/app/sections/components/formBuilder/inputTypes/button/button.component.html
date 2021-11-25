@@ -1,5 +1,9 @@
 <div class="button">
-  <button mat-button>
+  <button mat-button [ngStyle]="{
+          'width': styles.width,
+          'height': styles.height,
+          'border': styles.border
+    }">
     {{this.styles.label}}
   </button>
 </div>

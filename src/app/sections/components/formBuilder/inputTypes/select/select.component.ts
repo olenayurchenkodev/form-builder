@@ -11,9 +11,6 @@ import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
 export class SelectComponent {
   styles?: any
 
-  width: string = this.styles? this.styles.width: 'normal';
-  height: string = this.styles? this.styles.height: 'normal';
-  options: [] = this.styles? this.styles.options: ['make options :)'];
   @Input() id: any = null;
 
   constructor(
@@ -26,6 +23,10 @@ export class SelectComponent {
       .subscribe(
         s => this.styles = s
       )
+    console.log(this.styles.newOption);
+    setTimeout(()=>{
+      console.log(this.styles.newOption);
+    }, 10000)
   }
 
 }

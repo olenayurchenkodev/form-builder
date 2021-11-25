@@ -11,9 +11,6 @@ import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
 export class CheckboxComponent {
   styles?: any
 
-  width: string = this.styles? this.styles.width: 'normal';
-  height: string = this.styles? this.styles.height: 'normal';
-  options: [] = this.styles? this.styles.options: ['make options :)'];
   @Input() id: any = null;
 
   constructor(
