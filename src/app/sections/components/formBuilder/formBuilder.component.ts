@@ -28,7 +28,7 @@ export class FormBuilderComponent implements OnInit{
     private deleteElemService: DeleteElemService
   ) {
     this.receiveData = this.deleteElemService.getClickEvent()
-      .subscribe( message => this.deleteElem(message[0]))
+      .subscribe( message => this.deleteElem(message))
   }
 
   ngOnInit(){
@@ -40,10 +40,10 @@ export class FormBuilderComponent implements OnInit{
 
   drop(event: CdkDragDrop<string[]|any>) {
     if (event.previousContainer === event.container) {
+      console.log('prev, curr',event.previousIndex, event.currentIndex);
+      this.changePos(this.ids, event.previousIndex, event.currentIndex);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      const b = this.ids[event.previousIndex];
-      this.ids[event.previousIndex] = this.ids[event.currentIndex];
-      this.ids[event.currentIndex] = b;
+      // console.log('form',this.form); console.log('ids',this.ids)
     } else {
       copyArrayItem(
         event.previousContainer.data,
@@ -57,15 +57,33 @@ export class FormBuilderComponent implements OnInit{
     }
   }
 
+  changePos (arr: any[], prev: number, curr: number) {
+    let elem = arr[prev]
+    let i = prev
+    while (arr[i] !== arr[curr]) {
+      if (prev < curr) {
+        arr[i] = arr[i + 1]
+        i++
+      }
+      else{
+        arr[i] = arr[i - 1]
+        i--
+      }
+    }
+    arr[curr] = elem
+  }
+
   addField (id: string, typeField: string) {
     this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
   deleteElem (id: string) {
+    console.log(id)
     const index = this.ids.indexOf(id);
     console.log(index)
     this.ids.splice(index, 1)
     this.form.splice(index, 1)
+    console.log('form after delete',this.form);
   }
 
   selectInput(type: string, id: any){

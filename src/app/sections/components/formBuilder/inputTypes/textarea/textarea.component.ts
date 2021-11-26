@@ -21,7 +21,7 @@ export class TextareaComponent implements OnInit{
   ) { }
 
   ngOnInit(){
-    console.log('init id',this.id)
+    // console.log('init id',this.id)
     this.store.select(getFieldStyle(this.id))
       .subscribe(
         s => this.styles = s

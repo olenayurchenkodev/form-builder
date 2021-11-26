@@ -46,8 +46,8 @@ export class ButtonInputComponent {
   }
 
   deleteElem(){
-    this.deleteElemService.sendMessage(this.id);
-    this.store.dispatch(deleteField({id: this.id}));
+    this.deleteElemService.sendMessage(this.id[0]);
+    this.store.dispatch(deleteField({id: this.id[0]}));
   }
 
 }
