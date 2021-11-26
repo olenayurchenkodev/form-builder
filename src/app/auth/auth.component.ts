@@ -16,15 +16,19 @@ export class AuthComponent {
     password: new FormControl()
   })
 
-  sendForm(){
-    // console.log(this.formAuth.value)
-    this.http.post('http://localhost:3000/register',
-      JSON.stringify([this.formAuth.get('username')?.value,
-        this.formAuth.get('password')?.value]))
-      .subscribe(res => this.getToken(res))
+  sendLoginForm () {
+    this.http.post(`http://localhost:3000/login`, (this.formAuth.value))
+      .subscribe(token => this.setToken(token))
   }
 
-  getToken (res: any) {
-    console.log('token!');
+  sendRegisterForm () {
+    this.http.post(`http://localhost:3000/register`, (this.formAuth.value))
+      .subscribe(token => this.setToken(token))
+  }
+
+  setToken (token: any) {
+    localStorage.setItem('userData', JSON.stringify({
+      token: token
+    }))
   }
 }

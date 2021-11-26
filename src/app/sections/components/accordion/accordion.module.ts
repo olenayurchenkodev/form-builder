@@ -31,7 +31,6 @@ import {FieldStylesModule} from "./fieldStyles/fieldStyles.module";
         FormsModule,
         MatCheckboxModule,
         MatButtonModule
-
     ],
   providers: [],
     exports: [

@@ -6,6 +6,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {AppEffects} from "./app.effects";
 import {HttpClientModule} from '@angular/common/http';
+import {Routes, RouterModule} from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -16,7 +17,17 @@ import { environment } from '../environments/environment';
 import {FormReducer} from "../store/reducers/form.reducers";
 import {CommonModule} from "@angular/common";
 import {AuthModule} from "./auth/auth.module";
+import {AuthComponent} from "./auth/auth.component";
+import {SectionsComponent} from "./sections/sections.component";
+import {AuthGuard} from "../guards/auth.guard";
 
+const appRoutes: Routes =[
+  { path: 'login', component: AuthComponent},
+  { path: 'form-builder',
+    component: SectionsComponent,
+    canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'login'}
+];
 
 @NgModule({
   declarations: [
@@ -30,6 +41,7 @@ import {AuthModule} from "./auth/auth.module";
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
     HttpClientModule,
     ReactiveComponentModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
