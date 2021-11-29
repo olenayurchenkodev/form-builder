@@ -16,6 +16,7 @@ export class TextInputComponent {
 
   formStyle = new FormGroup({
     label: new FormControl(),
+    backcolour: new FormControl(),
     placeholder: new FormControl(),
     width: new FormControl(),
     height: new FormControl(),
@@ -30,6 +31,7 @@ export class TextInputComponent {
   sendStyles(){
     this.customStyles = {
       label: this.formStyle.get('label')?.value,
+      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
       placeholder: this.formStyle.get('placeholder')?.value,
       width: `${this.formStyle.get('width')?.value}px`,
       height: `${this.formStyle.get('height')?.value}px`,

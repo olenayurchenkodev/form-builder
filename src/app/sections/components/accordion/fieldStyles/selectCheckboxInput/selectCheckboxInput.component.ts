@@ -16,6 +16,7 @@ export class SelectCheckboxInputComponent {
 
   formStyle = new FormGroup({
     label: new FormControl(),
+    backcolour: new FormControl(),
     width: new FormControl(),
     height: new FormControl(),
     required: new FormControl(),
@@ -38,6 +39,7 @@ export class SelectCheckboxInputComponent {
   sendStyles(){
     this.customStyles = {
       label: this.formStyle.get('label')?.value,
+      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
       width: `${this.formStyle.get('width')?.value}px`,
       height: `${this.formStyle.get('height')?.value}px`,
       required: this.formStyle.get('required')?.value,

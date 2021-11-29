@@ -10,7 +10,7 @@ export interface FieldStyle{
   Checkbox?: { [key: string]: string | boolean | [] },
   Select?: { [key: string]: string | boolean | [] },
   Form?: { [key: string]: string | boolean | [] },
-  Auth?: boolean
+  Auth?: string
 }
 
 export const initialState: FieldStyle ={
@@ -18,26 +18,30 @@ export const initialState: FieldStyle ={
   styles: [],
   Input: {
     label: 'label',
+    backcolour: 'none',
     placeholder: '',
     width: '100%',
-    height: '60px',
+    height: '30px',
     required: false
   },
   Textarea: {
     label: 'label',
+    backcolour: 'none',
     placeholder: '',
     width: '100%',
-    height: '80px',
+    height: '40px',
     required: false
   },
   Button:{
     label: 'button',
+    backcolour: 'none',
     width: '30%',
     height: '40px',
     border: 'none'
   },
   Checkbox:{
     label: 'label',
+    backcolour: 'none',
     width: '100%',
     height: '30px',
     required: false,
@@ -45,6 +49,7 @@ export const initialState: FieldStyle ={
   },
   Select:{
     label: 'label',
+    backcolour: 'none',
     width: '100%',
     height: '30px',
     required: false,
@@ -53,12 +58,12 @@ export const initialState: FieldStyle ={
   Form: {
     label: 'Form Builder',
     colour: 'black',
-    backcolour: 'white',
+    backcolour: 'none',
     border: '1px solid',
     fontSize: '24px',
     fontWeight: 'normal',
   },
-  Auth: false
+  Auth: ''
 };
 
 export const FormReducer = createReducer(

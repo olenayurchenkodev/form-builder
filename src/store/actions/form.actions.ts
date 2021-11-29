@@ -14,7 +14,7 @@ export const deleteField = createAction(
   props<{id: string}>());
 
 export const setForm = createAction(
-  '[Form] setField',
+  '[Form] setForm',
   props<{styles: any}>());
 
 export const addOption = createAction(
@@ -23,4 +23,8 @@ export const addOption = createAction(
 
 export const setAuth = createAction(
   '[Auth] setAuth',
-  props<{auth: boolean}>());
+  props<{auth: string}>());
+
+export const setAuthSuccess = createAction(
+  '[Auth] setAuthSuccess',
+  props<{auth: string}>());

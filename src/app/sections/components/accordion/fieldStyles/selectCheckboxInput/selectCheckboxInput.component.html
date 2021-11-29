@@ -8,8 +8,13 @@
       <input matInput name="label" formControlName="label">
     </mat-form-field>
 
-    <div class="height-width-button">
+    <mat-form-field appearance="fill" class="form-item">
+      <mat-label>Background colour</mat-label>
+      <input matInput name="backcolor" formControlName="backcolour">
+      <span matSuffix>RGB</span>
+    </mat-form-field>
 
+    <div class="height-width-button">
       <mat-form-field appearance="fill">
         <mat-label>Width</mat-label>
         <input matInput name="width" formControlName="width">
@@ -21,7 +26,6 @@
         <input matInput name="height" formControlName="height">
         <span matSuffix>px</span>
       </mat-form-field>
-
     </div>
 
     <section class="form-item">

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {getAuth} from "../../../../store/reducers/form.reducers";
 import {Store} from "@ngrx/store";
 import {setAuth} from "../../../../store/actions/form.actions";
 import {Router} from "@angular/router";
@@ -30,7 +29,7 @@ export class InputCardComponent {
 
   logout () {
     localStorage.removeItem('userData');
-    this.store.dispatch(setAuth({auth: false}));
+    this.store.dispatch(setAuth({auth: ''}));
     this.router.navigate(['/login']);
   }
 

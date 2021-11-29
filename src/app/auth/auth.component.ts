@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import {setAuth} from "../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
 import {getAuth} from "../../store/reducers/form.reducers";
-import {AuthGuard} from "../../guards/auth.guard";
 import {Router} from "@angular/router";
 
 @Component({
@@ -36,9 +35,9 @@ export class AuthComponent {
   }
 
   setToken (token: any) {
-    this.store.dispatch(setAuth({auth: !!token}))
+    this.store.dispatch(setAuth({auth: token}))
     this.store.select(getAuth)
-      .subscribe(s =>
+      .subscribe(() =>
         this.router.navigate(['/form-builder']))
   }
 }

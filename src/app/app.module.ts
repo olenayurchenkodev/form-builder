@@ -25,7 +25,7 @@ const routes: Routes =[
   { path: 'login', component: AuthComponent},
   { path: 'form-builder',
     component: SectionsComponent},
-  {path: '**', component: AuthComponent}
+  { path: '**', component: AuthComponent}
 ];
 
 @NgModule({

@@ -3,10 +3,14 @@
     <mat-form-field appearance="fill"
                     [ngStyle]="{
           'width': styles.width? styles.width: '',
-          'height': styles.height? styles.height: ''
+          'background': styles.backcolour
     }">
       <mat-label>{{this.styles.label}}</mat-label>
-      <input matInput [placeholder]="this.styles.placeholder"
+      <input
+        matInput
+        [ngStyle]="{
+          'height': styles.height}"
+        [placeholder]="this.styles.placeholder"
              [required]="this.styles.required">
     </mat-form-field>
   </ng-container>

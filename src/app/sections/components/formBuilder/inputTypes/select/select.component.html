@@ -1,8 +1,10 @@
 <div class="select">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" [ngStyle]="{
+          'width': this.styles.width,
+          'background': this.styles.backcolour
+    }">
     <mat-label class="check-label">{{this.styles.label}}</mat-label>
     <mat-select [ngStyle]="{
-          'width': this.styles.width,
           'height': this.styles.height
     }" [required]="this.styles.required">
       <mat-option *ngFor="let item of this.styles.newOption" [value]="item">
