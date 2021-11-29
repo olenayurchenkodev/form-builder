@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {CdkPortalOutlet, ComponentPortal, Portal} from '@angular/cdk/portal';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'sections-root',
@@ -6,4 +7,10 @@ import {Component} from '@angular/core';
   styleUrls: ['./sections.component.scss']
 })
 export class SectionsComponent {
+  selectedPortal?: Portal<any>;
+  componentPortal?: ComponentPortal<ComponentPortal<any>>;
+
+  ngAfterViewInit() {
+    this.componentPortal = new ComponentPortal(ComponentPortal);
+  }
 }

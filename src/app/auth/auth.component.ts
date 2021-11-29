@@ -1,6 +1,11 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
+import {setAuth} from "../../store/actions/form.actions";
+import {Store} from "@ngrx/store";
+import {getAuth} from "../../store/reducers/form.reducers";
+import {AuthGuard} from "../../guards/auth.guard";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'auth-root',
@@ -9,7 +14,11 @@ import {HttpClient} from "@angular/common/http";
 })
 export class AuthComponent {
 
-  constructor( private http: HttpClient ) { }
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    public router: Router
+  ) { }
 
   formAuth = new FormGroup({
     username: new FormControl(),
@@ -27,8 +36,9 @@ export class AuthComponent {
   }
 
   setToken (token: any) {
-    localStorage.setItem('userData', JSON.stringify({
-      token: token
-    }))
+    this.store.dispatch(setAuth({auth: !!token}))
+    this.store.select(getAuth)
+      .subscribe(s =>
+        this.router.navigate(['/form-builder']))
   }
 }

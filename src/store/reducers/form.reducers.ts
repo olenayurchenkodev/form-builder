@@ -1,5 +1,5 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import {addOption, createField, deleteField, setField, setForm} from "../actions/form.actions";
+import {addOption, createField, deleteField, setAuth, setField, setForm} from "../actions/form.actions";
 
 export interface FieldStyle{
   id: string[],
@@ -9,7 +9,8 @@ export interface FieldStyle{
   Button?: { [key: string]: string },
   Checkbox?: { [key: string]: string | boolean | [] },
   Select?: { [key: string]: string | boolean | [] },
-  Form?: { [key: string]: string | boolean | [] }
+  Form?: { [key: string]: string | boolean | [] },
+  Auth?: boolean
 }
 
 export const initialState: FieldStyle ={
@@ -26,7 +27,7 @@ export const initialState: FieldStyle ={
     label: 'label',
     placeholder: '',
     width: '100%',
-    height: '60px',
+    height: '80px',
     required: false
   },
   Button:{
@@ -38,7 +39,7 @@ export const initialState: FieldStyle ={
   Checkbox:{
     label: 'label',
     width: '100%',
-    height: '60px',
+    height: '30px',
     required: false,
     newOption: []
   },
@@ -56,7 +57,8 @@ export const initialState: FieldStyle ={
     border: '1px solid',
     fontSize: '24px',
     fontWeight: 'normal',
-  }
+  },
+  Auth: false
 };
 
 export const FormReducer = createReducer(
@@ -74,10 +76,10 @@ export const FormReducer = createReducer(
     };
   }),
   on(setField, (state, {id, styles})=>{
-    console.log('in reducer',state);
+    // console.log('in reducer',state);
     let newStyles: any = {};
     for (let item in styles){
-      console.log('in loop',item);
+      // console.log('in loop',item);
       styles[item] && item !== 'newOption'?
         newStyles[item] = styles[item]:
         newStyles[item] = state.styles[state.id.indexOf(id[0])][item]
@@ -85,20 +87,20 @@ export const FormReducer = createReducer(
       if (item === 'newOption'){ newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption}
     }
     let entrie = JSON.parse(JSON.stringify(state.styles));
-    console.log('entrie', entrie);
+    // console.log('entrie', entrie);
     entrie[state.id.indexOf(id[0])] = newStyles;
-    console.log('in reducer',entrie.styles);
+    // console.log('in reducer',entrie.styles);
     return  {...state,
       styles: entrie
     };
   }),
   on(deleteField, (state, {id})=>{
-    console.log(id, state.id.indexOf(id))
+    // console.log(id, state.id.indexOf(id))
     let entrieStyles = JSON.parse(JSON.stringify(state.styles));
     let entrieIds = JSON.parse(JSON.stringify(state.id));
     entrieIds.splice(state.id.indexOf(id), 1)
     entrieStyles.splice(state.id.indexOf(id), 1)
-    console.log(entrieIds, entrieStyles)
+    // console.log(entrieIds, entrieStyles)
     return {...state,
       styles: entrieStyles,
       id: entrieIds
@@ -119,11 +121,16 @@ export const FormReducer = createReducer(
     return  {...state};
   }),
   on(addOption, (state, {id, option})=>{
-    console.log('in reducer',state.styles, option)
+    // console.log('in reducer',state.styles, option)
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[state.id.indexOf(id[0])].newOption.push(option);
     return {...state,
       styles: entrie
+    }
+  }),
+  on(setAuth, (state, {auth})=>{
+    return {...state,
+      Auth: auth
     }
   })
 );
@@ -145,5 +152,12 @@ export const getFormStyle = createSelector(
   (state: FieldStyle) => {
     // console.log('selector blyat`',state.Form)
     return state.Form;
+  }
+);
+
+export const getAuth = createSelector(
+  selectFieldStyles,
+  (state: FieldStyle) => {
+    return state.Auth;
   }
 );

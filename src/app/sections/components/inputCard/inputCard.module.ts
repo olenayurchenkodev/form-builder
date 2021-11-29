@@ -9,6 +9,8 @@ import {MatInputModule} from "@angular/material/input";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 
 import {InputCardComponent} from "./inputCard.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import {InputCardComponent} from "./inputCard.component";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   exports: [

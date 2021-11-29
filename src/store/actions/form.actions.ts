@@ -20,3 +20,7 @@ export const setForm = createAction(
 export const addOption = createAction(
   '[Option] addOption',
   props<{id: string, option: string}>());
+
+export const setAuth = createAction(
+  '[Auth] setAuth',
+  props<{auth: boolean}>());

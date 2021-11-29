@@ -21,12 +21,11 @@ import {AuthComponent} from "./auth/auth.component";
 import {SectionsComponent} from "./sections/sections.component";
 import {AuthGuard} from "../guards/auth.guard";
 
-const appRoutes: Routes =[
+const routes: Routes =[
   { path: 'login', component: AuthComponent},
   { path: 'form-builder',
-    component: SectionsComponent,
-    canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'login'}
+    component: SectionsComponent},
+  {path: '**', component: AuthComponent}
 ];
 
 @NgModule({
@@ -37,11 +36,12 @@ const appRoutes: Routes =[
     StoreModule.forRoot( {fieldStyles: FormReducer}),
     BrowserModule,
     PortalModule,
+    RouterModule,
     SectionsModule,
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(routes),
     HttpClientModule,
     ReactiveComponentModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
