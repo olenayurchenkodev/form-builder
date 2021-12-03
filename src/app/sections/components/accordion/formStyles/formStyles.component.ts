@@ -16,13 +16,13 @@ export class FormStylesComponent{
     {name: "None", value: "none"},
     {name: "Dotted line", value: "dotted"},
     {name: "Solid line", value: "solid"}
-  ]
+  ];
 
   fontWeight=[
     {name: "Thin", value: "thin"},
     {name: "Normal", value: "normal"},
     {name: "Bold", value: "bold"}
-  ]
+  ];
 
   formStyle = new FormGroup({
     label: new FormControl(),

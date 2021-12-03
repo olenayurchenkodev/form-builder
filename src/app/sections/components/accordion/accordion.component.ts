@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AccordionComponent {
 
-  items = ['Form Styles', 'Field Styles']
+  items = ['Form Styles', 'Field Styles'];
   expandedIndex = 0;
 
 }

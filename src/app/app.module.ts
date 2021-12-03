@@ -19,13 +19,11 @@ import {CommonModule} from "@angular/common";
 import {AuthModule} from "./auth/auth.module";
 import {AuthComponent} from "./auth/auth.component";
 import {SectionsComponent} from "./sections/sections.component";
-import {AuthGuard} from "../guards/auth.guard";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
-const routes: Routes =[
+const routes: Routes = [
   { path: 'login', component: AuthComponent},
-  { path: 'form-builder',
-    component: SectionsComponent},
-  { path: '**', component: AuthComponent}
+  { path: 'form-builder', component: SectionsComponent}
 ];
 
 @NgModule({
@@ -36,10 +34,11 @@ const routes: Routes =[
     StoreModule.forRoot( {fieldStyles: FormReducer}),
     BrowserModule,
     PortalModule,
-    RouterModule,
     SectionsModule,
     FormsModule,
     CommonModule,
+    //disable for run
+    HttpClientTestingModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,

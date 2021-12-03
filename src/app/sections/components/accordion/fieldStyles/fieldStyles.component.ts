@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
 })
 export class FieldStylesComponent{
 
-  elemData: any[] = []
+  elemData: any[] = [];
   receiveData:Subscription;
 
   constructor(

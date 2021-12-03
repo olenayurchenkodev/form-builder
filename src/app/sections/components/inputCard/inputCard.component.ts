@@ -16,10 +16,9 @@ export class InputCardComponent {
   constructor(
     private store: Store,
     public router: Router
-  ) {
-  }
+  ) {  }
 
-  inputs = ['Input', 'Textarea', 'Button', 'Checkbox', 'Select']
+  inputs = ['Input', 'Textarea', 'Button', 'Checkbox', 'Select'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

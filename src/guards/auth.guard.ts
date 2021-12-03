@@ -5,12 +5,14 @@ import {getAuth} from "../store/reducers/form.reducers";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  isAuth = false;
   constructor(public store: Store, public router: Router) {}
   canActivate(): boolean {
-    if (!this.store.select(getAuth).subscribe(s => s)) {
-      this.router.navigate(['/login']);
-      return false;
+    this.store.select(getAuth).subscribe(s => this.isAuth = !!s)
+    console.log(this.isAuth)
+    if(this.isAuth){
+      this.router.navigate(['/form-builder'])
     }
-    return true;
+    return this.isAuth
   }
 }

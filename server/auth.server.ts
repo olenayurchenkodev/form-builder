@@ -5,6 +5,7 @@ const bcrypt = require(`bcrypt`);
 const jwt = require(`jsonwebtoken`)
 const fs = require('fs').promises;
 const v4 = require('uuid');
+const PORT = 3000
 
 const server = express()
 const corsOptions ={
@@ -16,8 +17,8 @@ const corsOptions ={
 server.use(cors(corsOptions));
 server.use(express.json())
 
-server.listen(3000, () => {
-  console.log('Server is running on 3000 port');
+server.listen(PORT, () => {
+  console.log(`Server is running on ${PORT} port`);
 });
 
 

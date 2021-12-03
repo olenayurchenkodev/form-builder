@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {setAuth} from "../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
@@ -12,17 +12,28 @@ import {Router} from "@angular/router";
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
+  hide = true;
 
   constructor(
     private http: HttpClient,
     private store: Store,
-    public router: Router
-  ) { }
+    public router: Router,
+    private fb: FormBuilder
+  ) {
+    this.formAuth = fb.group({
+      'username': ['', Validators.required],
+      'password': ['', Validators.required]
+    })
+  }
 
   formAuth = new FormGroup({
     username: new FormControl(),
     password: new FormControl()
   })
+
+  getErrorMessage(field: string) {
+    return this.formAuth.get(`${field}`)?.hasError(`required`) ? 'This field is required' : '';
+  }
 
   sendLoginForm () {
     this.http.post(`http://localhost:3000/login`, (this.formAuth.value))
@@ -35,7 +46,7 @@ export class AuthComponent {
   }
 
   setToken (token: any) {
-    this.store.dispatch(setAuth({auth: token}))
+    this.store.dispatch(setAuth({auth: token.token}))
     this.store.select(getAuth)
       .subscribe(() =>
         this.router.navigate(['/form-builder']))

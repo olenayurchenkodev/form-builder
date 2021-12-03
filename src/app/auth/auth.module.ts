@@ -11,29 +11,32 @@ import {MatSelectModule} from "@angular/material/select";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
   declarations: [
     AuthComponent
   ],
-  imports: [
-    BrowserModule,
-    PortalModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    BrowserModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-        { path: '', redirectTo: '/', pathMatch: 'full' }
-    ])
-  ],
+    imports: [
+        BrowserModule,
+        PortalModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        BrowserModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        // HttpClientTestingModule,
+        RouterModule.forRoot([
+            {path: '', redirectTo: '/', pathMatch: 'full'}
+        ])
+    ],
   providers: [],
   exports: [
     AuthComponent
