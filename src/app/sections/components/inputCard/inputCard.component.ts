@@ -9,8 +9,6 @@ import {Router} from "@angular/router";
   templateUrl: './inputCard.component.html',
   styleUrls: ['./inputCard.component.scss']
 })
-
-
 export class InputCardComponent {
 
   constructor(
@@ -26,7 +24,7 @@ export class InputCardComponent {
     }
   }
 
-  logout () {
+  logout(): void {
     localStorage.removeItem('userData');
     this.store.dispatch(setAuth({auth: ''}));
     this.router.navigate(['/login']);

@@ -19,7 +19,6 @@ import {CommonModule} from "@angular/common";
 import {AuthModule} from "./auth/auth.module";
 import {AuthComponent} from "./auth/auth.component";
 import {SectionsComponent} from "./sections/sections.component";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent},
@@ -38,7 +37,7 @@ const routes: Routes = [
     FormsModule,
     CommonModule,
     //disable for run
-    HttpClientTestingModule,
+    // HttpClientTestingModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,

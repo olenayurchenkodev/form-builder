@@ -15,9 +15,8 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./formBuilder.component.scss']
 })
 export class FormBuilderComponent implements OnInit{
-
   formStyles?: any
-  form = [];
+  form: any = [];
   ids:any = [];
   click: boolean = false;
   receiveData:Subscription;
@@ -40,7 +39,7 @@ export class FormBuilderComponent implements OnInit{
 
   drop(event: CdkDragDrop<string[]|any>) {
     if (event.previousContainer === event.container) {
-      console.log('prev, curr',event.previousIndex, event.currentIndex);
+      // console.log('prev, curr',event.previousIndex, event.currentIndex);
       this.changePos(this.ids, event.previousIndex, event.currentIndex);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       // console.log('form',this.form); console.log('ids',this.ids)
@@ -78,12 +77,12 @@ export class FormBuilderComponent implements OnInit{
   }
 
   deleteElem (id: string) {
-    console.log(id)
+    // console.log(id)
     const index = this.ids.indexOf(id);
-    console.log(index)
+    // console.log(index)
     this.ids.splice(index, 1)
     this.form.splice(index, 1)
-    console.log('form after delete',this.form);
+    // console.log('form after delete',this.form);
   }
 
   selectInput(type: string, id: any){

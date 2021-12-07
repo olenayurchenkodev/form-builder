@@ -31,21 +31,21 @@ export class AuthComponent {
     password: new FormControl()
   })
 
-  getErrorMessage(field: string) {
+  getErrorMessage(field: string): string {
     return this.formAuth.get(`${field}`)?.hasError(`required`) ? 'This field is required' : '';
   }
 
-  sendLoginForm () {
+  sendLoginForm(): void {
     this.http.post(`http://localhost:3000/login`, (this.formAuth.value))
       .subscribe(token => this.setToken(token))
   }
 
-  sendRegisterForm () {
+  sendRegisterForm(): void {
     this.http.post(`http://localhost:3000/register`, (this.formAuth.value))
       .subscribe(token => this.setToken(token))
   }
 
-  setToken (token: any) {
+  setToken(token: any): void {
     this.store.dispatch(setAuth({auth: token.token}))
     this.store.select(getAuth)
       .subscribe(() =>

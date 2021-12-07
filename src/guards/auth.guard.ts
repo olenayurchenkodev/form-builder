@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   constructor(public store: Store, public router: Router) {}
   canActivate(): boolean {
     this.store.select(getAuth).subscribe(s => this.isAuth = !!s)
-    console.log(this.isAuth)
+    // console.log(this.isAuth)
     if(this.isAuth){
       this.router.navigate(['/form-builder'])
     }
