@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MatIconModule} from "@angular/material/icon";
+import {AuthService} from "../../services/authGuard.service";
 
 
 @NgModule({
@@ -37,7 +38,9 @@ import {MatIconModule} from "@angular/material/icon";
             {path: '', redirectTo: '/', pathMatch: 'full'}
         ])
     ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   exports: [
     AuthComponent
   ],

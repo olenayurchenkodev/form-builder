@@ -23,7 +23,6 @@ import {FormStylesComponent} from "./formStyles.component";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule
-
   ],
   providers: [],
   exports: [

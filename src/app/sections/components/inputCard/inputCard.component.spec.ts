@@ -9,11 +9,20 @@ import {AuthComponent} from "../../../auth/auth.component";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {SectionsComponent} from "../../sections.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('InputCardComponent', () => {
   let store: MockStore;
   let routes: Router;
-  const initialState = { isAuth: 'fffffffff' };
+  const initialState = { Auth: 'token',
+    Form: {
+      label: 'Form Builder',
+      colour: 'black',
+      backcolour: 'none',
+      border: '1px solid',
+      fontSize: '24px',
+      fontWeight: 'normal',
+    }};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,7 +35,8 @@ describe('InputCardComponent', () => {
         RouterModule.forRoot([
           { path: 'login', component: AuthComponent},
           { path: 'form-builder', component: SectionsComponent}
-        ])
+        ]),
+        RouterTestingModule
       ],
       declarations: [
         InputCardComponent
@@ -41,9 +51,9 @@ describe('InputCardComponent', () => {
   it('logout', ( async() => {
     const fixture = TestBed.createComponent(InputCardComponent);
     const component = fixture.componentInstance;
-    spyOn(component, 'logout');
+    spyOn(store, 'dispatch');
     component.logout();
     fixture.detectChanges();
-    expect(component.logout).toHaveBeenCalled();
+    expect(store.dispatch).toHaveBeenCalled();
   }));
 });

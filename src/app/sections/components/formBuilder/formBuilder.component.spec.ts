@@ -1,32 +1,110 @@
 import {RouterModule} from "@angular/router";
 import {TestBed} from "@angular/core/testing";
-import {StoreModule} from "@ngrx/store";
-import {FormReducer} from "../../../../store/reducers/form.reducers";
+import {createFeatureSelector, createSelector, StoreModule} from "@ngrx/store";
+import {FieldStyle, FormReducer, initialState} from "../../../../store/reducers/form.reducers";
 import {FormBuilderComponent} from "./formBuilder.component";
 import {AuthComponent} from "../../../auth/auth.component";
 import {SectionsComponent} from "../../sections.component";
+import {RouterTestingModule} from "@angular/router/testing";
+import {MockStore, provideMockStore} from "@ngrx/store/testing";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import {SharedDataService} from "../../../../services/shareElemData.service";
+import {MatFormFieldModule} from "@angular/material/form-field";
+
+export const selectFieldStyles =
+  createFeatureSelector<FieldStyle>('fieldStyles');
+
+export const selectFormStyles = createSelector(
+  selectFieldStyles,
+  (state: FieldStyle) => {
+    return state.Form;
+  }
+);
 
 describe('FormBuilderComponent', () => {
+  let store: MockStore;
+  const initialState = {
+    id: [],
+    styles: [],
+    Input: {
+      label: 'label',
+      backcolour: 'none',
+      placeholder: '',
+      width: '100%',
+      height: '30px',
+      required: false
+    },
+    Textarea: {
+      label: 'label',
+      backcolour: 'none',
+      placeholder: '',
+      width: '100%',
+      height: '40px',
+      required: false
+    },
+    Button:{
+      label: 'button',
+      backcolour: 'none',
+      width: '30%',
+      height: '40px',
+      border: 'none'
+    },
+    Checkbox:{
+      label: 'label',
+      backcolour: 'none',
+      width: '100%',
+      height: '30px',
+      required: false,
+      newOption: []
+    },
+    Select:{
+      label: 'label',
+      backcolour: 'none',
+      width: '100%',
+      height: '30px',
+      required: false,
+      newOption: []
+    },
+    Form: {
+      label: 'Form Builder',
+      colour: 'black',
+      backcolour: 'none',
+      border: '1px solid',
+      fontSize: '24px',
+      fontWeight: 'normal',
+    },
+    Auth: ''
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot( {fieldStyles: FormReducer}),
         RouterModule.forRoot([
+          { path: '', component: AuthComponent, pathMatch: 'full' },
           { path: 'login', component: AuthComponent},
-          { path: 'form-builder', component: SectionsComponent}
-        ])
+          { path: 'form-builder', component: SectionsComponent},
+          { path: '**', redirectTo: '' }
+        ]),
+        RouterTestingModule,
+        DragDropModule,
+        MatFormFieldModule,
       ],
       declarations: [
         FormBuilderComponent
       ],
+      providers: [
+        provideMockStore({ initialState }),
+      ]
     }).compileComponents();
+    store = TestBed.inject(MockStore);
   });
   it('onInit', ( async() => {
     const fixture = TestBed.createComponent(FormBuilderComponent);
     const component = fixture.componentInstance;
     await component.ngOnInit();
-    expect(component.formStyles).toBeDefined();
+    component.formStyles = store.select(selectFormStyles);
+    fixture.detectChanges();
+    expect(component.formStyles).toBeTruthy();
   }));
   it('changePos', ( async() => {
     const fixture = TestBed.createComponent(FormBuilderComponent);
@@ -38,9 +116,9 @@ describe('FormBuilderComponent', () => {
   it('addField', ( async() => {
     const fixture = TestBed.createComponent(FormBuilderComponent);
     const component = fixture.componentInstance;
-    spyOn(component, 'addField')
-    component.addField('id', 'Input');
-    expect(component.addField).toHaveBeenCalled()
+    spyOn(store, 'dispatch')
+    await component.addField('id', 'Input');
+    expect(store.dispatch).toHaveBeenCalled()
   }));
   it('deleteElem', ( async() => {
     const fixture = TestBed.createComponent(FormBuilderComponent);
@@ -56,6 +134,6 @@ describe('FormBuilderComponent', () => {
     const component = fixture.componentInstance;
     component.click = false;
     component.selectInput('Input', '1');
-    expect(component.click).toEqual(true);
+    expect(component.click).toEqual(true)
   }));
 });

@@ -37,7 +37,7 @@ export class FormBuilderComponent implements OnInit{
       )
   }
 
-  drop(event: CdkDragDrop<string[]|any>) {
+  drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       // console.log('prev, curr',event.previousIndex, event.currentIndex);
       this.changePos(this.ids, event.previousIndex, event.currentIndex);

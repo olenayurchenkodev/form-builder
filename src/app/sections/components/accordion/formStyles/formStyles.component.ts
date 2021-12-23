@@ -33,7 +33,6 @@ export class FormStylesComponent{
     fontWeight: new FormControl(),
   })
 
-
   constructor(private store: Store) {  }
 
   sendStyles(){

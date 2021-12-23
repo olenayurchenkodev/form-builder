@@ -10,7 +10,7 @@ export interface FieldStyle{
   Checkbox?: { [key: string]: string | boolean | [] },
   Select?: { [key: string]: string | boolean | [] },
   Form?: { [key: string]: string | boolean | [] },
-  Auth?: string
+  Auth: string
 }
 
 export const initialState: FieldStyle ={

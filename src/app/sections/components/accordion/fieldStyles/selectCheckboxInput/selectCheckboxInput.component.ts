@@ -21,7 +21,6 @@ export class SelectCheckboxInputComponent {
     height: new FormControl(),
     required: new FormControl(),
     newOption: new FormControl()
-
   })
 
   constructor(

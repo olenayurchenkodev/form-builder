@@ -10,23 +10,80 @@ import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, By} from "@angular/platform-browser";
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {SectionsComponent} from "../sections/sections.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AuthComponent', () => {
+  let store: MockStore;
   let router: Router;
   let guard: AuthGuard;
-  let store: MockStore;
-  const initialState = { isAuth: false };
+  const initialState = {
+    id: [],
+    styles: [],
+    Input: {
+      label: 'label',
+      backcolour: 'none',
+      placeholder: '',
+      width: '100%',
+      height: '30px',
+      required: false
+    },
+    Textarea: {
+      label: 'label',
+      backcolour: 'none',
+      placeholder: '',
+      width: '100%',
+      height: '40px',
+      required: false
+    },
+    Button:{
+      label: 'button',
+      backcolour: 'none',
+      width: '30%',
+      height: '40px',
+      border: 'none'
+    },
+    Checkbox:{
+      label: 'label',
+      backcolour: 'none',
+      width: '100%',
+      height: '30px',
+      required: false,
+      newOption: []
+    },
+    Select:{
+      label: 'label',
+      backcolour: 'none',
+      width: '100%',
+      height: '30px',
+      required: false,
+      newOption: []
+    },
+    Form: {
+      label: 'Form Builder',
+      colour: 'black',
+      backcolour: 'none',
+      border: '1px solid',
+      fontSize: '24px',
+      fontWeight: 'normal',
+    },
+    Auth: ''
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        StoreModule.forRoot( {fieldStyles: FormReducer}),
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([
+          { path: '', component: AuthComponent, pathMatch: 'full' },
+          { path: 'login', component: AuthComponent},
+          { path: 'form-builder', component: SectionsComponent},
+          { path: '**', redirectTo: '' }
+        ]),
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
@@ -36,6 +93,7 @@ describe('AuthComponent', () => {
         MatSelectModule,
         MatIconModule,
         BrowserAnimationsModule,
+        RouterTestingModule
       ],
       declarations: [
         AuthComponent
@@ -49,37 +107,56 @@ describe('AuthComponent', () => {
     router.initialNavigation();
     store = TestBed.inject(MockStore);
     guard = TestBed.inject(AuthGuard);
+
   });
-  it('pass field login falsy', () => {
+  it('getErrorMessageFalse', () => {
     const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
     const component = fixture.componentInstance;
     let pass = component.formAuth.controls['password'];
     expect(pass.valid).toBeFalsy();
   });
-  it('pass field login trues', () => {
+  it('getErrorMessageTrue', () => {
     const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
     const component = fixture.componentInstance;
     let pass = component.formAuth.controls['password'];
     pass.setValue('123')
     expect(pass.valid).toBeTruthy();
   });
-  it('auth fields validity', () => {
+  it('sendLoginForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
     const component = fixture.componentInstance;
+    spyOn(component, "sendLoginForm")
     let password = component.formAuth.controls['password'];
+    password.setValue('123')
     let username = component.formAuth.controls['username'];
-    let errors = (password.errors && username.errors) || {};
-    expect(errors['required']).toBeTruthy();
+    username.setValue('custom_user')
+    let button = fixture.debugElement.query(By.css('button'));
+    button.triggerEventHandler('click', null);
+    expect(component.sendLoginForm).toHaveBeenCalled()
   });
-  it('submitting a form emits a user',  (async () => {
+  it('sendRegisterForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
     const component = fixture.componentInstance;
-    expect(component.formAuth.valid).toBeFalsy();
-    component.formAuth.controls['username'].setValue("custom_user");
-    component.formAuth.controls['password'].setValue("123");
-    expect(component.formAuth.valid).toBeTruthy();
-    await component.sendLoginForm();
-    // expect(component.sendLoginForm).toHaveBeenCalled();
+    spyOn(component, "sendLoginForm")
+    let password = component.formAuth.controls['password'];
+    password.setValue('123')
+    let username = component.formAuth.controls['username'];
+    username.setValue('custom_new_user')
+    let button = fixture.debugElement.query(By.css('button'));
+    button.triggerEventHandler('click', null);
+    expect(component.sendLoginForm).toHaveBeenCalled()
+  });
+  it('setToken',  (async () => {
+    const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
+    const component = fixture.componentInstance;
+    spyOn(component, 'setToken')
+    await component.setToken('token');
+    expect(component.setToken).toHaveBeenCalled();
     expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   }));
 });

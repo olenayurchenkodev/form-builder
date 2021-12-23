@@ -46,9 +46,12 @@ export class AuthComponent {
   }
 
   setToken(token: any): void {
+    // console.log(token);
     this.store.dispatch(setAuth({auth: token.token}))
     this.store.select(getAuth)
-      .subscribe(() =>
-        this.router.navigate(['/form-builder']))
+      .subscribe(token => {
+        localStorage.setItem('userData', token);
+        this.router.navigate(['/form-builder'])
+      })
   }
 }

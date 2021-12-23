@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
-import {AppEffects} from "./app.effects";
+import {AppEffects} from "../store/effects/app.effects";
 import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
 
@@ -19,10 +19,12 @@ import {CommonModule} from "@angular/common";
 import {AuthModule} from "./auth/auth.module";
 import {AuthComponent} from "./auth/auth.component";
 import {SectionsComponent} from "./sections/sections.component";
+import {AuthService} from "../services/authGuard.service";
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent},
-  { path: 'form-builder', component: SectionsComponent}
+  { path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

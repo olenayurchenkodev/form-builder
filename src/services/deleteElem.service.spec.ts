@@ -9,7 +9,7 @@ describe('DeleteElemService', () => {
       ],
     });
   });
-  it('send',
+  it('sendMessage',
     inject([DeleteElemService],
       (service: DeleteElemService) => {
         expect(service).toBeTruthy();
@@ -17,7 +17,7 @@ describe('DeleteElemService', () => {
 
     })
   );
-  it('get',
+  it('getClickEvent',
     inject([DeleteElemService],
       (service: DeleteElemService) => {
       expect(service.getClickEvent().subscribe(s => s)).toBeDefined()
