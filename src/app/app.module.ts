@@ -6,7 +6,7 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {AppEffects} from "../store/effects/app.effects";
 import {HttpClientModule} from '@angular/common/http';
-import {Routes, RouterModule} from '@angular/router';
+import { RouterModule} from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -20,32 +20,34 @@ import {AuthModule} from "./auth/auth.module";
 import {AuthComponent} from "./auth/auth.component";
 import {SectionsComponent} from "./sections/sections.component";
 import {AuthService} from "../services/authGuard.service";
-
-const routes: Routes = [
-  { path: 'login', component: AuthComponent},
-  { path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
-  { path: '**', redirectTo: '/login' }
-];
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundPageComponent
   ],
   imports: [
-    StoreModule.forRoot( {fieldStyles: FormReducer}),
+    StoreModule.forRoot({fieldStyles: FormReducer}),
     BrowserModule,
     PortalModule,
     SectionsModule,
     FormsModule,
     CommonModule,
-    //disable for run
-    // HttpClientTestingModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot([
+      {path: 'login', component: AuthComponent},
+      {path: 'not-found', component: NotFoundPageComponent},
+      {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
+      {path: '**', redirectTo: 'not-found'},
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
+    ]),
     HttpClientModule,
     ReactiveComponentModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AppEffects])
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    EffectsModule.forRoot([AppEffects]),
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent],

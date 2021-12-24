@@ -39,10 +39,8 @@ export class FormBuilderComponent implements OnInit{
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      // console.log('prev, curr',event.previousIndex, event.currentIndex);
       this.changePos(this.ids, event.previousIndex, event.currentIndex);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      // console.log('form',this.form); console.log('ids',this.ids)
     } else {
       copyArrayItem(
         event.previousContainer.data,

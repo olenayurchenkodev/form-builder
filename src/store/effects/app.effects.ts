@@ -7,7 +7,7 @@ import {Observable, of} from "rxjs";
 
 @Injectable()
 export class AppEffects{
-  auth$ = createEffect(()=>this.actions$.pipe(
+  auth$ = createEffect(()=> this.actions$.pipe(
     ofType(setAuth),
     mergeMap(():Observable<any> => {
       map((token: string) => setAuthSuccess({auth: token}))
