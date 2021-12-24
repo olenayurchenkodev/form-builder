@@ -1,11 +1,10 @@
 import { TestBed} from '@angular/core/testing';
 import { AuthComponent } from "./auth.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import { StoreModule} from "@ngrx/store";
 import {FormReducer, getAuth} from "../../store/reducers/form.reducers";
 import { RouterModule, Router} from "@angular/router";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthGuard} from "../../guards/auth.guard";
+import {AuthService} from '../../services/authGuard.service'
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
@@ -16,11 +15,13 @@ import {MatIconModule} from "@angular/material/icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SectionsComponent} from "../sections/sections.component";
 import {RouterTestingModule} from "@angular/router/testing";
+import {NotFoundPageComponent} from "../not-found-page/not-found-page.component";
+import {createField} from "../../store/actions/form.actions";
 
-describe('AuthComponent', () => {
+fdescribe('AuthComponent', () => {
   let store: MockStore;
   let router: Router;
-  let guard: AuthGuard;
+  let guard: AuthService;
   const initialState = {
     id: [],
     styles: [],
@@ -79,10 +80,10 @@ describe('AuthComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterModule.forRoot([
-          { path: '', component: AuthComponent, pathMatch: 'full' },
-          { path: 'login', component: AuthComponent},
-          { path: 'form-builder', component: SectionsComponent},
-          { path: '**', redirectTo: '' }
+          {path: '', component: AuthComponent },
+          {path: 'not-found', component: NotFoundPageComponent},
+          {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
+          {path: '**', redirectTo: 'not-found'},
         ]),
         FormsModule,
         ReactiveFormsModule,
@@ -99,14 +100,14 @@ describe('AuthComponent', () => {
         AuthComponent
       ],
       providers: [
-        AuthGuard,
+        AuthService,
         provideMockStore({ initialState }),
       ]
     }).compileComponents();
     router = TestBed.get(Router);
     router.initialNavigation();
     store = TestBed.inject(MockStore);
-    guard = TestBed.inject(AuthGuard);
+    guard = TestBed.inject(AuthService);
 
   });
   it('getErrorMessageFalse', () => {
@@ -115,14 +116,16 @@ describe('AuthComponent', () => {
     const component = fixture.componentInstance;
     let pass = component.formAuth.controls['password'];
     expect(pass.valid).toBeFalsy();
+    expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });
   it('getErrorMessageTrue', () => {
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
     const component = fixture.componentInstance;
     let pass = component.formAuth.controls['password'];
-    pass.setValue('123')
+    pass.setValue('123');
     expect(pass.valid).toBeTruthy();
+    expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });
   it('sendLoginForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
@@ -135,7 +138,8 @@ describe('AuthComponent', () => {
     username.setValue('custom_user')
     let button = fixture.debugElement.query(By.css('button'));
     button.triggerEventHandler('click', null);
-    expect(component.sendLoginForm).toHaveBeenCalled()
+    expect(component.sendLoginForm).toHaveBeenCalled();
+    expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });
   it('sendRegisterForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
@@ -148,7 +152,8 @@ describe('AuthComponent', () => {
     username.setValue('custom_new_user')
     let button = fixture.debugElement.query(By.css('button'));
     button.triggerEventHandler('click', null);
-    expect(component.sendLoginForm).toHaveBeenCalled()
+    expect(component.sendLoginForm).toHaveBeenCalled();
+    expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });
   it('setToken',  (async () => {
     const fixture = TestBed.createComponent(AuthComponent);

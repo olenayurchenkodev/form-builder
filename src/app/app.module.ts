@@ -22,33 +22,34 @@ import {SectionsComponent} from "./sections/sections.component";
 import {AuthService} from "../services/authGuard.service";
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import {MatButtonModule} from "@angular/material/button";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundPageComponent
   ],
-  imports: [
-    StoreModule.forRoot({fieldStyles: FormReducer}),
-    BrowserModule,
-    PortalModule,
-    SectionsModule,
-    FormsModule,
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      {path: '', component: AuthComponent },
-      {path: 'not-found', component: NotFoundPageComponent},
-      {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
-      {path: '**', redirectTo: 'not-found'},
-
-    ]),
-    HttpClientModule,
-    ReactiveComponentModule,
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([AppEffects]),
-    MatButtonModule
-  ],
+    imports: [
+        StoreModule.forRoot({fieldStyles: FormReducer}),
+        BrowserModule,
+        PortalModule,
+        SectionsModule,
+        FormsModule,
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            {path: '', component: AuthComponent},
+            {path: 'not-found', component: NotFoundPageComponent},
+            {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
+            {path: '**', redirectTo: 'not-found'},
+        ]),
+        HttpClientModule,
+        ReactiveComponentModule,
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        EffectsModule.forRoot([AppEffects]),
+        MatButtonModule,
+        MatGridListModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [
