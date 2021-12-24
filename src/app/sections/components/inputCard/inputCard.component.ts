@@ -27,7 +27,7 @@ export class InputCardComponent {
   logout(): void {
     localStorage.removeItem('userData');
     this.store.dispatch(setAuth({auth: ''}));
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
 }

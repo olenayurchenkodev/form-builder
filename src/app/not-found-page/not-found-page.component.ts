@@ -25,7 +25,7 @@ export class NotFoundPageComponent implements OnInit {
   navigate(): void{
     this.way === 'FormBuilder page' ?
       this.router.navigate(['/form-builder']) :
-      this.router.navigate(['/login'])
+      this.router.navigate(['/'])
   }
 
 }

@@ -37,11 +37,11 @@ import {MatButtonModule} from "@angular/material/button";
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: 'login', component: AuthComponent},
+      {path: '', component: AuthComponent },
       {path: 'not-found', component: NotFoundPageComponent},
       {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
       {path: '**', redirectTo: 'not-found'},
-      {path: '', redirectTo: 'login', pathMatch: 'full'},
+
     ]),
     HttpClientModule,
     ReactiveComponentModule,

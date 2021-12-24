@@ -1,5 +1,5 @@
-import {CdkPortalOutlet, ComponentPortal, Portal} from '@angular/cdk/portal';
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {ComponentPortal, Portal} from '@angular/cdk/portal';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'sections-root',

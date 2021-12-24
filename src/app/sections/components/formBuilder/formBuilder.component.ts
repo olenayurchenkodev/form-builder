@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
-  selector: 'form-builder-root',
+  selector: 'app-form-builder-root',
   templateUrl: './formBuilder.component.html',
   styleUrls: ['./formBuilder.component.scss']
 })
