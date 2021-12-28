@@ -5,8 +5,9 @@ import {Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
 import {getFormStyle} from "../../../../store/reducers/form.reducers";
 import {DeleteElemService} from "../../../../services/deleteElem.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription, takeUntil} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
+import {map} from "rxjs/operators";
 
 
 @Component({
@@ -15,11 +16,12 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./formBuilder.component.scss']
 })
 export class FormBuilderComponent implements OnInit{
-  formStyles?: any
-  form: any = [];
-  ids:any = [];
-  click: boolean = false;
-  receiveData:Subscription;
+  public formStyles?: {[p: string]: string | boolean | []} | undefined;
+  public form: never[] | string[] = [];
+  public ids: string[] = [];
+  public click = false;
+  public receiveData:Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private store: Store,
@@ -30,14 +32,15 @@ export class FormBuilderComponent implements OnInit{
       .subscribe( message => this.deleteElem(message))
   }
 
-  ngOnInit(){
+  ngOnInit(): void{
     this.store.select(getFormStyle)
-      .subscribe(
-        s => this.formStyles = s
-      )
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map(s => this.formStyles = s ))
+      .subscribe()
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void{
     if (event.previousContainer === event.container) {
       this.changePos(this.ids, event.previousIndex, event.currentIndex);
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -48,46 +51,47 @@ export class FormBuilderComponent implements OnInit{
         event.previousIndex,
         event.currentIndex,
       );
-      let id = uuidv4()
+      const id = uuidv4()
       this.addField(id, this.form[event.currentIndex])
       this.ids.splice(event.currentIndex, 0, id)
     }
   }
 
-  changePos (arr: any[], prev: number, curr: number) {
+  changePos (arr: any[], prev: number, curr: number): void {
     let elem = arr[prev]
     let i = prev
     while (arr[i] !== arr[curr]) {
       if (prev < curr) {
-        arr[i] = arr[i + 1]
-        i++
-      }
-      else{
-        arr[i] = arr[i - 1]
-        i--
+        arr[i] = arr[i + 1];
+        i++;
+      } else {
+        arr[i] = arr[i - 1];
+        i--;
       }
     }
-    arr[curr] = elem
+    arr[curr] = elem;
   }
 
-  addField (id: string, typeField: string) {
+  addField (id: string, typeField: string): void{
     this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
-  deleteElem (id: string) {
-    // console.log(id)
+  deleteElem (id: string): void{
     const index = this.ids.indexOf(id);
-    // console.log(index)
     this.ids.splice(index, 1)
     this.form.splice(index, 1)
-    // console.log('form after delete',this.form);
   }
 
-  selectInput(type: string, id: any){
+  selectInput(type: string, id: string[]): void{
     this.click = true
     this.sharedDataService.sendMessage([
       type, id
     ]);
+  }
+
+  onDestroy(): void{
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

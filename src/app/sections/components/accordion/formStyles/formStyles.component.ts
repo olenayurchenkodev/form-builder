@@ -10,19 +10,10 @@ import {setForm} from "../../../../../store/actions/form.actions";
   styleUrls: ['./formStyles.component.scss']
 })
 export class FormStylesComponent{
-  customStyles?: { [key: string]: string | boolean };
+  public customStyles?: { [key: string]: string | boolean };
 
-  border=[
-    {name: "None", value: "none"},
-    {name: "Dotted line", value: "dotted"},
-    {name: "Solid line", value: "solid"}
-  ];
-
-  fontWeight=[
-    {name: "Thin", value: "thin"},
-    {name: "Normal", value: "normal"},
-    {name: "Bold", value: "bold"}
-  ];
+  border = ['none', 'dotted', 'solid'];
+  fontWeight = [ "lighter","normal","bold"];
 
   formStyle = new FormGroup({
     label: new FormControl(),
@@ -33,9 +24,11 @@ export class FormStylesComponent{
     fontWeight: new FormControl(),
   })
 
-  constructor(private store: Store) {  }
+  constructor(
+    private store: Store
+  ) { }
 
-  sendStyles(){
+  sendStyles(): void{
     this.customStyles = {
       label: this.formStyle.get('label')?.value,
       colour: `rgb(${this.formStyle.get('colour')?.value})`,
@@ -45,7 +38,6 @@ export class FormStylesComponent{
       fontWeight: this.formStyle.get('fontWeight')?.value
     }
     this.store.dispatch(setForm({styles: this.customStyles}));
-    // console.log(this.customStyles);
   }
 
 }

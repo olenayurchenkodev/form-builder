@@ -6,23 +6,20 @@ import {ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewContainerRef} 
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.scss']
 })
-export class SectionsComponent {
+export class SectionsComponent{
+  public accordionPortal: TemplatePortal | undefined;
+  public formBuilderPortal: TemplatePortal | undefined;
+  public inputPortal: TemplatePortal | undefined;
+  @ViewChild('accordionPortalContent') accordionPortalContent?: TemplateRef<unknown>;
+  @ViewChild('formBuilderPortalContent') formBuilderPortalContent?: TemplateRef<unknown>;
+  @ViewChild('inputPortalContent') inputPortalContent?: TemplateRef<unknown>;
+
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private cdr: ChangeDetectorRef
-  ) {
-  }
+  ) { }
 
-  accordionPortal?: TemplatePortal;
-  @ViewChild('accordionPortalContent') accordionPortalContent?: TemplateRef<unknown>;
-
-  formBuilderPortal?: TemplatePortal;
-  @ViewChild('formBuilderPortalContent') formBuilderPortalContent?: TemplateRef<unknown>;
-
-  inputPortal?: TemplatePortal;
-  @ViewChild('inputPortalContent') inputPortalContent?: TemplateRef<unknown>;
-
-  ngAfterViewInit() {
+  ngAfterViewInit(): void{
     if (this.accordionPortalContent && this.formBuilderPortalContent && this.inputPortalContent) {
       this.accordionPortal = new TemplatePortal(this.accordionPortalContent, this._viewContainerRef);
       this.formBuilderPortal = new TemplatePortal(this.formBuilderPortalContent, this._viewContainerRef);
@@ -30,6 +27,5 @@ export class SectionsComponent {
     }
     this.cdr.detectChanges();
   }
-
 
 }

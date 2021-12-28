@@ -8,22 +8,24 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from "@angular/material/select";
 
 import {FormStylesComponent} from "./formStyles.component";
+import {FormBuilderModule} from "../../formBuilder/formBuilder.module";
 
 
 @NgModule({
   declarations: [
     FormStylesComponent
   ],
-  imports: [
-    BrowserModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FormsModule
-  ],
+    imports: [
+        BrowserModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        FormsModule,
+        FormBuilderModule
+    ],
   providers: [],
   exports: [
     FormStylesComponent

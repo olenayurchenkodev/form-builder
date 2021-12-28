@@ -4,11 +4,11 @@
   <div
     class="list"
     [ngStyle]="{
-          'color': formStyles.colour,
-          'background': formStyles.backcolour,
-          'border-style': formStyles.border,
-          'font-size': formStyles.fontSize,
-          'font-weight': formStyles.fontWeight
+          'color': formStyles && formStyles['colour'],
+          'background': formStyles && formStyles['backcolour'],
+          'border-style': formStyles && formStyles['border'],
+          'font-size': formStyles && formStyles['fontSize'],
+          'font-weight': formStyles && formStyles['fontWeight']
     }"
     cdkDropList
     [cdkDropListData]="form"
@@ -16,7 +16,7 @@
     id="formList"
     (cdkDropListDropped)="drop($event)"
   >
-    <p>{{ formStyles.label }}</p>
+    <p>{{ formStyles && formStyles['label'] }}</p>
     <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
 
       <ng-container>

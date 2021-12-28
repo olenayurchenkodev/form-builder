@@ -10,15 +10,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./inputCard.component.scss']
 })
 export class InputCardComponent {
+  inputs = ['Input', 'Textarea', 'Button', 'Checkbox', 'Select'];
 
   constructor(
     private store: Store,
     public router: Router
   ) {  }
 
-  inputs = ['Input', 'Textarea', 'Button', 'Checkbox', 'Select'];
-
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }

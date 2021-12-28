@@ -5,6 +5,8 @@ import {setAuth} from "../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
 import {getAuth} from "../../store/reducers/form.reducers";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-auth-root',
@@ -12,7 +14,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-  hide = true;
+  public hide = true;
+  private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -46,12 +49,20 @@ export class AuthComponent {
   }
 
   setToken(token: any): void {
-    // console.log(token);
     this.store.dispatch(setAuth({auth: token.token}))
     this.store.select(getAuth)
-      .subscribe(token => {
-        localStorage.setItem('userData', token);
-        this.router.navigate(['/form-builder'])
-      })
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map(token => {
+          localStorage.setItem('userData', token);
+          this.router.navigate(['/form-builder'])
+        })
+        )
+      .subscribe()
+  }
+
+  onDestroy(): void{
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

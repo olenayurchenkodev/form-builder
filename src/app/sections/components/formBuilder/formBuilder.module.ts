@@ -19,6 +19,7 @@ import {ButtonComponent} from "./inputTypes/button/button.component";
 import {CheckboxComponent} from "./inputTypes/checkbox/checkbox.component";
 import {SelectComponent} from "./inputTypes/select/select.component";
 import {ReactiveComponentModule} from "@ngrx/component";
+import {FirstCamelPipe} from "../../../../pipes/first-camel.pipe";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {ReactiveComponentModule} from "@ngrx/component";
     TextareaComponent,
     ButtonComponent,
     CheckboxComponent,
-    SelectComponent
+    SelectComponent,
+    FirstCamelPipe
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import {ReactiveComponentModule} from "@ngrx/component";
   ],
   providers: [],
   exports: [
-    FormBuilderComponent
+    FormBuilderComponent,
+    FirstCamelPipe
   ],
   bootstrap: [FormBuilderComponent]
 })

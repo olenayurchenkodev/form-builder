@@ -1,13 +1,13 @@
 <div class="checkbox">
-  <mat-label>{{this.styles.label}}</mat-label>
+  <mat-label>{{styles ? styles['label'] : 'label'}}</mat-label>
   <ng-container >
     <mat-checkbox
       [ngStyle]="{
-          'width': this.styles.width,
-          'height': this.styles.height,
-          'background': this.styles.backcolour
-    }" [required]="this.styles.required"
-      *ngFor="let item of this.styles.newOption" [value]="item">
+          'width': styles && styles['width'],
+          'height': styles && styles['height'],
+          'background': styles && styles['backcolour']
+    }" [required]="required"
+      *ngFor="let item of options" [value]="item">
       {{item}}
     </mat-checkbox>
   </ng-container>

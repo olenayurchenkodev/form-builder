@@ -11,7 +11,7 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
   styleUrls: ['./textInput.component.scss']
 })
 export class TextInputComponent {
-  customStyles?: { [key: string]: string | boolean };
+  public customStyles?: { [key: string]: string | boolean };
   @Input() id: any = null;
 
   formStyle = new FormGroup({
@@ -38,7 +38,6 @@ export class TextInputComponent {
       required: this.formStyle.get('required')?.value
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
-    // console.log(this.customStyles);
   }
 
   deleteElem(){

@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./accordion.component.scss']
 })
 export class AccordionComponent {
-
-  items = ['Form Styles', 'Field Styles'];
-  expandedIndex = 0;
-
+  public items = ['Form Styles', 'Field Styles'];
+  // public expandedIndex = 0;
 }

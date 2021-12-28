@@ -2,16 +2,16 @@
   <ng-container>
     <mat-form-field appearance="fill"
                     [ngStyle]="{
-          'width': styles.width? styles.width: '',
-          'background': styles.backcolour
+          'width': styles && styles['width'],
+          'background': styles && styles['backcolour']
     }">
-      <mat-label>{{this.styles.label}}</mat-label>
+      <mat-label>{{styles ? styles['label']: 'label'}}</mat-label>
       <input
         matInput
         [ngStyle]="{
-          'height': styles.height}"
-        [placeholder]="this.styles.placeholder"
-             [required]="this.styles.required">
+          'height': styles && styles['height']}"
+        [placeholder]="styles ? styles['placeholder']: ''"
+             [required]="styles && required">
     </mat-form-field>
   </ng-container>
 </div>

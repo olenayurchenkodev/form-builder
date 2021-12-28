@@ -1,10 +1,10 @@
 <div class="button">
   <button mat-button [ngStyle]="{
-          'width': styles.width,
-          'height': styles.height,
-          'border': styles.border,
-          'background': this.styles.backcolour
+          'width': styles && styles['width'],
+          'height': styles && styles['height'],
+          'border': styles && styles['border'],
+          'background': styles && styles['backcolour']
     }">
-    {{this.styles.label}}
+    {{styles ? styles['label'] : 'button'}}
   </button>
 </div>

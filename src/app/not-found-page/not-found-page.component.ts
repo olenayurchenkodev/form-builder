@@ -15,11 +15,9 @@ export class NotFoundPageComponent implements OnInit {
 
   ngOnInit(): void {
     const auth = localStorage.getItem('userData')
-    if (auth) {
-      this.way = 'FormBuilder page';
-    } else {
-      this.way = 'Login page';
-    }
+    auth ?
+      this.way = 'FormBuilder page' :
+      this.way = 'Login page'
   }
 
   navigate(): void{

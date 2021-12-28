@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SharedDataService} from "../../../../../services/shareElemData.service";
-import {Subscription} from "rxjs";
+import {Subject, Subscription, takeUntil} from "rxjs";
 
 
 @Component({
@@ -9,18 +9,23 @@ import {Subscription} from "rxjs";
   styleUrls: ['./fieldStyles.component.scss']
 })
 export class FieldStylesComponent{
-
-  elemData: any[] = [];
-  receiveData:Subscription;
+  public elemData = [];
+  private receiveData: Subscription;
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     private sharedDataService:SharedDataService
   ) {
     this.receiveData = this.sharedDataService.getClickEvent()
-      .subscribe( message => this.elemData = message)
-    // setTimeout(()=>{
-    //   console.log(this.elemData);
-    // }, 10000)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe( message => {
+        this.elemData = message
+      })
+  }
+
+  onDestroy(): void{
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

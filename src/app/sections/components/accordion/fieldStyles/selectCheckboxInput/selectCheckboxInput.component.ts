@@ -11,8 +11,8 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
   styleUrls: ['./selectCheckboxInput.component.scss']
 })
 export class SelectCheckboxInputComponent {
-  customStyles?: { [key: string]: string | boolean | [] };
-  @Input() id: any = null;
+  public customStyles: { [key: string]: string | boolean | [] } | undefined;
+  @Input() id: string = '';
 
   formStyle = new FormGroup({
     label: new FormControl(),
@@ -28,7 +28,7 @@ export class SelectCheckboxInputComponent {
     private deleteElemService: DeleteElemService
   ) {  }
 
-  addOption(){
+  addOption(): void{
     this.store.dispatch(addOption({
         id: this.id,
         option: this.formStyle.get('newOption')?.value
@@ -45,7 +45,6 @@ export class SelectCheckboxInputComponent {
       newOption: ''
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
-    // console.log(this.customStyles);
   }
 
   deleteElem(){

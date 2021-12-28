@@ -10,8 +10,8 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
   styleUrls: ['./buttonInput.component.scss']
 })
 export class ButtonInputComponent {
-  customStyles?: { [key: string]: string | boolean };
-  @Input() id: any = null;
+  public customStyles?: { [key: string]: string | boolean };
+  @Input() id: string = '';
 
   formStyle = new FormGroup({
     label: new FormControl(),
@@ -28,23 +28,20 @@ export class ButtonInputComponent {
     {name: "Solid line", value: "solid"}
   ]
 
-  selected = this.border[0]
-
   constructor(
     private store: Store,
     private deleteElemService: DeleteElemService
-  ) {  }
+  ) { }
 
   sendStyles(){
     this.customStyles = {
-      label: this.formStyle.get('label')?.value,
-      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
-      width: `${this.formStyle.get('width')?.value}px`,
-      height: `${this.formStyle.get('height')?.value}px`,
-      border: this.formStyle.get('border')?.value
+      label: this.formStyle.value.label,
+      backcolour: `rgb(${this.formStyle.value.backcolour})`,
+      width: `${this.formStyle.value.width}px`,
+      height: `${this.formStyle.value.height}px`,
+      border: this.formStyle.value.border
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
-    // console.log(this.customStyles);
   }
 
   deleteElem(){

@@ -1,27 +1,24 @@
-<div>
+<fieldStyles-textInput
+  [id]="elemData[1]"
+  *ngIf="elemData[0] === 'Input'||elemData[0] === 'Textarea'"
+></fieldStyles-textInput>
 
-  <fieldStyles-textInput
-    [id]="elemData[1]"
-    *ngIf="elemData[0] === 'Input'||elemData[0] === 'Textarea'"
-  ></fieldStyles-textInput>
+<fieldStyles-buttonInput
+  [id]="elemData[1]"
+  *ngIf="elemData[0] === 'Button'"
+></fieldStyles-buttonInput>
 
-  <fieldStyles-buttonInput
-    [id]="elemData[1]"
-    *ngIf="elemData[0] === 'Button'"
-  ></fieldStyles-buttonInput>
+<fieldStyles-selectCheckboxInput
+  [id]="elemData[1]"
+  *ngIf="elemData[0] === 'Select'||elemData[0] === 'Checkbox'"
+></fieldStyles-selectCheckboxInput>
 
-  <fieldStyles-selectCheckboxInput
-    [id]="elemData[1]"
-    *ngIf="elemData[0] === 'Select'||elemData[0] === 'Checkbox'"
-  ></fieldStyles-selectCheckboxInput>
-
-  <div
-    *ngIf="elemData[0] !== 'Select'
-    &&elemData[0] !== 'Checkbox'
-    &&elemData[0] !== 'Input'
-    &&elemData[0] !== 'Textarea'
-    &&elemData[0] !== 'Button'"
-  ><h3>Choose the element in FormBuilder</h3>
-  </div>
-
+<div
+  *ngIf="elemData[0] !== 'Select'
+  &&elemData[0] !== 'Checkbox'
+  &&elemData[0] !== 'Input'
+  &&elemData[0] !== 'Textarea'
+  &&elemData[0] !== 'Button'"
+><h3>Choose the element in FormBuilder</h3>
 </div>
+

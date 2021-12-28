@@ -1,12 +1,12 @@
 <div class="textarea">
   <mat-form-field appearance="fill" [ngStyle]="{
-          'width': styles.width
+          'width': styles && styles['width']
     }">
-    <mat-label>{{this.styles.label}}</mat-label>
+    <mat-label>{{styles && styles['label']}}</mat-label>
     <textarea [ngStyle]="{
-          'background': styles.backcolour,
-          'height': styles.height}"
-      matInput [placeholder]="this.styles.placeholder"
-              [required]="this.styles.required"></textarea>
+          'background': styles && styles['backcolour'],
+          'height': styles && styles['height']}"
+      matInput [placeholder]="styles ? styles['placeholder'] : ''"
+              [required]="required"></textarea>
   </mat-form-field>
 </div>
