@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {EPages} from "../../enums/styles.enum";
 
 @Component({
   selector: 'app-not-found-page',
@@ -16,14 +17,12 @@ export class NotFoundPageComponent implements OnInit {
   ngOnInit(): void {
     const auth = localStorage.getItem('userData')
     auth ?
-      this.way = 'FormBuilder page' :
-      this.way = 'Login page'
+      this.way = EPages.home :
+      this.way = EPages.auth
   }
 
   navigate(): void{
-    this.way === 'FormBuilder page' ?
-      this.router.navigate(['/form-builder']) :
-      this.router.navigate(['/'])
+    this.router.navigate([this.way])
   }
 
 }

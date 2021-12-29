@@ -3,7 +3,9 @@
           'width': styles && styles['width']
     }">
     <mat-label>{{styles && styles['label']}}</mat-label>
-    <textarea [ngStyle]="{
+    <textarea
+      [value]="value"
+      [ngStyle]="{
           'background': styles && styles['backcolour'],
           'height': styles && styles['height']}"
       matInput [placeholder]="styles ? styles['placeholder'] : ''"

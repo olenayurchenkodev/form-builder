@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
-import {filter, Subject, takeUntil, tap} from "rxjs";
+import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
+import {BaseClass} from "../../../../../base.class";
 
 @Component({
   selector: 'checkbox-input-card',
@@ -10,16 +11,17 @@ import {map} from "rxjs/operators";
   styleUrls: ['./checkbox.component.scss']
 })
 
-export class CheckboxComponent implements OnInit{
+export class CheckboxComponent extends BaseClass implements OnInit{
   public styles: { [key: string]: string } | undefined;
   public required: boolean | undefined;
   public options = [];
-  private unsubscribe$: Subject<void> = new Subject<void>();
   @Input() id: any = null;
 
   constructor(
     private store: Store,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(){
     this.store.select(getFieldStyle(this.id))
@@ -34,11 +36,6 @@ export class CheckboxComponent implements OnInit{
         })
       )
       .subscribe()
-  }
-
-  onDestroy(): void{
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

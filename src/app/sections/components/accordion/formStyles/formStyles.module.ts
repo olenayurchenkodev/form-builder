@@ -9,23 +9,25 @@ import {MatSelectModule} from "@angular/material/select";
 
 import {FormStylesComponent} from "./formStyles.component";
 import {FormBuilderModule} from "../../formBuilder/formBuilder.module";
+import {FieldStylesModule} from "../fieldStyles/fieldStyles.module";
 
 
 @NgModule({
   declarations: [
     FormStylesComponent
   ],
-    imports: [
-        BrowserModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatInputModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        FormsModule,
-        FormBuilderModule
-    ],
+  imports: [
+    BrowserModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    FormBuilderModule,
+    FieldStylesModule,
+  ],
   providers: [],
   exports: [
     FormStylesComponent

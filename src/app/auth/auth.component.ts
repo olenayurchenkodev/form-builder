@@ -5,17 +5,18 @@ import {setAuth} from "../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
 import {getAuth} from "../../store/reducers/form.reducers";
 import {Router} from "@angular/router";
-import {Subject, takeUntil} from "rxjs";
+import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
+import {EError} from "../../enums/styles.enum";
+import {BaseClass} from "../base.class";
 
 @Component({
   selector: 'app-auth-root',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent {
+export class AuthComponent extends BaseClass{
   public hide = true;
-  private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -23,6 +24,7 @@ export class AuthComponent {
     public router: Router,
     private fb: FormBuilder
   ) {
+    super();
     this.formAuth = fb.group({
       'username': ['', Validators.required],
       'password': ['', Validators.required]
@@ -35,7 +37,7 @@ export class AuthComponent {
   })
 
   getErrorMessage(field: string): string {
-    return this.formAuth.get(`${field}`)?.hasError(`required`) ? 'This field is required' : '';
+      return this.formAuth.get(`${field}`)?.hasError(`required`) ? EError.error : '';
   }
 
   sendLoginForm(): void {
@@ -61,8 +63,4 @@ export class AuthComponent {
       .subscribe()
   }
 
-  onDestroy(): void{
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 }

@@ -12,6 +12,7 @@ import {TextInputComponent} from "./textInput/textInput.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {ButtonInputComponent} from "./buttonInput/buttonInput.component";
 import {SelectCheckboxInputComponent} from "./selectCheckboxInput/selectCheckboxInput.component";
+import {FirstCamelPipe} from "../../../../../pipes/first-camel.pipe";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {SelectCheckboxInputComponent} from "./selectCheckboxInput/selectCheckbox
     FieldStylesComponent,
     TextInputComponent,
     ButtonInputComponent,
-    SelectCheckboxInputComponent
+    SelectCheckboxInputComponent,
+    FirstCamelPipe
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import {SelectCheckboxInputComponent} from "./selectCheckboxInput/selectCheckbox
   ],
   providers: [],
   exports: [
-    FieldStylesComponent
+    FieldStylesComponent,
+    FirstCamelPipe
   ],
   bootstrap: [FieldStylesComponent]
 })

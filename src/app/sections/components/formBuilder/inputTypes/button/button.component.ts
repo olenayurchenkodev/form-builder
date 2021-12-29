@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
-import {Subject, takeUntil} from "rxjs";
+import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
+import {BaseClass} from "../../../../../base.class";
 
 @Component({
   selector: 'button-input-card',
@@ -10,27 +11,26 @@ import {map} from "rxjs/operators";
   styleUrls: ['./button.component.scss']
 })
 
-export class ButtonComponent {
+export class ButtonComponent extends BaseClass implements OnInit{
   public styles: { [key: string]: string } | undefined;
-  private unsubscribe$: Subject<void> = new Subject<void>();
   @Input() id: string = '';
 
   constructor(
     private store: Store,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(){
     this.store.select(getFieldStyle(this.id))
       .pipe(
         takeUntil(this.unsubscribe$),
-        map(s => this.styles = s)
+        map(s => {
+          this.styles = s
+          console.log('t')
+        })
       )
       .subscribe()
-  }
-
-  onDestroy(): void{
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

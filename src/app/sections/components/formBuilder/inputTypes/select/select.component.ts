@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
-import {filter, Subject, take, takeUntil, tap} from "rxjs";
+import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
+import {BaseClass} from "../../../../../base.class";
 
 @Component({
   selector: 'select-input-card',
@@ -10,17 +11,18 @@ import {map} from "rxjs/operators";
   styleUrls: ['./select.component.scss']
 })
 
-export class SelectComponent implements OnInit{
+export class SelectComponent extends BaseClass implements OnInit{
   public styles: { [key: string]: string } | undefined;
   public required: boolean = false;
   public options = [];
-  private unsubscribe$: Subject<void> = new Subject();
 
   @Input() id: string = '';
 
   constructor(
     private store: Store,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void{
     this.store.select(getFieldStyle(this.id))
@@ -35,11 +37,6 @@ export class SelectComponent implements OnInit{
         })
         )
       .subscribe()
-  }
-
-  onDestroy(): void{
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
 }

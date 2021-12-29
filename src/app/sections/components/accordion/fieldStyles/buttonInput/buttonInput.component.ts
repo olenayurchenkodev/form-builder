@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {deleteField, setField} from "../../../../../../store/actions/form.actions";
@@ -7,7 +7,8 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 @Component({
   selector: 'fieldStyles-buttonInput',
   templateUrl: './buttonInput.component.html',
-  styleUrls: ['./buttonInput.component.scss']
+  styleUrls: ['./buttonInput.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonInputComponent {
   public customStyles?: { [key: string]: string | boolean };
@@ -22,11 +23,7 @@ export class ButtonInputComponent {
     border: new FormControl()
   })
 
-  border=[
-    {name: "None", value: "none"},
-    {name: "Dotted line", value: "dotted"},
-    {name: "Solid line", value: "solid"}
-  ]
+  border=["none","dotted","solid"]
 
   constructor(
     private store: Store,

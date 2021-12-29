@@ -2,7 +2,6 @@
 .form-builder {
   width: 450px;
   margin: 0 25px 25px 0;
-  //display: inline-block;
   vertical-align: top;
   button{
     margin: 20px;
@@ -58,7 +57,7 @@
 }
 
 .cdk-drag-placeholder {
-  opacity: 0;
+  opacity: 0.2;
 }
 
 .cdk-drag-animating {

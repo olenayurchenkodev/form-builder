@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {addOption, deleteField, setField} from "../../../../../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
@@ -8,7 +8,8 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 @Component({
   selector: 'fieldStyles-selectCheckboxInput',
   templateUrl: './selectCheckboxInput.component.html',
-  styleUrls: ['./selectCheckboxInput.component.scss']
+  styleUrls: ['./selectCheckboxInput.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectCheckboxInputComponent {
   public customStyles: { [key: string]: string | boolean | [] } | undefined;

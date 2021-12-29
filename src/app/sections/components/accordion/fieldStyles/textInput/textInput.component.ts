@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {deleteField, setField} from "../../../../../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
@@ -8,7 +8,8 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 @Component({
   selector: 'fieldStyles-textInput',
   templateUrl: './textInput.component.html',
-  styleUrls: ['./textInput.component.scss']
+  styleUrls: ['./textInput.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextInputComponent {
   public customStyles?: { [key: string]: string | boolean };

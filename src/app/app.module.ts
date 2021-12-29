@@ -54,7 +54,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
   bootstrap: [AppComponent],
   exports: [
     SectionsModule,
-    AuthModule
+    AuthModule,
   ]
 })
 export class AppModule { }

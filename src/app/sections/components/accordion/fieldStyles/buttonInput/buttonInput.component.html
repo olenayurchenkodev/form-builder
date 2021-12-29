@@ -29,8 +29,8 @@
     <mat-form-field appearance="fill" class="form-item">
       <mat-label>Border type</mat-label>
       <mat-select formControlName="border">
-        <mat-option *ngFor="let type of border" [value]="type.value">
-          {{ type.name }}
+        <mat-option *ngFor="let type of border" [value]="type">
+          {{ type | upper }}
         </mat-option>
       </mat-select>
     </mat-form-field>
