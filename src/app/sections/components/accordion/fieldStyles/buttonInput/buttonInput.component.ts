@@ -1,8 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {deleteField, setField} from "../../../../../../store/actions/form.actions";
-import {DeleteElemService} from "../../../../../../services/deleteElem.service";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ElementsStylesClass} from "../elements-styles.class";
 
 @Component({
   selector: 'fieldStyles-buttonInput',
@@ -10,40 +7,6 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
   styleUrls: ['./buttonInput.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ButtonInputComponent {
-  public customStyles?: { [key: string]: string | boolean };
-  @Input() id: string = '';
-
-  formStyle = new FormGroup({
-    label: new FormControl(),
-    backcolour: new FormControl(),
-    width: new FormControl(),
-    height: new FormControl(),
-    required: new FormControl(),
-    border: new FormControl()
-  })
-
-  border=["none","dotted","solid"]
-
-  constructor(
-    private store: Store,
-    private deleteElemService: DeleteElemService
-  ) { }
-
-  sendStyles(){
-    this.customStyles = {
-      label: this.formStyle.value.label,
-      backcolour: `rgb(${this.formStyle.value.backcolour})`,
-      width: `${this.formStyle.value.width}px`,
-      height: `${this.formStyle.value.height}px`,
-      border: this.formStyle.value.border
-    }
-    this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
-  }
-
-  deleteElem(){
-    this.deleteElemService.sendMessage(this.id[0]);
-    this.store.dispatch(deleteField({id: this.id[0]}));
-  }
+export class ButtonInputComponent extends ElementsStylesClass{
 
 }

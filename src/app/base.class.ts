@@ -1,12 +1,9 @@
 import {Subject} from "rxjs";
+import {Directive} from "@angular/core";
 
-export abstract class BaseClass{
+@Directive()
+export abstract class BaseClass {
   protected unsubscribe$: Subject<void> = new Subject();
-
-  protected constructor(
-
-  ) {
-  }
 
   onDestroy(): void{
     this.unsubscribe$.next();

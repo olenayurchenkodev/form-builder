@@ -1,8 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {addOption, deleteField, setField} from "../../../../../../store/actions/form.actions";
-import {Store} from "@ngrx/store";
-import {DeleteElemService} from "../../../../../../services/deleteElem.service";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ElementsStylesClass} from "../elements-styles.class";
 
 
 @Component({
@@ -11,46 +8,7 @@ import {DeleteElemService} from "../../../../../../services/deleteElem.service";
   styleUrls: ['./selectCheckboxInput.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectCheckboxInputComponent {
-  public customStyles: { [key: string]: string | boolean | [] } | undefined;
-  @Input() id: string = '';
+export class SelectCheckboxInputComponent extends ElementsStylesClass{
 
-  formStyle = new FormGroup({
-    label: new FormControl(),
-    backcolour: new FormControl(),
-    width: new FormControl(),
-    height: new FormControl(),
-    required: new FormControl(),
-    newOption: new FormControl()
-  })
-
-  constructor(
-    private store: Store,
-    private deleteElemService: DeleteElemService
-  ) {  }
-
-  addOption(): void{
-    this.store.dispatch(addOption({
-        id: this.id,
-        option: this.formStyle.get('newOption')?.value
-      }));
-  }
-
-  sendStyles(){
-    this.customStyles = {
-      label: this.formStyle.get('label')?.value,
-      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
-      width: `${this.formStyle.get('width')?.value}px`,
-      height: `${this.formStyle.get('height')?.value}px`,
-      required: this.formStyle.get('required')?.value,
-      newOption: ''
-    }
-    this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
-  }
-
-  deleteElem(){
-    this.deleteElemService.sendMessage(this.id[0]);
-    this.store.dispatch(deleteField({id: this.id[0]}));
-  }
 
 }

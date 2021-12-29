@@ -1,10 +1,7 @@
 import {Component, ElementRef, forwardRef, HostListener, Inject, Input, OnInit, Renderer2} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {getFieldStyle} from "../../../../../../store/reducers/form.reducers";
-import {takeUntil} from "rxjs";
-import {map} from "rxjs/operators";
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {BaseClass} from "../../../../../base.class";
+import {ControlValueAccessor,  NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ElementsClass} from "../elements.class";
 
 @Component({
   selector: 'textarea-input-card',
@@ -17,33 +14,22 @@ import {BaseClass} from "../../../../../base.class";
   }],
 })
 
-export class TextareaComponent extends BaseClass implements OnInit, ControlValueAccessor{
-  public styles: { [key: string]: string } | undefined;
-  public required: boolean | undefined;
+export class TextareaComponent extends ElementsClass implements OnInit, ControlValueAccessor{
   public value = '';
-  private onChange = () => {};
+  private onChange = (value: any) => {};
   private onTouched = () => {};
-  @Input() id: string = '';
   @Input() create = false;
 
   constructor(
-    private store: Store,
     @Inject(ElementRef) private readonly elementRef: ElementRef,
     @Inject(Renderer2) private readonly renderer: Renderer2,
+    store: Store,
   ) {
-    super();
+    super(store);
   }
 
   ngOnInit(): void{
-    this.store.select(getFieldStyle(this.id))
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        map(s => {
-          this.styles = s
-          this.styles ? (this.required = s.required): null
-        })
-      )
-      .subscribe()
+    this.getFromStore()
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -53,11 +39,6 @@ export class TextareaComponent extends BaseClass implements OnInit, ControlValue
   registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
-
-  // writeValue(outsideValue: string): void {
-  //   // console.log(outsideValue);
-  //   this.value = outsideValue;
-  // }
 
   updateValue(insideValue: string): void {
     // console.log(insideValue);
