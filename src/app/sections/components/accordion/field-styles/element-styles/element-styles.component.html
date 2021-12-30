@@ -6,6 +6,11 @@
       <input matInput name="label" formControlName="label">
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="form-item" *ngIf="type === 'Input' || type === 'Textarea'">
+      <mat-label>Placeholder</mat-label>
+      <input matInput name="placeholder" formControlName="placeholder">
+    </mat-form-field>
+
     <mat-form-field appearance="fill" class="form-item">
       <mat-label>Background colour</mat-label>
       <input matInput name="backcolor" formControlName="backcolour">

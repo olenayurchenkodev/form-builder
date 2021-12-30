@@ -19,45 +19,12 @@
     <p>{{ formStyles && formStyles['label'] }}</p>
 <!--    <form [formGroup]="generatedForm">-->
       <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
-
-        <ng-container>
-          <app-input-input-card
-            class="formItem"
-            *ngIf="form[i] === 'Input'"
-            [id]="item"
-            (click) = selectInput(form[i],[item])
-          ></app-input-input-card>
-        </ng-container>
-
-        <app-textarea-input-card
-          [formControl]="textarea"
+        <app-elements
           class="formItem"
-          *ngIf="form[i] === 'Textarea'"
+          [type]="form[i]"
           [id]="item"
-          (click) = selectInput(form[i],[item])
-        ></app-textarea-input-card>
-
-        <app-button-input-card
-          class="formItem"
-          *ngIf="form[i] === 'Button'"
-          [id]="item"
-          (click) = selectInput(form[i],[item])
-        ></app-button-input-card>
-
-        <app-checkbox-input-card
-          class="formItem"
-          *ngIf="form[i] === 'Checkbox'"
-          [id]="item"
-          (click) = selectInput(form[i],[item])
-        ></app-checkbox-input-card>
-
-        <app-select-input-card
-          class="formItem"
-        *ngIf="form[i] === 'Select'"
-          [id]="item"
-          (click) = selectInput(form[i],[item])
-        ></app-select-input-card>
-
+          (click)="selectInput(form[i],[item])"
+        ></app-elements>
       </div>
 <!--    </form>-->
   </div>
@@ -69,5 +36,6 @@
       *ngIf="form.length !== 0"
     >Save Form</button>
   </div>
+  {{form}}
 
 </div>

@@ -14,20 +14,12 @@ import {ReactiveComponentModule} from "@ngrx/component";
 
 import {FormBuilderComponent} from "./form-builder.component";
 import {InputCardModule} from "../input-card/input-card.module";
-import {InputComponent} from "./input-types/input/input.component";
-import {TextareaComponent} from "./input-types/textarea/textarea.component";
-import {ButtonComponent} from "./input-types/button/button.component";
-import {CheckboxComponent} from "./input-types/checkbox/checkbox.component";
-import {SelectComponent} from "./input-types/select/select.component";
+import { ElementsComponent } from './elements/elements.component';
 
 @NgModule({
   declarations: [
     FormBuilderComponent,
-    InputComponent,
-    TextareaComponent,
-    ButtonComponent,
-    CheckboxComponent,
-    SelectComponent
+    ElementsComponent
   ],
   imports: [
     CommonModule,

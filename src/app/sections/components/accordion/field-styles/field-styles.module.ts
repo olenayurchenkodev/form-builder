@@ -32,10 +32,11 @@ import { ElementStylesComponent } from './element-styles/element-styles.componen
 
   ],
   providers: [],
-  exports: [
-    FieldStylesComponent,
-    FirstCamelPipe
-  ],
+    exports: [
+        FieldStylesComponent,
+        FirstCamelPipe,
+        ElementStylesComponent
+    ],
   bootstrap: [FieldStylesComponent]
 })
 export class FieldStylesModule { }

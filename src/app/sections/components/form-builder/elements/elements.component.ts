@@ -1,12 +1,17 @@
-import {BaseClass} from "../../../../base.class";
-import {Directive, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {getFieldStyle} from "../../../../../store/reducers/form.reducers";
 import {takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
+import {BaseClass} from "../../../../base.class";
 
-@Directive()
-export abstract class ElementsClass extends BaseClass implements OnInit{
+@Component({
+  selector: 'app-elements',
+  templateUrl: './elements.component.html',
+  styleUrls: ['./elements.component.scss']
+})
+export class ElementsComponent extends BaseClass implements OnInit{
+  @Input() type = '';
   public styles: { [key: string]: string } | undefined;
   public required: boolean = false;
   public options = [];
@@ -31,5 +36,4 @@ export abstract class ElementsClass extends BaseClass implements OnInit{
       )
       .subscribe()
   }
-
 }

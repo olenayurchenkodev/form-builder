@@ -8,7 +8,6 @@ import {DeleteElemService} from "../../../../services/deleteElem.service";
 import { Subscription, takeUntil} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
 import {map} from "rxjs/operators";
-import {FormControl} from "@angular/forms";
 import {BaseClass} from "../../../base.class";
 
 
@@ -20,7 +19,6 @@ import {BaseClass} from "../../../base.class";
 export class FormBuilderComponent extends BaseClass implements OnInit{
   public formStyles?: {[p: string]: string | boolean | []} | undefined;
   public form: never[] | string[] = [];
-  textarea = new FormControl()
   public ids: string[] = [];
   public click = false;
   public receiveData:Subscription;

@@ -1,12 +1,12 @@
 import {TemplatePortal} from '@angular/cdk/portal';
-import {ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Component({
   selector: 'app-sections-root',
   templateUrl: './sections.component.html',
   styleUrls: ['./sections.component.scss']
 })
-export class SectionsComponent{
+export class SectionsComponent implements AfterViewInit{
   public accordionPortal: TemplatePortal | undefined;
   public formBuilderPortal: TemplatePortal | undefined;
   public inputPortal: TemplatePortal | undefined;
