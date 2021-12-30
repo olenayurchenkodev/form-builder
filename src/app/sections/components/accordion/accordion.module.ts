@@ -9,9 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {AccordionComponent} from "./accordion.component";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
 import {MatSelectModule} from "@angular/material/select";
-import {FormStylesModule} from "./formStyles/formStyles.module";
+import {FormStylesModule} from "./form-styles/form-styles.module";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {FieldStylesModule} from "./fieldStyles/fieldStyles.module";
+import {FieldStylesModule} from "./field-styles/field-styles.module";
 
 
 @NgModule({
@@ -33,9 +33,9 @@ import {FieldStylesModule} from "./fieldStyles/fieldStyles.module";
         MatButtonModule
     ],
   providers: [],
-    exports: [
-        AccordionComponent
-    ],
+  exports: [
+      AccordionComponent
+  ],
   bootstrap: [AccordionComponent]
 })
 export class AccordionModule { }

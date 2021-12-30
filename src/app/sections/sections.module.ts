@@ -4,8 +4,8 @@ import {BrowserModule} from "@angular/platform-browser";
 
 import {SectionsComponent} from "./sections.component";
 import {AccordionModule} from './components/accordion/accordion.module';
-import {InputCardModule} from "./components/inputCard/inputCard.module";
-import {FormBuilderModule} from "./components/formBuilder/formBuilder.module";
+import {InputCardModule} from "./components/input-card/input-card.module";
+import {FormBuilderModule} from "./components/form-builder/form-builder.module";
 import {MatGridListModule} from "@angular/material/grid-list";
 
 

@@ -1,0 +1,73 @@
+<div class="form-builder">
+  <h3>Form Builder</h3>
+
+  <div
+    class="list"
+    [ngStyle]="{
+          'color': formStyles && formStyles['colour'],
+          'background': formStyles && formStyles['backcolour'],
+          'border-style': formStyles && formStyles['border'],
+          'font-size': formStyles && formStyles['fontSize'],
+          'font-weight': formStyles && formStyles['fontWeight']
+    }"
+    cdkDropList
+    [cdkDropListData]="form"
+    cdkDropListConnectedTo="inputsList"
+    id="formList"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <p>{{ formStyles && formStyles['label'] }}</p>
+<!--    <form [formGroup]="generatedForm">-->
+      <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
+
+        <ng-container>
+          <app-input-input-card
+            class="formItem"
+            *ngIf="form[i] === 'Input'"
+            [id]="item"
+            (click) = selectInput(form[i],[item])
+          ></app-input-input-card>
+        </ng-container>
+
+        <app-textarea-input-card
+          [formControl]="textarea"
+          class="formItem"
+          *ngIf="form[i] === 'Textarea'"
+          [id]="item"
+          (click) = selectInput(form[i],[item])
+        ></app-textarea-input-card>
+
+        <app-button-input-card
+          class="formItem"
+          *ngIf="form[i] === 'Button'"
+          [id]="item"
+          (click) = selectInput(form[i],[item])
+        ></app-button-input-card>
+
+        <app-checkbox-input-card
+          class="formItem"
+          *ngIf="form[i] === 'Checkbox'"
+          [id]="item"
+          (click) = selectInput(form[i],[item])
+        ></app-checkbox-input-card>
+
+        <app-select-input-card
+          class="formItem"
+        *ngIf="form[i] === 'Select'"
+          [id]="item"
+          (click) = selectInput(form[i],[item])
+        ></app-select-input-card>
+
+      </div>
+<!--    </form>-->
+  </div>
+
+  <div class="submission">
+    <button
+      mat-button
+      (click)="generateForm()"
+      *ngIf="form.length !== 0"
+    >Save Form</button>
+  </div>
+
+</div>

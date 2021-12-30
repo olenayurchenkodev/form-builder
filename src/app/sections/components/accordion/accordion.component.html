@@ -25,12 +25,12 @@
         [style.display]="accordionItem.expanded ? '' : 'none'"
         [attr.id]="'accordion-body-' + index"
         [attr.aria-labelledby]="'accordion-header-' + index">
-        <accordion-formStyles
+        <app-accordion-form-styles
           *ngIf="!+index"
-        ></accordion-formStyles>
-        <accordion-fieldStyles
+        ></app-accordion-form-styles>
+        <app-accordion-field-styles
           *ngIf="index"
-        ></accordion-fieldStyles>
+        ></app-accordion-field-styles>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>
