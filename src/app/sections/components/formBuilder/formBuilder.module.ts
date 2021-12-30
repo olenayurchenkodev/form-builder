@@ -10,6 +10,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { CommonModule } from '@angular/common';
+import {ReactiveComponentModule} from "@ngrx/component";
 
 import {FormBuilderComponent} from "./formBuilder.component";
 import {InputCardModule} from "../inputCard/inputCard.module";
@@ -18,9 +19,6 @@ import {TextareaComponent} from "./inputTypes/textarea/textarea.component";
 import {ButtonComponent} from "./inputTypes/button/button.component";
 import {CheckboxComponent} from "./inputTypes/checkbox/checkbox.component";
 import {SelectComponent} from "./inputTypes/select/select.component";
-import {ReactiveComponentModule} from "@ngrx/component";
-
-
 
 @NgModule({
   declarations: [

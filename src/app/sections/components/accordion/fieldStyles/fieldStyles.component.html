@@ -1,17 +1,8 @@
-<fieldStyles-textInput
+<app-element-styles
+  [type]="elemData[0]"
   [id]="elemData[1]"
-  *ngIf="elemData[0] === 'Input'||elemData[0] === 'Textarea'"
-></fieldStyles-textInput>
-
-<fieldStyles-buttonInput
-  [id]="elemData[1]"
-  *ngIf="elemData[0] === 'Button'"
-></fieldStyles-buttonInput>
-
-<fieldStyles-selectCheckboxInput
-  [id]="elemData[1]"
-  *ngIf="elemData[0] === 'Select'||elemData[0] === 'Checkbox'"
-></fieldStyles-selectCheckboxInput>
+  *ngIf="elemData[0]"
+></app-element-styles>
 
 <div
   *ngIf="elemData[0] !== 'Select'

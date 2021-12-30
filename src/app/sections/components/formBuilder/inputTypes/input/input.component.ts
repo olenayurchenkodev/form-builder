@@ -9,7 +9,4 @@ import {ElementsClass} from "../elements.class";
 })
 export class InputComponent extends ElementsClass implements OnInit{
 
-  ngOnInit(): void{
-    this.getFromStore();
-  }
 }

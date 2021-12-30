@@ -1,33 +1,55 @@
-.form-container{
+.form-container {
   width: 90%;
   display: block;
   margin: auto;
+
+  .newOption {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .options {
+    width: 80%
+  }
+
+  .add-button {
+    height: 60px;
+  }
 }
+
 .field-styles {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  .form-item{
+
+  .form-item {
     width: 100%;
-    mat-checkbox{
+
+    mat-checkbox {
       padding-bottom: 1.34375em;
     }
   }
-  .submission{
+
+  .submission {
     display: block;
     margin: auto;
   }
-  .subDelButton{
+
+  .subDelButton {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 10px;
   }
 }
-.height-width-button{
+
+.height-width-button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  mat-form-field{
+
+  mat-form-field {
     width: 45%;
   }
 }

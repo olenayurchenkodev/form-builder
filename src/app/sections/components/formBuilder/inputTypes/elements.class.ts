@@ -1,12 +1,12 @@
 import {BaseClass} from "../../../../base.class";
-import {Directive, Input} from "@angular/core";
+import {Directive, Input, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {getFieldStyle} from "../../../../../store/reducers/form.reducers";
 import {takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Directive()
-export abstract class ElementsClass extends BaseClass{
+export abstract class ElementsClass extends BaseClass implements OnInit{
   public styles: { [key: string]: string } | undefined;
   public required: boolean = false;
   public options = [];
@@ -19,7 +19,7 @@ export abstract class ElementsClass extends BaseClass{
     super();
   }
 
-  getFromStore(): void{
+  ngOnInit(): void{
     this.store.select(getFieldStyle(this.id))
       .pipe(
         takeUntil(this.unsubscribe$),

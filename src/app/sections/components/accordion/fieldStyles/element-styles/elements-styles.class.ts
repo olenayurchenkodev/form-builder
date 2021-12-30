@@ -1,8 +1,8 @@
 import {Directive, Input} from "@angular/core";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {DeleteElemService} from "../../../../../services/deleteElem.service";
-import {addOption, deleteField, setField} from "../../../../../store/actions/form.actions";
+import {DeleteElemService} from "../../../../../../services/deleteElem.service";
+import {addOption, deleteField, setField} from "../../../../../../store/actions/form.actions";
 
 @Directive()
 export abstract class ElementsStylesClass {

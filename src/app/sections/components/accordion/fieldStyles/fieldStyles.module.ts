@@ -8,20 +8,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from "@angular/material/select";
 
 import {FieldStylesComponent} from "./fieldStyles.component";
-import {TextInputComponent} from "./textInput/textInput.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {ButtonInputComponent} from "./buttonInput/buttonInput.component";
-import {SelectCheckboxInputComponent} from "./selectCheckboxInput/selectCheckboxInput.component";
 import {FirstCamelPipe} from "../../../../../pipes/first-camel.pipe";
+import { ElementStylesComponent } from './element-styles/element-styles.component';
 
 
 @NgModule({
   declarations: [
     FieldStylesComponent,
-    TextInputComponent,
-    ButtonInputComponent,
-    SelectCheckboxInputComponent,
-    FirstCamelPipe
+    FirstCamelPipe,
+    ElementStylesComponent
   ],
   imports: [
     BrowserModule,

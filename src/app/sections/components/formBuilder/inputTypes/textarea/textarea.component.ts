@@ -28,10 +28,6 @@ export class TextareaComponent extends ElementsClass implements OnInit, ControlV
     super(store);
   }
 
-  ngOnInit(): void{
-    this.getFromStore()
-  }
-
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }

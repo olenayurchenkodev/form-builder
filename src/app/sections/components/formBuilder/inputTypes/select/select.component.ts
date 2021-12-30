@@ -8,7 +8,4 @@ import {ElementsClass} from "../elements.class";
 })
 
 export class SelectComponent extends ElementsClass implements OnInit{
-  ngOnInit(): void {
-    this.getFromStore();
-  }
 }

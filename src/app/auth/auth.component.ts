@@ -41,12 +41,12 @@ export class AuthComponent extends BaseClass{
   }
 
   sendLoginForm(): void {
-    this.http.post(`http://localhost:3000/login`, (this.formAuth.value))
+    this.http.post(`${URL}/login`, (this.formAuth.value))
       .subscribe(token => this.setToken(token))
   }
 
   sendRegisterForm(): void {
-    this.http.post(`http://localhost:3000/register`, (this.formAuth.value))
+    this.http.post(`${URL}/register`, (this.formAuth.value))
       .subscribe(token => this.setToken(token))
   }
 

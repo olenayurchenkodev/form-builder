@@ -8,7 +8,4 @@ import {ElementsClass} from "../elements.class";
 })
 
 export class CheckboxComponent extends ElementsClass implements OnInit{
-  ngOnInit(){
-    this.getFromStore();
-  }
 }
