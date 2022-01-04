@@ -1,7 +1,7 @@
 import { TestBed} from '@angular/core/testing';
 import { AuthComponent } from "./auth.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {FormReducer, getAuth} from "../../store/reducers/form.reducers";
+import { getAuth} from "../../store/selectors/form.selectors";
 import { RouterModule, Router} from "@angular/router";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from '../../services/authGuard.service'
@@ -16,7 +16,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SectionsComponent} from "../sections/sections.component";
 import {RouterTestingModule} from "@angular/router/testing";
 import {NotFoundPageComponent} from "../not-found-page/not-found-page.component";
-import {createField} from "../../store/actions/form.actions";
 
 fdescribe('AuthComponent', () => {
   let store: MockStore;

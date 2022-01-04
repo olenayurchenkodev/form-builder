@@ -21,24 +21,18 @@ label{
 
 .checkbox {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
   margin: 4px;
 
   label {
     padding: 3px;
     font-size: 18px;
-    margin: auto;
   }
 }
 
 .input {
   display: flex;
   justify-content: center;
-
-  mat-form-field {
-    width: 100%;
-  }
 }
 
 .select {
@@ -49,8 +43,4 @@ label{
 .textarea {
   display: flex;
   justify-content: center;
-
-  mat-form-field {
-    width: 100%;
-  }
 }

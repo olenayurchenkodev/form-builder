@@ -39,6 +39,7 @@ export class ElementStylesComponent {
       width: `${this.formStyle.value.width}px`,
       height: `${this.formStyle.value.height}px`,
       border: this.formStyle.value.border,
+      required: this.formStyle.value.required,
       placeholder: this.formStyle.get('placeholder')?.value,
       newOption: ''
     }

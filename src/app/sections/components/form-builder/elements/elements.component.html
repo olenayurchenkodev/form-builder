@@ -10,34 +10,37 @@
   </button>
 </div>
 
-<label
-  *ngIf="type !== 'button'"
-  [for]="type"
->{{ styles && styles['label'] }}</label>
+
+
+<div
+  [class]="type"
+  *ngIf="type === 'checkbox'"
+  [ngStyle]="{
+        'width': styles!['width'],
+        'height': styles!['height'],
+        'background': styles!['backcolour']
+    }">
+  <input
+    type="checkbox"
+    [(ngModel)]="value"
+    [id]="id"
+    [required]="required">
+  <label
+    [for]="id"
+  >{{ styles && styles['label'] }}</label>
+</div>
+
 <div>
-  <div [class]="type" *ngIf="type === 'checkbox'">
-    <div *ngFor="let item of options">
-      <input
-        type="checkbox"
-        [id]="item"
-        [required]="required"
-        [value]="item"
-        >
-      <label
-        [for]="item"
-        [ngStyle]="{
-            'width': styles!['width'],
-            'height': styles!['height'],
-            'background': styles!['backcolour']
-        }"
-      >{{item}}</label>
-    </div>
-  </div>
+  <label
+    *ngIf="type !== 'button' && type !== 'checkbox'"
+    [for]="id"
+  >{{ styles && styles['label'] }}</label>
 
   <div class="select" *ngIf="type === 'select'">
     <select
       class="field"
-      [id]="type"
+      [(ngModel)]="value"
+      [id]="id"
       [required]="required"
       [ngStyle]="{
             'width': styles && styles['width'],
@@ -55,8 +58,10 @@
     <input
       class="field"
       type="text"
-      [id]="type"
+      [(ngModel)]="value"
+      [id]="id"
       [required]="required"
+      [placeholder]="styles && styles['placeholder']"
       [ngStyle]="{
           'width': styles && styles['width'],
           'height': styles && styles['height'],
@@ -67,8 +72,10 @@
   <div class="textarea" *ngIf="type === 'textarea'">
     <textarea
       class="field"
-      [id]="type"
+      [id]="id"
+      [(ngModel)]="value"
       [required]="required"
+      [placeholder]="styles && styles['placeholder']"
       [ngStyle]="{
           'width': styles && styles['width'],
           'height': styles && styles['height'],

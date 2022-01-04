@@ -3,7 +3,7 @@ import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-dro
 import {SharedDataService} from "../../../../services/shareElemData.service";
 import {Store} from "@ngrx/store";
 import {createField} from '../../../../store/actions/form.actions'
-import {getFormStyle} from "../../../../store/reducers/form.reducers";
+import {getFormStyle} from "../../../../store/selectors/form.selectors";
 import {DeleteElemService} from "../../../../services/deleteElem.service";
 import { Subscription, takeUntil} from "rxjs";
 import { v4 as uuidv4 } from 'uuid';
@@ -20,6 +20,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   public formStyles?: {[p: string]: string | boolean | []} | undefined;
   public form: never[] | string[] = [];
   public ids: string[] = [];
+  public formValues:  { id: string, type: string, value: string | []}[]= [];
   public click = false;
   public receiveData:Subscription;
 
@@ -55,6 +56,11 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
       const id = uuidv4()
       this.addField(id, this.form[event.currentIndex])
       this.ids.splice(event.currentIndex, 0, id)
+      this.formValues.splice(event.currentIndex, 0, {
+        id,
+        type: this.form[event.currentIndex],
+        value: ''
+      })
     }
   }
 
@@ -91,7 +97,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   }
 
   generateForm(): void{
-    console.log('generated');
+    console.log(this.formValues);
   }
 
 }

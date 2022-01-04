@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {setAuth} from "../../store/actions/form.actions";
 import {Store} from "@ngrx/store";
-import {getAuth} from "../../store/reducers/form.reducers";
+import {getAuth} from "../../store/selectors/form.selectors";
 import {Router} from "@angular/router";
 import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";

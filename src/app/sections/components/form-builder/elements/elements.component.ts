@@ -1,14 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {getFieldStyle} from "../../../../../store/reducers/form.reducers";
+import {getFieldStyle} from "../../../../../store/selectors/form.selectors";
 import {takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
 import {BaseClass} from "../../../../base.class";
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
   selector: 'app-elements',
   templateUrl: './elements.component.html',
-  styleUrls: ['./elements.component.scss']
+  styleUrls: ['./elements.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ElementsComponent),
+      multi: true
+    }
+  ]
 })
 export class ElementsComponent extends BaseClass implements OnInit{
   @Input() type = '';
@@ -37,6 +45,20 @@ export class ElementsComponent extends BaseClass implements OnInit{
       .subscribe()
   }
 
-
+  onChange: any = () => {}
+  onTouch: any = () => {}
+  set value(val: any){
+    this.onChange(val)
+    this.onTouch(val)
+  }
+  writeValue(value: any){
+    this.value = value
+  }
+  registerOnChange(fn: any){
+    this.onChange = fn
+  }
+  registerOnTouched(fn: any){
+    this.onTouch = fn
+  }
 
 }

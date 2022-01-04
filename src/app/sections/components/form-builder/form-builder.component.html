@@ -17,25 +17,23 @@
     (cdkDropListDropped)="drop($event)"
   >
     <p>{{ formStyles && formStyles['label'] }}</p>
-<!--    <form [formGroup]="generatedForm">-->
       <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
         <app-elements
           class="formItem"
+          [(ngModel)]="formValues[i]['value']"
           [type]="form[i]"
           [id]="item"
           (click)="selectInput(form[i],[item])"
         ></app-elements>
       </div>
-<!--    </form>-->
   </div>
 
   <div class="submission">
     <button
       mat-button
       (click)="generateForm()"
-      *ngIf="form.length !== 0"
+      *ngIf="formValues.length !== 0"
     >Save Form</button>
   </div>
-  {{form}}
 
 </div>
