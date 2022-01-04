@@ -11,7 +11,6 @@
 </div>
 
 
-
 <div
   [class]="type"
   *ngIf="type === 'checkbox'"
@@ -22,12 +21,16 @@
     }">
   <input
     type="checkbox"
+    #field="ngModel"
     [(ngModel)]="value"
     [id]="id"
     [required]="required">
   <label
     [for]="id"
   >{{ styles && styles['label'] }}</label>
+  <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+    <div class="error">Field is required.</div>
+  </div>
 </div>
 
 <div>
@@ -39,6 +42,7 @@
   <div class="select" *ngIf="type === 'select'">
     <select
       class="field"
+      #field="ngModel"
       [(ngModel)]="value"
       [id]="id"
       [required]="required"
@@ -47,17 +51,22 @@
             'height': styles && styles['height'],
             'background': styles && styles['backcolour']
         }"
-    ><option
+    >
+      <option
         *ngFor="let item of options"
         [value]="item"
-        >{{item}}</option>
+      >{{item}}</option>
     </select>
+    <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+      <div class="error">Field is required.</div>
+    </div>
   </div>
 
   <div class="input" *ngIf="type === 'input'">
     <input
       class="field"
       type="text"
+      #field="ngModel"
       [(ngModel)]="value"
       [id]="id"
       [required]="required"
@@ -67,11 +76,15 @@
           'height': styles && styles['height'],
           'background': styles && styles['backcolour']
       }">
+    <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+      <div class="error">Field is required.</div>
+    </div>
   </div>
 
   <div class="textarea" *ngIf="type === 'textarea'">
     <textarea
       class="field"
+      #field="ngModel"
       [id]="id"
       [(ngModel)]="value"
       [required]="required"
@@ -81,5 +94,8 @@
           'height': styles && styles['height'],
           'background': styles && styles['backcolour']
       }"></textarea>
+    <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+      <div class="error">Field is required.</div>
+    </div>
   </div>
 </div>

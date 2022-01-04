@@ -16,16 +16,20 @@
     id="formList"
     (cdkDropListDropped)="drop($event)"
   >
+    <form #customForm="ngForm"
+          (ngSubmit)="customForm.form.valid && generateForm()" novalidate>
     <p>{{ formStyles && formStyles['label'] }}</p>
       <div class="box" *ngFor="let item of ids; let i = index" cdkDrag>
         <app-elements
           class="formItem"
           [(ngModel)]="formValues[i]['value']"
           [type]="form[i]"
+          [name]="form[i]"
           [id]="item"
           (click)="selectInput(form[i],[item])"
         ></app-elements>
       </div>
+    </form>
   </div>
 
   <div class="submission">

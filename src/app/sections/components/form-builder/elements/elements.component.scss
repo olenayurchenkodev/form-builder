@@ -1,11 +1,11 @@
-.field{
+.field {
   border-radius: 4px;
   outline: none;
   border: 1px solid #C2D6E1;
   margin-top: 6px;
 }
 
-label{
+label {
   font-size: 18px;
   line-height: 17px;
 }
@@ -13,15 +13,14 @@ label{
 .button {
   display: flex;
   justify-content: center;
-  button{
+
+  button {
     cursor: pointer;
     border-radius: 4px;
   }
 }
 
 .checkbox {
-  display: flex;
-  align-items: center;
   margin: 4px;
 
   label {
@@ -30,17 +29,7 @@ label{
   }
 }
 
-.input {
-  display: flex;
-  justify-content: center;
-}
-
-.select {
-  display: flex;
-  justify-content: center;
-}
-
-.textarea {
-  display: flex;
-  justify-content: center;
+.error {
+  padding: 3px;
+  background: #F4EEEE;
 }
