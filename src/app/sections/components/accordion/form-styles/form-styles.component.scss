@@ -1,25 +1,31 @@
-.form-container{
+.form-container {
   width: 90%;
   display: block;
   margin: auto;
 }
+
 .form-styles {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  mat-form-field{
+
+  mat-form-field {
     width: 100%;
   }
-  .submission{
+
+  .submission {
     display: block;
     margin: auto;
   }
-}
-.height-width-button{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  mat-form-field{
-    width: 45%;
+
+  .height-width-button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    mat-form-field {
+      width: 45%;
+    }
   }
+
 }

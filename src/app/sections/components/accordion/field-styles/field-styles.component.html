@@ -4,12 +4,7 @@
   *ngIf="elemData[0]"
 ></app-element-styles>
 
-<div
-  *ngIf="elemData[0] !== 'Select'
-  &&elemData[0] !== 'Checkbox'
-  &&elemData[0] !== 'Input'
-  &&elemData[0] !== 'Textarea'
-  &&elemData[0] !== 'Button'"
+<div *ngIf="!elemData[0]"
 ><h3>Choose the element in FormBuilder</h3>
 </div>
 

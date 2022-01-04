@@ -4,54 +4,54 @@ import {addOption, createField, deleteField, setAuth, setField, setForm} from ".
 export interface FieldStyle{
   id: string[],
   styles: any[],
-  Input?: { [key: string]: string | boolean },
-  Textarea?: { [key: string]: string | boolean },
-  Button?: { [key: string]: string },
-  Checkbox?: { [key: string]: string | boolean | [] },
-  Select?: { [key: string]: string | boolean | [] },
+  input?: { [key: string]: string | boolean },
+  textarea?: { [key: string]: string | boolean },
+  button?: { [key: string]: string },
+  checkbox?: { [key: string]: string | boolean | [] },
+  select?: { [key: string]: string | boolean | [] },
   Form?: { [key: string]: string | boolean | [] },
   Auth: string
 }
 
-export const initialState: FieldStyle ={
+export const initialState: FieldStyle = {
   id: [],
   styles: [],
-  Input: {
-    label: 'label',
-    backcolour: 'none',
-    placeholder: '',
-    width: '100%',
-    height: '30px',
-    required: false
-  },
-  Textarea: {
-    label: 'label',
+  input: {
+    label: 'input label',
     backcolour: 'none',
     placeholder: '',
     width: '100%',
     height: '40px',
     required: false
   },
-  Button:{
-    label: 'button',
+  textarea: {
+    label: 'textarea label',
     backcolour: 'none',
+    placeholder: '',
+    width: '100%',
+    height: '50px',
+    required: false
+  },
+  button:{
+    label: 'button',
+    backcolour: '#EEF2F4',
     width: '30%',
     height: '40px',
     border: 'none'
   },
-  Checkbox:{
-    label: 'label',
+  checkbox:{
+    label: 'checkbox label',
     backcolour: 'none',
     width: '100%',
     height: '30px',
     required: false,
     newOption: []
   },
-  Select:{
-    label: 'label',
+  select:{
+    label: 'select label',
     backcolour: 'none',
     width: '100%',
-    height: '30px',
+    height: '40px',
     required: false,
     newOption: []
   },
@@ -70,21 +70,19 @@ export const FormReducer = createReducer(
   initialState,
   on(createField, (state, {id, typeField})=>{
     let type = null;
-    if (typeField === 'Input') {type = state.Input}
-    if (typeField === 'Textarea') {type = state.Textarea}
-    if (typeField === 'Button') {type = state.Button}
-    if (typeField === 'Checkbox') {type = state.Checkbox}
-    if (typeField === 'Select') {type = state.Select}
+    if (typeField === 'input') {type = state.input}
+    if (typeField === 'textarea') {type = state.textarea}
+    if (typeField === 'button') {type = state.button}
+    if (typeField === 'checkbox') {type = state.checkbox}
+    if (typeField === 'select') {type = state.select}
     return  {...state,
       id: [...state.id, id],
       styles: [ ...state.styles, type]
     };
   }),
   on(setField, (state, {id, styles})=>{
-    // console.log('in reducer',state);
     let newStyles: any = {};
     for (let item in styles){
-      // console.log('in loop',item);
       styles[item] && item !== 'newOption'?
         newStyles[item] = styles[item]:
         newStyles[item] = state.styles[state.id.indexOf(id[0])][item]
@@ -92,20 +90,16 @@ export const FormReducer = createReducer(
       if (item === 'newOption'){ newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption}
     }
     let entrie = JSON.parse(JSON.stringify(state.styles));
-    // console.log('entrie', entrie);
     entrie[state.id.indexOf(id[0])] = newStyles;
-    // console.log('in reducer',entrie.styles);
     return  {...state,
       styles: entrie
     };
   }),
   on(deleteField, (state, {id})=>{
-    // console.log(id, state.id.indexOf(id))
     let entrieStyles = JSON.parse(JSON.stringify(state.styles));
     let entrieIds = JSON.parse(JSON.stringify(state.id));
     entrieIds.splice(state.id.indexOf(id), 1)
     entrieStyles.splice(state.id.indexOf(id), 1)
-    // console.log(entrieIds, entrieStyles)
     return {...state,
       styles: entrieStyles,
       id: entrieIds
@@ -146,8 +140,6 @@ export const selectFieldStyles = createFeatureSelector<FieldStyle>('fieldStyles'
 export const getFieldStyle = (id: string) => createSelector(
   selectFieldStyles,
   (state: FieldStyle) => {
-    // console.log('in selector',id);
-    // console.log('in selector',state.id);
     return state.styles[state.id.indexOf(id)];
   }
 );
@@ -155,7 +147,6 @@ export const getFieldStyle = (id: string) => createSelector(
 export const getFormStyle = createSelector(
   selectFieldStyles,
   (state: FieldStyle) => {
-    // console.log('selector blyat`',state.Form)
     return state.Form;
   }
 );

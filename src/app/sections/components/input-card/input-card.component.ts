@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./input-card.component.scss']
 })
 export class InputCardComponent {
-  public inputs = ['Input', 'Textarea', 'Button', 'Checkbox', 'Select'];
+  public inputs = ['input', 'textarea', 'button', 'checkbox', 'select'];
 
   constructor(
     private store: Store,

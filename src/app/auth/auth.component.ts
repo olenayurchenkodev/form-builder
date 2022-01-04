@@ -9,6 +9,7 @@ import { takeUntil} from "rxjs";
 import {map} from "rxjs/operators";
 import {EError} from "../../enums/styles.enum";
 import {BaseClass} from "../base.class";
+import {URL} from "../config";
 
 @Component({
   selector: 'app-auth-root',

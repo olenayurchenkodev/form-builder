@@ -1,65 +1,78 @@
-<div *ngIf="type === 'Button'" class="button">
+<div *ngIf="type === 'button'" class="button">
   <button
-    mat-button [ngStyle]="{
-        'width': styles && styles['width'],
-        'height': styles && styles['height'],
-        'border': styles && styles['border'],
-        'background': styles && styles['backcolour']
+    [ngStyle]="{
+        'width': styles!['width'],
+        'height': styles!['height'],
+        'border': styles!['border'],
+        'background': styles!['backcolour']
   }">
-    {{styles ? styles['label'] : 'button'}}
+    {{ styles ? styles['label'] : 'button' }}
   </button>
 </div>
 
-<div class="checkbox" *ngIf="type === 'Checkbox'">
-  <mat-label>{{styles && styles['label']}}</mat-label>
-  <mat-checkbox
-    [ngStyle]="{
-        'width': styles && styles['width'],
-        'height': styles && styles['height'],
-        'background': styles && styles['backcolour']
-  }" [required]="required"
-    *ngFor="let item of options" [value]="item">
-    {{item}}
-  </mat-checkbox>
-</div>
-
-<mat-form-field
-  *ngIf="type !== 'Checkbox' && type !== 'Button'"
-  appearance="fill" [ngStyle]="{
-        'width': styles && styles['width']
-  }">
-  <mat-label>{{styles && styles['label']}}</mat-label>
-
-  <div *ngIf="type === 'Input'" class="input">
-    <input
-      matInput
-      [ngStyle]="{
-        'height': styles && styles['height']}"
-      [placeholder]="styles ? styles['placeholder']: ''"
-      [required]="styles && required">
+<label
+  *ngIf="type !== 'button'"
+  [for]="type"
+>{{ styles && styles['label'] }}</label>
+<div>
+  <div [class]="type" *ngIf="type === 'checkbox'">
+    <div *ngFor="let item of options">
+      <input
+        type="checkbox"
+        [id]="item"
+        [required]="required"
+        [value]="item"
+        >
+      <label
+        [for]="item"
+        [ngStyle]="{
+            'width': styles!['width'],
+            'height': styles!['height'],
+            'background': styles!['backcolour']
+        }"
+      >{{item}}</label>
+    </div>
   </div>
 
-  <div *ngIf="type === 'Select'" class="select">
-    <mat-select
-      [ngStyle]="{
-        'background': styles && styles['backcolour'],
-        'height': styles && styles['height']
-  }" [required]="required">
-      <mat-option *ngFor="let item of options" [value]="item">
-        {{ item }}
-      </mat-option>
-    </mat-select>
-  </div>
-
-  <div *ngIf="type === 'Textarea'">
-    <textarea
-      [ngStyle]="{
-            'background': styles && styles['backcolour'],
-            'height': styles && styles['height']}"
-      matInput
-      [placeholder]="styles!['placeholder']"
+  <div class="select" *ngIf="type === 'select'">
+    <select
+      class="field"
+      [id]="type"
       [required]="required"
-    ></textarea>
+      [ngStyle]="{
+            'width': styles && styles['width'],
+            'height': styles && styles['height'],
+            'background': styles && styles['backcolour']
+        }"
+    ><option
+        *ngFor="let item of options"
+        [value]="item"
+        >{{item}}</option>
+    </select>
   </div>
 
-</mat-form-field>
+  <div class="input" *ngIf="type === 'input'">
+    <input
+      class="field"
+      type="text"
+      [id]="type"
+      [required]="required"
+      [ngStyle]="{
+          'width': styles && styles['width'],
+          'height': styles && styles['height'],
+          'background': styles && styles['backcolour']
+      }">
+  </div>
+
+  <div class="textarea" *ngIf="type === 'textarea'">
+    <textarea
+      class="field"
+      [id]="type"
+      [required]="required"
+      [ngStyle]="{
+          'width': styles && styles['width'],
+          'height': styles && styles['height'],
+          'background': styles && styles['backcolour']
+      }"></textarea>
+  </div>
+</div>
