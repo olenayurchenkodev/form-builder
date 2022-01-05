@@ -31,13 +31,16 @@ export const FormReducer = createReducer(
     };
   }),
   on(setField, (state, {id, styles})=>{
+    console.log(styles)
     let newStyles: any = {};
     for (let item in styles){
-      styles[item] && item !== 'newOption'?
+      styles[item] && (item !== 'newOption' && item !== 'required')?
         newStyles[item] = styles[item]:
         newStyles[item] = state.styles[state.id.indexOf(id[0])][item]
-
-      if (item === 'newOption'){ newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption}
+      if (item === 'newOption')
+      { newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption }
+      if (item === 'required')
+      { newStyles[item] = styles[item] }
     }
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[state.id.indexOf(id[0])] = newStyles;
