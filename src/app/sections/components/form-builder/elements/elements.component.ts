@@ -46,8 +46,6 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
         })
       )
       .subscribe()
-
-
   }
 
   ngOnChanges(changes: SimpleChanges) {

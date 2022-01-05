@@ -65,13 +65,8 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
     let elem = arr[prev]
     let i = prev
     while (arr[i] !== arr[curr]) {
-      if (prev < curr) {
-        arr[i] = arr[i + 1];
-        i++;
-      } else {
-        arr[i] = arr[i - 1];
-        i--;
-      }
+      if (prev < curr) {arr[i] = arr[i + 1]; i++;}
+      else {arr[i] = arr[i - 1]; i--;}
     }
     arr[curr] = elem;
   }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { Subscription, takeUntil } from "rxjs";
+import { Component } from '@angular/core';
 
 import { SharedDataService } from "src/services/shareElemData.service";
 import { BaseClass } from "src/app/base.class";

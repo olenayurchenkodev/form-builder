@@ -1,7 +1,9 @@
+import { Subscription, takeUntil } from "rxjs";
 import { Component } from '@angular/core';
-import {Subscription, takeUntil} from "rxjs";
-import {SharedDataService} from "../../../../services/shareElemData.service";
-import {BaseClass} from "../../../base.class";
+
+import { SharedDataService } from "../../../../services/shareElemData.service";
+import { BaseClass } from "../../../base.class";
+
 
 @Component({
   selector: 'app-accordion-root',
