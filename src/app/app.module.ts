@@ -22,12 +22,14 @@ import { environment } from '../environments/environment';
 import { AuthComponent } from "./auth/auth.component";
 import { AppComponent } from './app.component';
 import { AuthModule } from "./auth/auth.module";
+import {WayDirectionPipe} from "../pipes/way-direction.pipe";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    WayDirectionPipe
   ],
     imports: [
         StoreModule.forRoot({fieldStyles: FormReducer}),

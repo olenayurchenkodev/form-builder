@@ -8,12 +8,8 @@ export class FirstCamelPipe implements PipeTransform {
     let isFirst = true;
     let res = '';
     for (let s of value) {
-      if (isFirst) {
-        res = s.toUpperCase()
-        isFirst = false
-      } else {
-        res += s
-      }
+      if (isFirst) {res = s.toUpperCase(); isFirst = false}
+      else res += s
     }
     return res;
   }

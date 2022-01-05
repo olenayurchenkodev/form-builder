@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import {AuthComponent} from "../auth/auth.component";
 import {SectionsComponent} from "../sections/sections.component";
 import {AuthService} from "../../services/authGuard.service";
+import {WayDirectionPipe} from "../../pipes/way-direction.pipe";
 
 describe('NotFoundPageComponent', () => {
   let component: NotFoundPageComponent;
@@ -12,7 +13,7 @@ describe('NotFoundPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotFoundPageComponent ],
+      declarations: [ NotFoundPageComponent, WayDirectionPipe ],
       imports: [
         RouterModule.forRoot([
           {path: '', component: AuthComponent },
@@ -20,7 +21,6 @@ describe('NotFoundPageComponent', () => {
           {path: 'form-builder', component: SectionsComponent, canActivate: [AuthService]},
           {path: '**', redirectTo: 'not-found'},
         ]),
-
       ]
     })
     .compileComponents();
