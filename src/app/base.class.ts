@@ -1,5 +1,5 @@
-import {Subject} from "rxjs";
-import {Directive} from "@angular/core";
+import { Directive } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Directive()
 export abstract class BaseClass {

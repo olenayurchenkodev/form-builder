@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {setForm} from "../../../../../store/actions/form.actions";
+import { FormControl, FormGroup } from "@angular/forms";
+import { Component } from '@angular/core';
+import { Store } from "@ngrx/store";
+
+import { setForm } from "src/store/actions/form.actions";
 
 
 @Component({
@@ -11,9 +12,8 @@ import {setForm} from "../../../../../store/actions/form.actions";
 })
 export class FormStylesComponent{
   public customStyles?: { [key: string]: string | boolean };
-
-  border = ['none', 'dotted', 'solid'];
-  fontWeight = [ "lighter","normal","bold"];
+  public border = ['none', 'dotted', 'solid'];
+  public fontWeight = [ "lighter","normal","bold"];
 
   formStyle = new FormGroup({
     label: new FormControl(),

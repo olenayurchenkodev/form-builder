@@ -1,10 +1,12 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {Store} from "@ngrx/store";
-import {getFieldStyle} from "../../../../../store/selectors/form.selectors";
-import {takeUntil} from "rxjs";
-import {map} from "rxjs/operators";
-import {BaseClass} from "../../../../base.class";
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { map } from "rxjs/operators";
+import { takeUntil } from "rxjs";
+
+import { getFieldStyle } from "src/store/selectors/form.selectors";
+import { BaseClass } from "src/app/base.class";
+
 
 @Component({
   selector: 'app-elements',
@@ -18,13 +20,14 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
     }
   ]
 })
-export class ElementsComponent extends BaseClass implements OnInit{
+export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
   @Input() type = '';
+  @Input() id: string = '';
+  @Input() selected: string = '';
+  public selectedClass = '';
   public styles: { [key: string]: string } | undefined;
   public required: boolean = false;
   public options = [];
-
-  @Input() id: string = '';
 
   public constructor(
     protected store: Store,
@@ -43,6 +46,16 @@ export class ElementsComponent extends BaseClass implements OnInit{
         })
       )
       .subscribe()
+
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.selected === this.id) {
+      this.selectedClass = 'active';
+    } else {
+      this.selectedClass = '';
+    }
   }
 
   onChange: any = () => {}

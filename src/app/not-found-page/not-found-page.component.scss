@@ -1,4 +1,7 @@
+@import '../less/variables.scss';
+
 .not-found-container {
+  color: $text;
   margin-top: 200px;
   display: flex;
   justify-content: center;

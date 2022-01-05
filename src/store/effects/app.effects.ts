@@ -1,9 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {setAuth, setAuthSuccess} from "../actions/form.actions";
-import {catchError, map, mergeMap} from 'rxjs/operators'
-import {Observable, of} from "rxjs";
-import {Action} from "@ngrx/store";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { Action } from "@ngrx/store";
+
+import { setAuth, setAuthSuccess } from "../actions/form.actions";
 
 
 @Injectable()

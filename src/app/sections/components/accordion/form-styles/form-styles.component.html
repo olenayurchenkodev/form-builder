@@ -1,53 +1,77 @@
 <div class="form-container">
-  <form [formGroup]="formStyle" class="form-styles">
-
+  <form
+    [formGroup]="formStyle"
+    class="form-styles"
+  >
     <mat-form-field appearance="fill">
       <mat-label>Form label</mat-label>
-      <input matInput name="label" formControlName="label">
+      <input
+        matInput
+        name="label"
+        formControlName="label"
+      >
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Text colour</mat-label>
-      <input matInput name="color" formControlName="colour">
+      <input
+        matInput
+        name="color"
+        formControlName="colour"
+      >
       <span matSuffix>RGB</span>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Background colour</mat-label>
-      <input matInput name="backcolor" formControlName="backcolour">
+      <input
+        matInput
+        name="backcolor"
+        formControlName="backcolour"
+      >
       <span matSuffix>RGB</span>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Border style</mat-label>
-      <mat-select name="border" formControlName="border">
-        <mat-option *ngFor="let item of border" [value]="item">
-          {{ item | upper }}
-        </mat-option>
+      <mat-select
+        name="border"
+        formControlName="border"
+      ><mat-option
+        *ngFor="let item of border"
+        [value]="item"
+      >{{ item | upper }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <div class="height-width-button">
-
       <mat-form-field appearance="fill">
         <mat-label>Font Size</mat-label>
-        <input matInput name="font-size" formControlName="fontSize">
-        <span matSuffix>px</span>
+        <input
+          matInput
+          name="font-size"
+          formControlName="fontSize"
+        ><span matSuffix>px</span>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Font Weight</mat-label>
-        <mat-select name="font-weight" formControlName="fontWeight">
-          <mat-option *ngFor="let item of fontWeight" [value]="item">
-            {{ item | upper }}
-          </mat-option>
+        <mat-select
+          name="font-weight"
+          formControlName="fontWeight"
+        ><mat-option
+          *ngFor="let item of fontWeight"
+          [value]="item"
+        >{{ item | upper }}</mat-option>
         </mat-select>
       </mat-form-field>
-
     </div>
 
     <div class="submission">
-      <button mat-button (click)=sendStyles() >Submit</button>
+      <button
+        mat-button
+        (click)=sendStyles()
+      >Submit</button>
     </div>
 
   </form>

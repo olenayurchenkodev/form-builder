@@ -1,28 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ReactiveComponentModule } from '@ngrx/component';
-import {StoreModule} from "@ngrx/store";
-import {EffectsModule} from "@ngrx/effects";
-import {AppEffects} from "../store/effects/app.effects";
-import {HttpClientModule} from '@angular/common/http';
-import { RouterModule} from '@angular/router';
-
-
-import { AppComponent } from './app.component';
-import {PortalModule} from "@angular/cdk/portal";
-import {SectionsModule} from "./sections/sections.module";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatButtonModule } from "@angular/material/button";
+import { AppEffects } from "../store/effects/app.effects";
+import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import {FormReducer} from "../store/reducers/form.reducers";
-import {CommonModule} from "@angular/common";
-import {AuthModule} from "./auth/auth.module";
-import {AuthComponent} from "./auth/auth.component";
-import {SectionsComponent} from "./sections/sections.component";
-import {AuthService} from "../services/authGuard.service";
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { PortalModule } from "@angular/cdk/portal";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from '@angular/router';
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
+import { NgModule } from '@angular/core';
+
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import {MatButtonModule} from "@angular/material/button";
-import {MatGridListModule} from "@angular/material/grid-list";
+import { SectionsComponent } from "./sections/sections.component";
+import { FormReducer } from "../store/reducers/form.reducers";
+import { SectionsModule } from "./sections/sections.module";
+import { AuthService } from "../services/authGuard.service";
+import { environment } from '../environments/environment';
+import { AuthComponent } from "./auth/auth.component";
+import { AppComponent } from './app.component';
+import { AuthModule } from "./auth/auth.module";
 
 
 @NgModule({

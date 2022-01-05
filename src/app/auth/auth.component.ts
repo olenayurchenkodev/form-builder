@@ -1,15 +1,17 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {setAuth} from "../../store/actions/form.actions";
-import {Store} from "@ngrx/store";
-import {getAuth} from "../../store/selectors/form.selectors";
-import {Router} from "@angular/router";
-import { takeUntil} from "rxjs";
-import {map} from "rxjs/operators";
-import {EError} from "../../enums/styles.enum";
-import {BaseClass} from "../base.class";
-import {URL} from "../config";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { map } from "rxjs/operators";
+import { takeUntil } from "rxjs";
+
+import { getAuth } from "../../store/selectors/form.selectors";
+import { setAuth } from "../../store/actions/form.actions";
+import { EError } from "../../enums/styles.enum";
+import { BaseClass } from "../base.class";
+import { URL } from "../config";
+
 
 @Component({
   selector: 'app-auth-root',

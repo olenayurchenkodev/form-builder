@@ -1,8 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {DeleteElemService} from "../../../../../../services/deleteElem.service";
-import {addOption, deleteField, setField} from "../../../../../../store/actions/form.actions";
+import { FormControl, FormGroup } from "@angular/forms";
+import { Component, Input } from '@angular/core';
+import { Store } from "@ngrx/store";
+
+import { addOption, deleteField, setField } from "src/store/actions/form.actions";
+import { DeleteElemService } from "src/services/deleteElem.service";
+
 
 @Component({
   selector: 'app-element-styles',
@@ -10,8 +12,9 @@ import {addOption, deleteField, setField} from "../../../../../../store/actions/
   styleUrls: ['./element-styles.component.scss']
 })
 export class ElementStylesComponent {
-  @Input() type: string = '';
   public customStyles?: { [key: string]: string | boolean };
+  public border=["none","dotted","solid"];
+  @Input() type: string = '';
   @Input() id: string = '';
 
   formStyle = new FormGroup({
@@ -25,14 +28,12 @@ export class ElementStylesComponent {
     newOption: new FormControl()
   })
 
-  border=["none","dotted","solid"]
-
   constructor(
     private store: Store,
     private deleteElemService: DeleteElemService
   ) { }
 
-  sendStyles(){
+  sendStyles(): void {
     this.customStyles = {
       label: this.formStyle.value.label,
       backcolour: `rgb(${this.formStyle.value.backcolour})`,
@@ -46,14 +47,14 @@ export class ElementStylesComponent {
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));
   }
 
-  addOption(): void{
+  addOption(): void {
     this.store.dispatch(addOption({
       id: this.id,
       option: this.formStyle.get('newOption')?.value
     }));
   }
 
-  deleteElem(){
+  deleteElem(): void {
     this.deleteElemService.sendMessage(this.id[0]);
     this.store.dispatch(deleteField({id: this.id[0]}));
   }

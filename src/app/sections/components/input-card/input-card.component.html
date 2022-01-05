@@ -8,12 +8,18 @@
     cdkDropListConnectedTo="formList"
     id="inputsList"
     (cdkDropListDropped)="drop($event)"
-  >
-    <div class="box" *ngFor="let item of inputs" cdkDrag>{{ item }}</div>
+  ><div
+    class="box"
+    *ngFor="let item of inputs"
+    cdkDrag
+  >{{ item }}</div>
   </div>
 
   <div class="logout">
-    <button mat-mini-fab (click)=logout()>Out</button>
+    <button
+      mat-mini-fab
+      (click)=logout()
+    >Out</button>
   </div>
 
 </div>

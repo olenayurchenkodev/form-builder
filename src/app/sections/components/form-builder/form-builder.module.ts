@@ -1,20 +1,21 @@
-import { NgModule} from '@angular/core';
-import {BrowserModule} from "@angular/platform-browser";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CdkAccordionModule} from "@angular/cdk/accordion";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
-import {DragDropModule} from "@angular/cdk/drag-drop";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { BrowserModule } from "@angular/platform-browser";
+import { CdkAccordionModule } from "@angular/cdk/accordion";
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { ReactiveComponentModule } from "@ngrx/component";
 import { CommonModule } from '@angular/common';
-import {ReactiveComponentModule} from "@ngrx/component";
+import { NgModule } from '@angular/core';
 
-import {FormBuilderComponent} from "./form-builder.component";
-import {InputCardModule} from "../input-card/input-card.module";
 import { ElementsComponent } from './elements/elements.component';
+import { InputCardModule } from "../input-card/input-card.module";
+import { FormBuilderComponent } from "./form-builder.component";
+
 
 @NgModule({
   declarations: [

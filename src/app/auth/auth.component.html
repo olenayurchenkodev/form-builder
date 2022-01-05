@@ -1,27 +1,35 @@
 <div class="auth-screen">
   <h1>Fill Form to LogIn</h1>
   <div class="form">
-    <form [formGroup]="formAuth">
+    <form
+      [formGroup]="formAuth">
 
-      <mat-form-field appearance="fill" class="authInputs">
-        <mat-label>Username</mat-label>
+      <mat-form-field
+        appearance="fill"
+        class="authInputs"
+      ><mat-label>Username</mat-label>
         <input
           matInput
           name="username"
           formControlName="username"
-          required>
-        <mat-error
+          required
+        ><mat-error
           *ngIf="formAuth.get('username')?.invalid"
         >{{getErrorMessage('username')}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="authInputs">
-        <mat-label>Password</mat-label>
+      <mat-form-field
+        appearance="fill"
+        class="authInputs"
+      ><mat-label>Password</mat-label>
         <input
-          matInput [type]="hide ? 'password' : 'text'"
+          matInput
+          [type]="hide ? 'password' : 'text'"
           formControlName="password"
-          required>
-        <mat-icon matSuffix (click)="hide = !hide"
+          required
+        ><mat-icon
+          matSuffix
+          (click)="hide = !hide"
         >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <mat-error
           *ngIf="formAuth.get('password')?.invalid"
@@ -30,12 +38,18 @@
 
       <div class="buttons">
         <div class="submission">
-          <button mat-button name="login" (click)=sendLoginForm()
+          <button
+            mat-button
+            name="login"
+            (click)=sendLoginForm()
           >LogIn</button>
         </div>
 
         <div class="submission">
-          <button mat-button name="register" (click)=sendRegisterForm()
+          <button
+            mat-button
+            name="register"
+            (click)=sendRegisterForm()
           >SignUp</button>
         </div>
       </div>

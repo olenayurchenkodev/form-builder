@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {PortalModule} from '@angular/cdk/portal';
-import {BrowserModule} from "@angular/platform-browser";
+import { MatGridListModule } from "@angular/material/grid-list";
+import { BrowserModule } from "@angular/platform-browser";
+import { PortalModule } from '@angular/cdk/portal';
+import { NgModule } from '@angular/core';
 
-import {SectionsComponent} from "./sections.component";
-import {AccordionModule} from './components/accordion/accordion.module';
-import {InputCardModule} from "./components/input-card/input-card.module";
-import {FormBuilderModule} from "./components/form-builder/form-builder.module";
-import {MatGridListModule} from "@angular/material/grid-list";
+import { FormBuilderModule } from "./components/form-builder/form-builder.module";
+import { AccordionModule } from './components/accordion/accordion.module';
+import { InputCardModule } from "./components/input-card/input-card.module";
+import { SectionsComponent } from "./sections.component";
 
 
 @NgModule({

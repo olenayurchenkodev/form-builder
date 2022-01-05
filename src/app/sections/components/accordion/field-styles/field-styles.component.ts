@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {SharedDataService} from "../../../../../services/shareElemData.service";
-import { Subscription, takeUntil} from "rxjs";
-import {BaseClass} from "../../../../base.class";
+import { Component } from '@angular/core';
+import { Subscription, takeUntil } from "rxjs";
+
+import { SharedDataService } from "src/services/shareElemData.service";
+import { BaseClass } from "src/app/base.class";
 
 
 @Component({

@@ -1,49 +1,82 @@
 <div class="form-container">
-  <form [formGroup]="formStyle" class="field-styles">
+  <form
+    [formGroup]="formStyle"
+    class="field-styles"
+  >
 
-    <mat-form-field appearance="fill" class="form-item">
-      <mat-label>Label</mat-label>
-      <input matInput name="label" formControlName="label">
+    <mat-form-field
+      appearance="fill"
+      class="form-item"
+    ><mat-label>Label</mat-label>
+      <input
+        matInput
+        name="label"
+        formControlName="label"
+      >
     </mat-form-field>
 
     <mat-form-field
-      appearance="fill" class="form-item"
+      appearance="fill"
+      class="form-item"
       *ngIf="type === 'input' || type === 'textarea'"
     ><mat-label>Placeholder</mat-label>
-      <input matInput name="placeholder" formControlName="placeholder">
+      <input
+        matInput
+        name="placeholder"
+        formControlName="placeholder"
+      >
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="form-item">
-      <mat-label>Background colour</mat-label>
-      <input matInput name="backcolor" formControlName="backcolour">
-      <span matSuffix>RGB</span>
+    <mat-form-field
+      appearance="fill"
+      class="form-item"
+    ><mat-label>Background colour</mat-label>
+      <input
+        matInput
+        name="backcolor"
+        formControlName="backcolour"
+      ><span
+        matSuffix
+      >RGB</span>
     </mat-form-field>
 
     <div class="height-width-button">
       <mat-form-field appearance="fill">
         <mat-label>Width</mat-label>
-        <input matInput name="width" formControlName="width">
-        <span matSuffix>px</span>
+        <input
+          matInput
+          name="width"
+          formControlName="width"
+        ><span matSuffix>px</span>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Height</mat-label>
-        <input matInput name="height" formControlName="height">
-        <span matSuffix>px</span>
+        <input
+          matInput
+          name="height"
+          formControlName="height"
+        ><span matSuffix>px</span>
       </mat-form-field>
     </div>
 
-    <mat-form-field appearance="fill" class="form-item" *ngIf="type === 'button'">
-      <mat-label>Border type</mat-label>
+    <mat-form-field
+      appearance="fill"
+      class="form-item"
+      *ngIf="type === 'button'"
+    ><mat-label>Border type</mat-label>
       <mat-select formControlName="border">
-        <mat-option *ngFor="let type of border" [value]="type">
-          {{ type | upper }}
-        </mat-option>
+        <mat-option
+          *ngFor="let type of border"
+          [value]="type"
+        >{{ type | upper }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <section class="form-item" *ngIf="type !== 'button'">
-      <mat-checkbox
+    <section
+      class="form-item"
+      *ngIf="type !== 'button'"
+    ><mat-checkbox
         class="example-margin"
         name="required"
         formControlName="required"
@@ -52,25 +85,38 @@
 
     <div class="subDelButton">
       <div class="submission" >
-        <button mat-button (click)=sendStyles()>Submit</button>
+        <button
+          mat-button
+          (click)=sendStyles()
+        >Submit</button>
       </div>
 
-      <div class="submission" >
-        <button mat-button (click)=deleteElem()>Delete</button>
+      <div class="submission">
+        <button
+          mat-button
+          (click)=deleteElem()
+        >Delete</button>
       </div>
     </div>
 
     <div
       class="newOption"
       *ngIf="type === 'select'"
-    ><mat-form-field appearance="fill" class="options">
+    ><mat-form-field
+      appearance="fill"
+      class="options">
         <mat-label>New option</mat-label>
-        <input matInput name="option" formControlName="newOption">
+        <input
+          matInput
+          name="option"
+          formControlName="newOption"
+        >
       </mat-form-field>
 
-      <button mat-button
-              class="add-button"
-              (click)=addOption()
+      <button
+        mat-button
+        class="add-button"
+        (click)=addOption()
       >Add</button>
     </div>
 

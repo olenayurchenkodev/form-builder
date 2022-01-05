@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import {addOption, createField, deleteField, setAuth, setField, setForm} from "../actions/form.actions";
-import {initialState} from "../../app/config";
+
+import { addOption, createField, deleteField, setAuth, setField, setForm } from "../actions/form.actions";
+import { initialState } from "../../app/config";
+
 
 export interface FieldStyle{
   id: string[],

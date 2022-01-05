@@ -1,14 +1,15 @@
-import {Component,OnInit} from '@angular/core';
-import {CdkDragDrop, copyArrayItem, moveItemInArray} from "@angular/cdk/drag-drop";
-import {SharedDataService} from "../../../../services/shareElemData.service";
-import {Store} from "@ngrx/store";
-import {createField} from '../../../../store/actions/form.actions'
-import {getFormStyle} from "../../../../store/selectors/form.selectors";
-import {DeleteElemService} from "../../../../services/deleteElem.service";
-import { Subscription, takeUntil} from "rxjs";
+import { CdkDragDrop, copyArrayItem, moveItemInArray } from "@angular/cdk/drag-drop";
+import { Component,OnInit } from '@angular/core';
+import { Subscription, takeUntil } from "rxjs";
+import { Store } from "@ngrx/store";
 import { v4 as uuidv4 } from 'uuid';
-import {map} from "rxjs/operators";
-import {BaseClass} from "../../../base.class";
+import { map} from "rxjs/operators";
+
+import { SharedDataService } from "src/services/shareElemData.service";
+import { DeleteElemService } from "src/services/deleteElem.service";
+import { getFormStyle } from "src/store/selectors/form.selectors";
+import { createField } from 'src/store/actions/form.actions';
+import { BaseClass } from "../../../base.class";
 
 
 @Component({
@@ -20,8 +21,8 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   public formStyles?: {[p: string]: string | boolean | []} | undefined;
   public form: never[] | string[] = [];
   public ids: string[] = [];
-  public formValues:  { id: string, type: string, value: string | []}[]= [];
-  public click = false;
+  public formValues: {value: string}[]= [];
+  public click: string = '';
   public receiveData:Subscription;
 
   constructor(
@@ -56,11 +57,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
       const id = uuidv4()
       this.addField(id, this.form[event.currentIndex])
       this.ids.splice(event.currentIndex, 0, id)
-      this.formValues.splice(event.currentIndex, 0, {
-        id,
-        type: this.form[event.currentIndex],
-        value: ''
-      })
+      this.formValues.splice(event.currentIndex, 0, {value: ''})
     }
   }
 
@@ -90,7 +87,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   }
 
   selectInput(type: string, id: string[]): void{
-    this.click = true
+    this.click = id[0]
     this.sharedDataService.sendMessage([
       type, id
     ]);

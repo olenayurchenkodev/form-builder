@@ -1,5 +1,7 @@
-import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {FieldStyle} from "../reducers/form.reducers";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+
+import { FieldStyle } from "../reducers/form.reducers";
+
 
 export const selectFieldStyles = createFeatureSelector<FieldStyle>('fieldStyles');
 

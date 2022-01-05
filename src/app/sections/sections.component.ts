@@ -1,5 +1,6 @@
-import {TemplatePortal} from '@angular/cdk/portal';
-import {AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { TemplatePortal } from '@angular/cdk/portal';
+
 
 @Component({
   selector: 'app-sections-root',

@@ -1,4 +1,7 @@
+@import 'src/app/less/variables';
+
 .cont {
+  color: $text;
   display: flex;
   justify-content: space-between;
 }

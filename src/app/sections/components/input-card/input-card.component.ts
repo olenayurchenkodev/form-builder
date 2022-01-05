@@ -1,8 +1,10 @@
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { Component } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Store} from "@ngrx/store";
-import {setAuth} from "../../../../store/actions/form.actions";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+
+import { setAuth } from "../../../../store/actions/form.actions";
+
 
 @Component({
   selector: 'app-input-card-root',

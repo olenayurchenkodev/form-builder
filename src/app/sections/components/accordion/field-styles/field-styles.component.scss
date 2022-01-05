@@ -1,4 +1,7 @@
+@import 'src/app/less/variables';
+
 h3{
+  color: $text;
   text-align: center;
   font-weight: normal;
 }

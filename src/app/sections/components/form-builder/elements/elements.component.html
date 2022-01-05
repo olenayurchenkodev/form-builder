@@ -1,46 +1,51 @@
-<div *ngIf="type === 'button'" class="button">
-  <button
+<div [class]="selectedClass">
+  <div
+    *ngIf="type === 'button'"
+    class="button"
+  ><button
     [ngStyle]="{
-        'width': styles!['width'],
-        'height': styles!['height'],
-        'border': styles!['border'],
-        'background': styles!['backcolour']
-  }">
-    {{ styles ? styles['label'] : 'button' }}
-  </button>
-</div>
-
-
-<div
-  [class]="type"
-  *ngIf="type === 'checkbox'"
-  [ngStyle]="{
-        'width': styles!['width'],
-        'height': styles!['height'],
-        'background': styles!['backcolour']
+      'width': styles!['width'],
+      'height': styles!['height'],
+      'border': styles!['border'],
+      'background': styles!['backcolour']
     }">
-  <input
-    type="checkbox"
-    #field="ngModel"
-    [(ngModel)]="value"
-    [id]="id"
-    [required]="required">
-  <label
-    [for]="id"
-  >{{ styles && styles['label'] }}</label>
-  <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
-    <div class="error">Field is required.</div>
+      {{ styles ? styles['label'] : 'button' }}
+    </button>
   </div>
-</div>
 
-<div>
-  <label
-    *ngIf="type !== 'button' && type !== 'checkbox'"
-    [for]="id"
-  >{{ styles && styles['label'] }}</label>
+  <div
+    *ngIf="type === 'checkbox'"
+    [class]="type"
+    [ngStyle]="{
+      'width': styles!['width'],
+      'height': styles!['height'],
+      'background': styles!['backcolour']
+      }">
+    <input
+      type="checkbox"
+      #field="ngModel"
+      [(ngModel)]="value"
+      [id]="id"
+      [required]="required"
+    ><label
+      [for]="id"
+    >{{ styles && styles['label'] }}</label>
+    <div
+      *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']"
+    ><p class="error">Field is required.</p>
+    </div>
+  </div>
 
-  <div class="select" *ngIf="type === 'select'">
-    <select
+  <div>
+    <label
+      *ngIf="type !== 'button' && type !== 'checkbox'"
+      [for]="id"
+    >{{ styles && styles['label'] }}</label>
+
+    <div
+      class="select"
+      *ngIf="type === 'select'"
+    ><select
       class="field"
       #field="ngModel"
       [(ngModel)]="value"
@@ -51,19 +56,20 @@
             'height': styles && styles['height'],
             'background': styles && styles['backcolour']
         }"
-    >
-      <option
-        *ngFor="let item of options"
-        [value]="item"
-      >{{item}}</option>
+    ><option
+      *ngFor="let item of options"
+      [value]="item"
+    >{{item}}</option>
     </select>
     <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
       <div class="error">Field is required.</div>
     </div>
-  </div>
+    </div>
 
-  <div class="input" *ngIf="type === 'input'">
-    <input
+    <div
+      class="input"
+      *ngIf="type === 'input'"
+    ><input
       class="field"
       type="text"
       #field="ngModel"
@@ -76,13 +82,15 @@
           'height': styles && styles['height'],
           'background': styles && styles['backcolour']
       }">
-    <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
-      <div class="error">Field is required.</div>
+      <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+        <div class="error">Field is required.</div>
+      </div>
     </div>
-  </div>
 
-  <div class="textarea" *ngIf="type === 'textarea'">
-    <textarea
+    <div
+      class="textarea"
+      *ngIf="type === 'textarea'"
+    ><textarea
       class="field"
       #field="ngModel"
       [id]="id"
@@ -94,8 +102,9 @@
           'height': styles && styles['height'],
           'background': styles && styles['backcolour']
       }"></textarea>
-    <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
-      <div class="error">Field is required.</div>
+      <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
+        <div class="error">Field is required.</div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,7 @@
+@import 'src/app/less/variables';
+
 .auth-screen{
+  color: $text;
   padding-top: 100px;
   display: block;
   margin: auto;

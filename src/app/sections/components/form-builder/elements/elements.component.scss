@@ -1,3 +1,5 @@
+@import 'src/app/less/variables';
+
 .field {
   border-radius: 4px;
   outline: none;
@@ -32,4 +34,8 @@ label {
 .error {
   padding: 3px;
   background: #F4EEEE;
+}
+
+.active {
+  background: $hover;
 }

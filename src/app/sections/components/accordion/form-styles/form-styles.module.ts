@@ -1,15 +1,15 @@
-import { NgModule} from '@angular/core';
-import {BrowserModule} from "@angular/platform-browser";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import { MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from "@angular/material/select";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from "@angular/material/select";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from '@angular/core';
 
-import {FormStylesComponent} from "./form-styles.component";
-import {FormBuilderModule} from "../../form-builder/form-builder.module";
-import {FieldStylesModule} from "../field-styles/field-styles.module";
+import { FormBuilderModule } from "../../form-builder/form-builder.module";
+import { FieldStylesModule } from "../field-styles/field-styles.module";
+import { FormStylesComponent } from "./form-styles.component";
 
 
 @NgModule({

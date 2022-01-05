@@ -1,19 +1,30 @@
 <div class="cont">
-<ng-template [cdkPortalOutlet]="accordionPortal"></ng-template>
-<ng-template [cdkPortalOutlet]="formBuilderPortal"></ng-template>
-<ng-template [cdkPortalOutlet]="inputPortal"></ng-template>
+  <ng-template
+    [cdkPortalOutlet]="accordionPortal"
+  ></ng-template>
+  <ng-template
+    [cdkPortalOutlet]="formBuilderPortal"
+  ></ng-template>
+  <ng-template
+    [cdkPortalOutlet]="inputPortal"
+  ></ng-template>
 
-
-  <ng-template #accordionPortalContent class="item">
-    <app-accordion-root></app-accordion-root>
+  <ng-template
+    #accordionPortalContent
+    class="item"
+  ><app-accordion-root></app-accordion-root>
   </ng-template>
 
-  <ng-template #formBuilderPortalContent class="item">
-    <app-form-builder-root></app-form-builder-root>
+  <ng-template
+    #formBuilderPortalContent
+    class="item"
+  ><app-form-builder-root></app-form-builder-root>
   </ng-template>
 
-  <ng-template #inputPortalContent class="item">
-    <app-input-card-root></app-input-card-root>
+  <ng-template
+    #inputPortalContent
+    class="item"
+  ><app-input-card-root></app-input-card-root>
   </ng-template>
 </div>
 
