@@ -7,7 +7,7 @@ export const initialState: FieldStyle = {
   styles: [],
   input: {
     label: 'input label',
-    backcolour: '250, 250, 250',
+    backcolour: '255, 255, 255',
     placeholder: '',
     width: '400',
     height: '40',
@@ -17,7 +17,7 @@ export const initialState: FieldStyle = {
   },
   textarea: {
     label: 'textarea label',
-    backcolour: '250, 250, 250',
+    backcolour: '255, 255, 255',
     placeholder: '',
     width: '400',
     height: '50',
@@ -27,7 +27,7 @@ export const initialState: FieldStyle = {
   },
   button:{
     label: 'button',
-    backcolour: '230, 230, 230',
+    backcolour: '235, 235, 235',
     width: '100',
     placeholder: '',
     height: '40',
@@ -37,7 +37,7 @@ export const initialState: FieldStyle = {
   },
   checkbox:{
     label: 'checkbox label',
-    backcolour: '250, 250, 250',
+    backcolour: '255, 255, 255',
     placeholder: '',
     width: '400',
     height: '30',
@@ -47,7 +47,7 @@ export const initialState: FieldStyle = {
   },
   select:{
     label: 'select label',
-    backcolour: '250, 250, 250',
+    backcolour: '255, 255, 255',
     width: '400',
     placeholder: '',
     height: '40',

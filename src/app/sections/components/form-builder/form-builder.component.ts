@@ -22,7 +22,9 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
 
   public formStyles?: {[p: string]: string | boolean | []} | undefined;
   public form: never[] | string[] = [];
-  public formValues: {value: string}[]= [];
+  public formValues: {value: string, label: string}[]= [];
+  public isFormComplete: boolean = false;
+  public isShowValue: boolean = false;
   public backgroundColor: string = '';
   public ids: string[] = [];
   public click: string = '';
@@ -39,12 +41,12 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
       .subscribe( message => this.deleteElem(message))
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.store.select(getFormStyle)
       .pipe(
         takeUntil(this.unsubscribe$),
         map(s => {
-          if (s) {
+          if (s && !this.isFormComplete) {
             this.formStyles = s
             this.backgroundColor = `rgb(${s['backcolour']})`;
             this.textColor = `rgb(${s['colour']})`;
@@ -53,21 +55,23 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
       .subscribe()
   }
 
-  drop(event: CdkDragDrop<string[]>): void{
-    if (event.previousContainer === event.container) {
-      this.changePos(this.ids, event.previousIndex, event.currentIndex);
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      copyArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      const id = uuidv4()
-      this.addField(id, this.form[event.currentIndex])
-      this.ids.splice(event.currentIndex, 0, id)
-      this.formValues.splice(event.currentIndex, 0, {value: ''})
+  drop(event: CdkDragDrop<string[]>): void {
+    if (!this.isFormComplete ) {
+      if (event.previousContainer === event.container) {
+        this.changePos(this.ids, event.previousIndex, event.currentIndex);
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        copyArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        const id = uuidv4()
+        this.addField(id, this.form[event.currentIndex])
+        this.ids.splice(event.currentIndex, 0, id)
+        this.formValues.splice(event.currentIndex, 0, {value: '', label: ''})
+      }
     }
   }
 
@@ -80,25 +84,38 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
     arr[curr] = elem;
   }
 
-  addField (id: string, typeField: string): void{
+  addField (id: string, typeField: string): void {
     this.store.dispatch(createField({id: id, typeField: typeField}))
   }
 
-  deleteElem (id: string): void{
+  deleteElem (id: string): void {
     const index = this.ids.indexOf(id);
     this.ids.splice(index, 1)
     this.form.splice(index, 1)
   }
 
-  selectInput(type: string, id: string[]): void{
+  selectInput(type: string, id: string[]): void {
     this.click = id[0]
     this.sharedDataService.sendMessage([
       type, id
     ]);
   }
 
-  generateForm(): void{
-    console.log(this.formValues);
+  showFormValue(): void {
+    if (this.isFormComplete) {
+      this.isShowValue = true;
+      setTimeout(() => {
+        this.isShowValue = false;
+      }, 5000)
+    }
+  }
+
+  generateForm(): void {
+    this.isFormComplete = !this.isFormComplete;
+  }
+
+  addItem(newItem: string, id: number) {
+    this.formValues[id].label = newItem
   }
 
 }

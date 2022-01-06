@@ -13,6 +13,10 @@ export const deleteField = createAction(
   '[Field] deleteField',
   props<{id: string}>());
 
+export const setValue = createAction(
+  '[Field] setValueField',
+  props<{id: string, value: string}>());
+
 export const setForm = createAction(
   '[Form] setForm',
   props<{styles: any}>());

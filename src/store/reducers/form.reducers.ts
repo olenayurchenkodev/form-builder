@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { addOption, createField, deleteField, setAuth, setField, setForm } from "../actions/form.actions";
+import {addOption, createField, deleteField, setAuth, setField, setForm, setValue} from "../actions/form.actions";
 import { initialState } from "../../app/config";
 
 
@@ -75,6 +75,14 @@ export const FormReducer = createReducer(
     // console.log('in reducer',state.styles, option)
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[state.id.indexOf(id[0])].newOption.push(option);
+    return {...state,
+      styles: entrie
+    }
+  }),
+  on(setValue, (state, {id, value})=>{
+    console.log('in reducer', value, id)
+    let entrie = JSON.parse(JSON.stringify(state.styles));
+    entrie[state.id.indexOf(id[0])].value = value;
     return {...state,
       styles: entrie
     }

@@ -27,6 +27,7 @@
       [(ngModel)]="value"
       [id]="id"
       [required]="required"
+      (ngModelChange)="addNewItem(styles!['label'])"
     ><label
       [for]="id"
     >{{ styles && styles['label'] }}</label>
@@ -51,6 +52,7 @@
       [(ngModel)]="value"
       [id]="id"
       [required]="required"
+      (ngModelChange)="addNewItem(styles!['label'])"
       [ngStyle]="{
             'width.px': styles && styles['width'],
             'height.px': styles && styles['height'],
@@ -77,6 +79,7 @@
       [id]="id"
       [required]="required"
       [placeholder]="styles && styles['placeholder']"
+      (ngModelChange)="addNewItem(styles!['label'])"
       [ngStyle]="{
           'width.px': styles && styles['width'],
           'height.px': styles && styles['height'],
@@ -97,6 +100,7 @@
       [(ngModel)]="value"
       [required]="required"
       [placeholder]="styles && styles['placeholder']"
+      (ngModelChange)="addNewItem(styles!['label'])"
       [ngStyle]="{
           'width.px': styles && styles['width'],
           'height.px': styles && styles['height'],

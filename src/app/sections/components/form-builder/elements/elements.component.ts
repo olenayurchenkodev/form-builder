@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { map } from "rxjs/operators";
@@ -30,6 +30,12 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
   @Input() type = '';
   @Input() id: string = '';
   @Input() selected: string = '';
+  @Input() isCompleted: boolean = false;
+  @Output() newItemEvent = new EventEmitter<string>();
+
+  addNewItem(value: string): void {
+    this.newItemEvent.emit(value);
+  }
 
   public constructor(
     protected store: Store,
@@ -42,7 +48,7 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
       .pipe(
         takeUntil(this.unsubscribe$),
         map(s => {
-          if (s) {
+          if (s && !this.isCompleted) {
             this.styles = s;
             this.backgroundColor = `rgb(${s['backcolour']})`;
             this.styles ? (this.required = s.required): null
@@ -63,6 +69,7 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
 
   onChange: any = () => {}
   onTouch: any = () => {}
+
   set value(val: any){
     this.onChange(val)
     this.onTouch(val)

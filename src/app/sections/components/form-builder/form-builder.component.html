@@ -19,7 +19,7 @@
     <form
       [class]="'form-element'"
       #customForm="ngForm"
-      (ngSubmit)="customForm.form.valid && generateForm()"
+      (ngSubmit)="customForm.form.valid && showFormValue()"
       novalidate
     ><p>{{ formStyles && formStyles['label'] }}</p>
       <div
@@ -33,6 +33,8 @@
           [name]="form[i]"
           [id]="item"
           [selected]="click"
+          [isCompleted]="isFormComplete"
+          (newItemEvent)="addItem($event, i)"
           (click)="selectInput(form[i],[item])"
         ></app-elements>
       </div>
@@ -43,8 +45,21 @@
     <button
       mat-button
       (click)="generateForm()"
-      *ngIf="formValues.length !== 0"
-    >Save Form</button>
+      *ngIf="form.length !== 0"
+    >{{!isFormComplete ? 'Save Form' : 'Continue Change'}}</button>
   </div>
 
+</div>
+
+<div
+  class="form-value"
+  *ngIf="isShowValue"
+><div
+  *ngFor="let item of formValues">
+    <h5 *ngIf="item.value">{{item.label + ": " + item.value}}</h5>
+  </div>
+  <button
+    mat-button
+    (click)="isShowValue = false"
+  >Close</button>
 </div>
