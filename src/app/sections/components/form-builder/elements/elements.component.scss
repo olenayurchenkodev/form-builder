@@ -8,8 +8,8 @@
 }
 
 label {
-  font-size: 18px;
-  line-height: 17px;
+  font-size: $regular;
+  line-height: 1rem;
 }
 
 .button {
@@ -27,7 +27,7 @@ label {
   padding-bottom: 10px;
   label {
     padding: 3px;
-    font-size: 18px;
+    font-size: $regular;
   }
 }
 

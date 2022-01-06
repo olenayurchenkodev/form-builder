@@ -62,8 +62,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   }
 
   changePos (arr: any[], prev: number, curr: number): void {
-    let elem = arr[prev]
-    let i = prev
+    let elem = arr[prev]; let i = prev
     while (arr[i] !== arr[curr]) {
       if (prev < curr) {arr[i] = arr[i + 1]; i++;}
       else {arr[i] = arr[i - 1]; i--;}

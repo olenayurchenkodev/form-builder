@@ -1,10 +1,11 @@
 @import 'src/app/less/variables';
 
 .accordion-container {
-  width: 450px;
+  width: 28.125rem;
   margin-left: 25px;
 
   h3 {
+    font-size: $header;
     text-align: center;
   }
 
@@ -24,7 +25,7 @@
   }
 
   .accordion-item-button {
-    font-size: 0.85em;
+    font-size: $content;
     color: #999;
   }
 
