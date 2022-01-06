@@ -7,9 +7,9 @@ import { initialState } from "../../app/config";
 export interface FieldStyle{
   id: string[],
   styles: any[],
-  input?: { [key: string]: string | boolean },
-  textarea?: { [key: string]: string | boolean },
-  button?: { [key: string]: string },
+  input?: { [key: string]: string | boolean | []  },
+  textarea?: { [key: string]: string | boolean | []  },
+  button?: { [key: string]: string | boolean | []  },
   checkbox?: { [key: string]: string | boolean | [] },
   select?: { [key: string]: string | boolean | [] },
   Form?: { [key: string]: string | boolean | [] },
@@ -31,7 +31,6 @@ export const FormReducer = createReducer(
     };
   }),
   on(setField, (state, {id, styles})=>{
-    console.log(styles)
     let newStyles: any = {};
     for (let item in styles){
       styles[item] && (item !== 'newOption' && item !== 'required')?

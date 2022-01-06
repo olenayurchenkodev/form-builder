@@ -4,10 +4,10 @@
   <div
     class="list"
     [ngStyle]="{
-          'color': formStyles && formStyles['colour'],
-          'background': formStyles && formStyles['backcolour'],
+          'color': textColor,
+          'background': backgroundColor,
           'border-style': formStyles && formStyles['border'],
-          'font-size': formStyles && formStyles['fontSize'],
+          'font-size.px': formStyles && formStyles['fontSize'],
           'font-weight': formStyles && formStyles['fontWeight']
     }"
     cdkDropList

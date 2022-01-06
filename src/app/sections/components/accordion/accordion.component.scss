@@ -11,7 +11,7 @@
 
   .accordion-item {
     display: block;
-    border: solid 1px #ccc;
+    border: solid 1px $border;
   }
 
   .accordion-item + .accordion-item {
@@ -36,7 +36,7 @@
 
   .accordion-item-title:hover {
     cursor: pointer;
-    background-color: #eee;
+    background-color: $hover;
   }
 
   .accordion-item:first-child {

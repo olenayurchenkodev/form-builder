@@ -18,12 +18,15 @@ import { BaseClass } from "../../../base.class";
   styleUrls: ['./form-builder.component.scss']
 })
 export class FormBuilderComponent extends BaseClass implements OnInit{
+  private receiveData:Subscription;
+
   public formStyles?: {[p: string]: string | boolean | []} | undefined;
   public form: never[] | string[] = [];
-  public ids: string[] = [];
   public formValues: {value: string}[]= [];
+  public backgroundColor: string = '';
+  public ids: string[] = [];
   public click: string = '';
-  public receiveData:Subscription;
+  public textColor: string = '';
 
   constructor(
     private store: Store,
@@ -32,6 +35,7 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   ) {
     super();
     this.receiveData = this.deleteElemService.getClickEvent()
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe( message => this.deleteElem(message))
   }
 
@@ -39,7 +43,13 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
     this.store.select(getFormStyle)
       .pipe(
         takeUntil(this.unsubscribe$),
-        map(s => this.formStyles = s ))
+        map(s => {
+          if (s) {
+            this.formStyles = s
+            this.backgroundColor = `rgb(${s['backcolour']})`;
+            this.textColor = `rgb(${s['colour']})`;
+          }
+        } ))
       .subscribe()
   }
 

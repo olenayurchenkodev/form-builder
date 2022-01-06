@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { map } from "rxjs/operators";
@@ -21,13 +21,15 @@ import { BaseClass } from "src/app/base.class";
   ]
 })
 export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
+  public selectedClass = '';
+  public styles: { [key: string]: string } | undefined;
+  public backgroundColor: string = '';
+  public required: boolean = false;
+  public options = [];
+
   @Input() type = '';
   @Input() id: string = '';
   @Input() selected: string = '';
-  public selectedClass = '';
-  public styles: { [key: string]: string } | undefined;
-  public required: boolean = false;
-  public options = [];
 
   public constructor(
     protected store: Store,
@@ -40,9 +42,12 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
       .pipe(
         takeUntil(this.unsubscribe$),
         map(s => {
-          this.styles = s;
-          this.styles ? (this.required = s.required): null
-          this.styles ? (this.options = s.newOption): null
+          if (s) {
+            this.styles = s;
+            this.backgroundColor = `rgb(${s['backcolour']})`;
+            this.styles ? (this.required = s.required): null
+            this.styles ? (this.options = s.newOption): null
+          }
         })
       )
       .subscribe()

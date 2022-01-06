@@ -1,8 +1,12 @@
 import { FormControl, FormGroup } from "@angular/forms";
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Store } from "@ngrx/store";
 
 import { setForm } from "src/store/actions/form.actions";
+import {getFormStyle} from "../../../../../store/selectors/form.selectors";
+import {takeUntil} from "rxjs";
+import {map} from "rxjs/operators";
+import {BaseClass} from "../../../../base.class";
 
 
 @Component({
@@ -10,12 +14,12 @@ import { setForm } from "src/store/actions/form.actions";
   templateUrl: './form-styles.component.html',
   styleUrls: ['./form-styles.component.scss']
 })
-export class FormStylesComponent{
+export class FormStylesComponent extends BaseClass implements OnInit{
   public customStyles?: { [key: string]: string | boolean };
-  public border = ['none', 'dotted', 'solid'];
-  public fontWeight = [ "lighter","normal","bold"];
+  public border: string[] = ['none', 'dotted', 'solid'];
+  public fontWeight: string[] = [ "lighter","normal","bold"];
 
-  formStyle = new FormGroup({
+  public formStyle = new FormGroup({
     label: new FormControl(),
     colour: new FormControl(),
     backcolour: new FormControl(),
@@ -26,16 +30,30 @@ export class FormStylesComponent{
 
   constructor(
     private store: Store
-  ) { }
+  ) {
+    super();
+  }
+
+  ngOnInit(): void{
+    this.store.select(getFormStyle)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        map((s: any) => {
+          if (s) {
+            this.formStyle.setValue(s)
+          }
+        } ))
+      .subscribe()
+  }
 
   sendStyles(): void{
     this.customStyles = {
-      label: this.formStyle.get('label')?.value,
-      colour: `rgb(${this.formStyle.get('colour')?.value})`,
-      backcolour: `rgb(${this.formStyle.get('backcolour')?.value})`,
-      border: this.formStyle.get('border')?.value,
-      fontSize: `${this.formStyle.get('fontSize')?.value}px`,
-      fontWeight: this.formStyle.get('fontWeight')?.value
+      label: this.formStyle.value.label,
+      colour: `${this.formStyle.value.colour}`,
+      backcolour: `${this.formStyle.value.backcolour}`,
+      border: this.formStyle.value.border,
+      fontSize: `${this.formStyle.value.fontSize}`,
+      fontWeight: this.formStyle.value.fontWeight
     }
     this.store.dispatch(setForm({styles: this.customStyles}));
   }

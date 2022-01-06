@@ -21,7 +21,7 @@ export class FieldStylesComponent extends BaseClass{
     this.receiveData = this.sharedDataService.getClickEvent()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe( message => {
-        this.elemData = message
+        this.elemData = message;
       })
   }
 

@@ -4,10 +4,10 @@
     class="button"
   ><button
     [ngStyle]="{
-      'width': styles!['width'],
-      'height': styles!['height'],
+      'width.px': styles!['width'],
+      'height.px': styles!['height'],
       'border': styles!['border'],
-      'background': styles!['backcolour']
+      'background': backgroundColor
     }">
       {{ styles ? styles['label'] : 'button' }}
     </button>
@@ -17,9 +17,9 @@
     *ngIf="type === 'checkbox'"
     [class]="type"
     [ngStyle]="{
-      'width': styles!['width'],
-      'height': styles!['height'],
-      'background': styles!['backcolour']
+      'width.px': styles!['width'],
+      'height.px': styles!['height'],
+      'background': backgroundColor
       }">
     <input
       type="checkbox"
@@ -52,9 +52,9 @@
       [id]="id"
       [required]="required"
       [ngStyle]="{
-            'width': styles && styles['width'],
-            'height': styles && styles['height'],
-            'background': styles && styles['backcolour']
+            'width.px': styles && styles['width'],
+            'height.px': styles && styles['height'],
+            'background': backgroundColor
         }"
     ><option
       *ngFor="let item of options"
@@ -78,9 +78,9 @@
       [required]="required"
       [placeholder]="styles && styles['placeholder']"
       [ngStyle]="{
-          'width': styles && styles['width'],
-          'height': styles && styles['height'],
-          'background': styles && styles['backcolour']
+          'width.px': styles && styles['width'],
+          'height.px': styles && styles['height'],
+          'background': backgroundColor
       }">
       <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
         <div class="error">Field is required.</div>
@@ -98,9 +98,9 @@
       [required]="required"
       [placeholder]="styles && styles['placeholder']"
       [ngStyle]="{
-          'width': styles && styles['width'],
-          'height': styles && styles['height'],
-          'background': styles && styles['backcolour']
+          'width.px': styles && styles['width'],
+          'height.px': styles && styles['height'],
+          'background': backgroundColor
       }"></textarea>
       <div *ngIf="field.invalid && (field.dirty || field.touched) && field.errors?.['required']">
         <div class="error">Field is required.</div>
