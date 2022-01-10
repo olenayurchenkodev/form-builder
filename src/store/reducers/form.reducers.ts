@@ -16,7 +16,7 @@ export interface FieldStyle{
   Auth: string
 }
 
-export const FormReducer = createReducer(
+export const FormReducer = createReducer<FieldStyle>(
   initialState,
   on(createField, (state, {id, typeField})=>{
     let type = null;

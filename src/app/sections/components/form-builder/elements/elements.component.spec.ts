@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementsComponent } from './elements.component';
-import {StoreModule} from "@ngrx/store";
+import {createFeatureSelector, StoreModule} from "@ngrx/store";
 import {FormReducer} from "../../../../../store/reducers/form.reducers";
-import {RouterModule} from "@angular/router";
+import {Router, RouterModule} from "@angular/router";
 import {AuthComponent} from "../../../../auth/auth.component";
 import {SectionsComponent} from "../../../sections.component";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -13,13 +13,20 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ReactiveFormsModule} from "@angular/forms";
-import {provideMockStore} from "@ngrx/store/testing";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {initialState} from "../../../../config";
+import {BrowserModule} from "@angular/platform-browser";
+import {MatIconModule} from "@angular/material/icon";
+import {EventEmitter, SimpleChange} from "@angular/core";
 
 describe('ElementsComponent', () => {
   let component: ElementsComponent;
   let fixture: ComponentFixture<ElementsComponent>;
+  let router: Router;
+  let store: MockStore;
+  let selectFieldStyles;
+  let mockAuthState: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -38,23 +45,94 @@ describe('ElementsComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatCheckboxModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        MatIconModule,
         BrowserAnimationsModule,
-        ReactiveFormsModule
       ],
       providers: [
         provideMockStore({ initialState }),
       ]
-    })
+    }).overrideTemplate(ElementsComponent,`<span></span>`)
     .compileComponents();
+
+    store = TestBed.inject(MockStore);
+    router = TestBed.inject(Router);
+    router.initialNavigation();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ElementsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    selectFieldStyles = createFeatureSelector<
+      { [key: string]: string | boolean | []  }
+      >('fieldStyles');
+    mockAuthState = store.overrideSelector(
+      selectFieldStyles,
+      {
+        label: 'input label',
+        backcolour: '255, 255, 255',
+        placeholder: '',
+        width: '400',
+        height: '40',
+        border: 'none',
+        required: '',
+        newOption: ''
+      }
+    );
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('ngOnInitWorks', () => {
+    component.isCompleted = false;
+    component.ngOnInit();
+    let styles = {};
+    store.select(mockAuthState).subscribe(s => {
+      styles = s
+    })
+    expect(styles).toEqual({
+      label: 'input label',
+      backcolour: '255, 255, 255',
+      placeholder: '',
+      width: '400',
+      height: '40',
+      border: 'none',
+      required: '',
+      newOption: ''
+    });
   });
+  it('ngOnInitWorks', () => {
+    let styles = {}
+    component.isCompleted = true;
+    fixture.detectChanges();
+    store.select(mockAuthState).subscribe(s => {
+      if (!component.isCompleted) {styles = s}
+    })
+    expect(styles).toEqual({});
+  });
+  it('ngOnChangesSelected', () => {
+    component.selected = '123';
+    component.id = '123';
+    component.ngOnChanges({
+      prop1: new SimpleChange('old', 'new', false),
+    });
+    expect(component.selectedClass).toEqual('active');
+  });
+  it('ngOnChangesNotActive', () => {
+    component.selected = '123';
+    component.id = '122';
+    component.ngOnChanges({
+      prop1: new SimpleChange('old', 'new', false),
+    });
+    expect(component.selectedClass).toEqual('');
+  });
+  it('addNewItem', () => {
+    expect(component.newItemEvent).toEqual(new EventEmitter<string>());
+  });
+  it('writeValue', (async () => {
+    const spy = spyOnProperty(component, 'value', 'set').and.returnValue('ddd');
+    component.writeValue('ddd')
+    expect(spy).toHaveBeenCalled();
+  }));
 });

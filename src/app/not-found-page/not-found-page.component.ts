@@ -10,15 +10,15 @@ import { EPages } from "../../enums/styles.enum";
   styleUrls: ['./not-found-page.component.scss']
 })
 export class NotFoundPageComponent implements OnInit {
-  public way = '';
+  public way: string = EPages.auth;
+  public auth: string | null = localStorage.getItem('userData')
 
   constructor(
     public router: Router
   ) { }
 
   ngOnInit(): void {
-    const auth = localStorage.getItem('userData')
-    auth ?
+    this.auth ?
       this.way = EPages.home :
       this.way = EPages.auth
   }

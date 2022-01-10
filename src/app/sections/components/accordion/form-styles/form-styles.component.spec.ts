@@ -17,6 +17,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { initialState } from "../../../../config";
 import {FirstCamelPipe} from "../../../../../pipes/first-camel.pipe";
+import {BrowserModule} from "@angular/platform-browser";
+import {MatIconModule} from "@angular/material/icon";
 
 describe('FormStylesComponent', () => {
   let routes: Router;
@@ -34,6 +36,8 @@ describe('FormStylesComponent', () => {
         DragDropModule,
         MatInputModule,
         MatButtonModule,
+        BrowserModule,
+        MatIconModule,
         BrowserAnimationsModule,
         RouterModule.forRoot([
           { path: '', component: AuthComponent, pathMatch: 'full' },

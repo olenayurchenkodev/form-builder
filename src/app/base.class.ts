@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 
 @Directive()
 export abstract class BaseClass {
-  protected unsubscribe$: Subject<void> = new Subject();
+  public unsubscribe$: Subject<void> = new Subject();
 
   onDestroy(): void{
     this.unsubscribe$.next();

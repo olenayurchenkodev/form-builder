@@ -117,5 +117,4 @@ export class FormBuilderComponent extends BaseClass implements OnInit{
   addItem(newItem: string, id: number) {
     this.formValues[id].label = newItem
   }
-
 }

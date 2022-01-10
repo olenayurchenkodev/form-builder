@@ -4,10 +4,10 @@ import { Store } from "@ngrx/store";
 
 import { addOption, deleteField, setField } from "src/store/actions/form.actions";
 import { DeleteElemService } from "src/services/deleteElem.service";
-import {getFieldStyle } from "../../../../../../store/selectors/form.selectors";
-import {takeUntil} from "rxjs";
-import {map} from "rxjs/operators";
-import {BaseClass} from "../../../../../base.class";
+import { getFieldStyle } from "../../../../../../store/selectors/form.selectors";
+import { takeUntil } from "rxjs";
+import { map } from "rxjs/operators";
+import { BaseClass } from "../../../../../base.class";
 
 
 @Component({
@@ -16,8 +16,8 @@ import {BaseClass} from "../../../../../base.class";
   styleUrls: ['./element-styles.component.scss']
 })
 export class ElementStylesComponent extends BaseClass implements OnChanges{
-  public customStyles?: { [key: string]: string | boolean };
-  public border=["none","dotted","solid"];
+  public customStyles: { [key: string]: string | boolean } = {};
+  public border: string[] = ["none","dotted","solid"];
 
   @Input() type: string = '';
   @Input() id: string = '';
@@ -36,7 +36,9 @@ export class ElementStylesComponent extends BaseClass implements OnChanges{
   constructor(
     private store: Store,
     private deleteElemService: DeleteElemService
-  ) { super(); }
+  ) {
+    super();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.store.select(getFieldStyle(this.id[0]))
@@ -52,12 +54,12 @@ export class ElementStylesComponent extends BaseClass implements OnChanges{
   sendStyles(): void {
     this.customStyles = {
       label: this.formStyle.value.label,
-      backcolour: `${this.formStyle.value.backcolour}`,
-      width: `${this.formStyle.value.width}`,
-      height: `${this.formStyle.value.height}`,
+      backcolour: this.formStyle.value.backcolour,
+      width: this.formStyle.value.width,
+      height: this.formStyle.value.height,
       border: this.formStyle.value.border,
       required: this.formStyle.value.required,
-      placeholder: this.formStyle.get('placeholder')?.value,
+      placeholder: this.formStyle.value.placeholder,
       newOption: '',
     }
     this.store.dispatch(setField({id: this.id, styles: this.customStyles}));

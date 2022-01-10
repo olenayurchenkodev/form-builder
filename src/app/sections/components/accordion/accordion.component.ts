@@ -14,7 +14,7 @@ export class AccordionComponent extends BaseClass{
   public items = ['Form Styles', 'Field Styles'];
   // public expandedIndex = 0;
 
-  public elemData = [];
+  public elemData: string[] = [];
   private receiveData: Subscription;
 
   constructor(

@@ -22,7 +22,7 @@ import { BaseClass } from "src/app/base.class";
 })
 export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
   public selectedClass = '';
-  public styles: { [key: string]: string } | undefined;
+  public styles: { [key: string]: string } = {};
   public backgroundColor: string = '';
   public required: boolean = false;
   public options = [];
@@ -32,10 +32,6 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
   @Input() selected: string = '';
   @Input() isCompleted: boolean = false;
   @Output() newItemEvent = new EventEmitter<string>();
-
-  addNewItem(value: string): void {
-    this.newItemEvent.emit(value);
-  }
 
   public constructor(
     protected store: Store,
@@ -67,20 +63,27 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
     }
   }
 
-  onChange: any = () => {}
-  onTouch: any = () => {}
+  addNewItem(value: string): void {
+    this.newItemEvent.emit(value);
+  }
 
-  set value(val: any){
+  private onChange: (value: string) => void = () => {}
+  private onTouch: (val: string) => void = () => {}
+
+  set value(val: string) {
     this.onChange(val)
     this.onTouch(val)
   }
-  writeValue(value: any){
+
+  writeValue(value: string): void {
     this.value = value
   }
-  registerOnChange(fn: any){
+
+  registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn
   }
-  registerOnTouched(fn: any){
+
+  registerOnTouched(fn: () => void): void {
     this.onTouch = fn
   }
 

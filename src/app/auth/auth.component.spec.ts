@@ -1,4 +1,4 @@
-import { TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import { AuthComponent } from "./auth.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import { RouterModule, Router} from "@angular/router";
@@ -13,11 +13,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SectionsComponent} from "../sections/sections.component";
-import {RouterTestingModule} from "@angular/router/testing";
 import {NotFoundPageComponent} from "../not-found-page/not-found-page.component";
-import { initialState } from "../config";
-import {StoreModule} from "@ngrx/store";
-import {FormReducer} from "../../store/reducers/form.reducers";
+import {createFeatureSelector, StoreModule} from "@ngrx/store";
+import { FormReducer} from "../../store/reducers/form.reducers";
 
 describe('AuthComponent', () => {
   let store: MockStore;
@@ -43,7 +41,6 @@ describe('AuthComponent', () => {
         MatSelectModule,
         MatIconModule,
         BrowserAnimationsModule,
-        RouterTestingModule,
         StoreModule.forRoot({fieldStyles: FormReducer}),
       ],
       declarations: [
@@ -51,31 +48,35 @@ describe('AuthComponent', () => {
       ],
       providers: [
         AuthService,
-        provideMockStore({ initialState }),
+        provideMockStore({}),
       ]
     }).compileComponents();
     router = TestBed.get(Router);
     router.initialNavigation();
     store = TestBed.inject(MockStore);
     guard = TestBed.inject(AuthService);
-
   });
   it('getErrorMessageFalse', () => {
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
     const component = fixture.componentInstance;
-    let pass = component.formAuth.controls['password'];
-    expect(pass.valid).toBeFalsy();
-    // expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
+    let password = component.formAuth.controls['password'];
+    password.setValue('password')
+    let username = component.formAuth.controls['username'];
+    username.setValue('username')
+    let pass = component.getErrorMessage('password')
+    expect(pass).toEqual('')
   });
   it('getErrorMessageTrue', () => {
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
     const component = fixture.componentInstance;
-    let pass = component.formAuth.controls['password'];
-    pass.setValue('123');
-    expect(pass.valid).toBeTruthy();
-    // expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
+    let password = component.formAuth.controls['password'];
+    password.setValue('')
+    let username = component.formAuth.controls['username'];
+    username.setValue('username')
+    let pass = component.getErrorMessage('password')
+    expect(pass).toEqual('This field is required')
   });
   it('sendLoginForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
@@ -105,13 +106,20 @@ describe('AuthComponent', () => {
     expect(component.sendLoginForm).toHaveBeenCalled();
     // expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });
-  it('setToken',  (async () => {
+  it('setToken',   (async ()=> {
+    const selectAuth = createFeatureSelector<{Auth: string}>('fieldStyles');
+    const mockAuthState = store.overrideSelector(
+      selectAuth,
+      {Auth: 'token'}
+    );
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
+    spyOn(store, 'dispatch');
     const component = fixture.componentInstance;
-    spyOn(component, 'setToken')
     await component.setToken('token');
-    expect(component.setToken).toHaveBeenCalled();
-    // expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
+    let token = '';
+    expect(store.dispatch).toHaveBeenCalled()
+    await store.select(mockAuthState).subscribe(s => s ? token = s.Auth : null)
+    expect(token).toEqual('token');
   }));
 });

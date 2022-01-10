@@ -19,7 +19,7 @@ import { URL } from "../config";
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent extends BaseClass{
-  public hide = true;
+  public hide: boolean = true;
 
   constructor(
     private http: HttpClient,

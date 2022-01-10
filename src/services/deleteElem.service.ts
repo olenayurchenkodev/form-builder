@@ -6,7 +6,6 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DeleteElemService {
-
   private subject = new Subject<any>();
 
   sendMessage(message: any) {

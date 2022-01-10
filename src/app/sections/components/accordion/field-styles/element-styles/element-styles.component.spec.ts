@@ -1,33 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementStylesComponent } from './element-styles.component';
-import {StoreModule} from "@ngrx/store";
-import {FormReducer} from "../../../../../../store/reducers/form.reducers";
+import {createFeatureSelector, StoreModule} from "@ngrx/store";
 import {Router, RouterModule} from "@angular/router";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {AuthComponent} from "../../../../../auth/auth.component";
 import {SectionsComponent} from "../../../../sections.component";
 import {RouterTestingModule} from "@angular/router/testing";
-import {initialState} from "../../../../../config";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {BrowserModule} from "@angular/platform-browser";
+import {MatIconModule} from "@angular/material/icon";
+import {DeleteElemService} from "../../../../../../services/deleteElem.service";
 
 describe('ElementStylesComponent', () => {
   let component: ElementStylesComponent;
   let fixture: ComponentFixture<ElementStylesComponent>;
-  let routes: Router;
+  let router: Router;
   let store: MockStore;
+  let deleteElemService = new DeleteElemService();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ElementStylesComponent ],
       imports: [
-        StoreModule.forRoot( {fieldStyles: FormReducer}),
+        StoreModule.forRoot( {}),
         RouterModule.forRoot([
           { path: '', component: AuthComponent, pathMatch: 'full' },
           { path: 'login', component: AuthComponent},
@@ -40,16 +43,21 @@ describe('ElementStylesComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatCheckboxModule,
+        ReactiveFormsModule,
+        HttpClientTestingModule,
+        FormsModule,
+        BrowserModule,
+        MatIconModule,
         BrowserAnimationsModule,
-        ReactiveFormsModule
       ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({}),
       ]
     }).compileComponents();
 
     store = TestBed.inject(MockStore);
-    routes = TestBed.inject(Router);
+    router = TestBed.inject(Router);
+    router.initialNavigation();
   });
 
   beforeEach(() => {
@@ -58,7 +66,62 @@ describe('ElementStylesComponent', () => {
     fixture.detectChanges();
   });
 
+  it('onChanges', (async () => {
+    const selectFieldStyles = createFeatureSelector<
+      { [key: string]: string | boolean | []  }
+      >('fieldStyles');
+    const mockAuthState = store.overrideSelector(
+      selectFieldStyles,
+      {
+        label: 'input label',
+        backcolour: '255, 255, 255',
+        placeholder: '',
+        width: '400',
+        height: '40',
+        border: 'none',
+        required: false,
+        newOption: []
+      }
+    );
+    await store.select(mockAuthState).subscribe(s => {
+      component.formStyle.setValue(s)
+    })
+    expect(component.formStyle.value).toEqual({
+      label: 'input label',
+      backcolour: '255, 255, 255',
+      placeholder: '',
+      width: '400',
+      height: '40',
+      border: 'none',
+      required: false,
+      newOption: []
+    });
+  }));
   it('sendStyles', () => {
-    expect(component).toBeTruthy();
+    spyOn(store, 'dispatch')
+    component.customStyles = {
+      label: 'select label',
+      backcolour: '255, 255, 255',
+      width: '400',
+      placeholder: '',
+      height: '40',
+      border: 'none',
+      required: false,
+      newOption: ''
+    }
+    component.sendStyles();
+    expect(store.dispatch).toHaveBeenCalled();
+  });
+  it('addOption', () => {
+    spyOn(store, 'dispatch')
+    component.addOption();
+    expect(store.dispatch).toHaveBeenCalled();
+  });
+  it('deleteElem', () => {
+    component.id = 'b'
+    spyOn(store, 'dispatch');
+    spyOn(deleteElemService, 'sendMessage');
+    component.deleteElem();
+    expect(store.dispatch).toHaveBeenCalled();
   });
 });

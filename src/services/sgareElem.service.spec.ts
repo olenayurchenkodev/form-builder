@@ -1,24 +1,24 @@
 import {inject, TestBed} from '@angular/core/testing';
-import {DeleteElemService} from "./deleteElem.service";
+import {SharedDataService} from "./shareElemData.service";
 
-describe('DeleteElemService', () => {
+describe('SharedDataService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        DeleteElemService
+        SharedDataService
       ],
     });
   });
   it('sendMessage',
-    inject([DeleteElemService],
-      (service: DeleteElemService) => {
+    inject([SharedDataService],
+      (service: SharedDataService) => {
         expect(service).toBeTruthy();
         service.sendMessage('message');
     })
   );
   it('getClickEvent',
-    inject([DeleteElemService],
-      (service: DeleteElemService) => {
+    inject([SharedDataService],
+      (service: SharedDataService) => {
       expect(service.getClickEvent().subscribe(s => s)).toBeDefined()
       }
       ))

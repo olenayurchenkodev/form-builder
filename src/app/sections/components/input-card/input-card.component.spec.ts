@@ -7,7 +7,7 @@ import {FormReducer} from "../../../../store/reducers/form.reducers";
 import {InputCardComponent} from "./input-card.component";
 import {AuthComponent} from "../../../auth/auth.component";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import { DragDropModule} from "@angular/cdk/drag-drop";
 import {SectionsComponent} from "../../sections.component";
 import {RouterTestingModule} from "@angular/router/testing";
 
@@ -52,8 +52,10 @@ describe('InputCardComponent', () => {
     const fixture = TestBed.createComponent(InputCardComponent);
     const component = fixture.componentInstance;
     spyOn(store, 'dispatch');
+    spyOn(routes, 'navigate');
     component.logout();
     fixture.detectChanges();
     expect(store.dispatch).toHaveBeenCalled();
+    expect(routes.navigate).toHaveBeenCalledWith(['/']);
   }));
 });
