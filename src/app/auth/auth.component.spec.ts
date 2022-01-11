@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import { AuthComponent } from "./auth.component";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import { RouterModule, Router} from "@angular/router";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from '../../services/authGuard.service'
@@ -16,11 +16,13 @@ import {SectionsComponent} from "../sections/sections.component";
 import {NotFoundPageComponent} from "../not-found-page/not-found-page.component";
 import {createFeatureSelector, StoreModule} from "@ngrx/store";
 import { FormReducer} from "../../store/reducers/form.reducers";
+import {ElementsComponent} from "../sections/components/form-builder/elements/elements.component";
 
 describe('AuthComponent', () => {
   let store: MockStore;
   let router: Router;
   let guard: AuthService;
+  let httpMock: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -50,12 +52,19 @@ describe('AuthComponent', () => {
         AuthService,
         provideMockStore({}),
       ]
-    }).compileComponents();
-    router = TestBed.get(Router);
+    }).overrideTemplate(ElementsComponent,`<span></span>`)
+      .compileComponents();
+    router = TestBed.inject(Router);
     router.initialNavigation();
     store = TestBed.inject(MockStore);
     guard = TestBed.inject(AuthService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('getErrorMessageFalse', () => {
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
@@ -78,6 +87,17 @@ describe('AuthComponent', () => {
     let pass = component.getErrorMessage('password')
     expect(pass).toEqual('This field is required')
   });
+  it('getErrorMessageNotExists', () => {
+    const fixture = TestBed.createComponent(AuthComponent);
+    fixture.detectChanges();
+    const component = fixture.componentInstance;
+    let password = component.formAuth.controls['password'];
+    password.setValue('')
+    let username = component.formAuth.controls['username'];
+    username.setValue('username')
+    let pass = component.getErrorMessage('pass')
+    expect(pass).toEqual('')
+  });
   it('sendLoginForm', () => {
     const fixture = TestBed.createComponent(AuthComponent);
     fixture.detectChanges();
@@ -87,8 +107,10 @@ describe('AuthComponent', () => {
     password.setValue('123')
     let username = component.formAuth.controls['username'];
     username.setValue('custom_user')
-    let button = fixture.debugElement.query(By.css('button'));
-    button.triggerEventHandler('click', null);
+    // const req = httpMock.expectOne(`${URL}/login`);
+    // expect(req.request.method).toBe("POST");
+    // req.flush(component.formAuth.value);
+    component.sendLoginForm()
     expect(component.sendLoginForm).toHaveBeenCalled();
     // expect(store.select(getAuth).subscribe(s => !!s)).toBeTruthy();
   });

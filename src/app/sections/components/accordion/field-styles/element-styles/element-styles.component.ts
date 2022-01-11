@@ -67,7 +67,7 @@ export class ElementStylesComponent extends BaseClass implements OnChanges{
 
   addOption(): void {
     this.store.dispatch(addOption({
-      id: this.id,
+      id: this.id[0],
       option: this.formStyle.value.newOption
     }));
   }

@@ -25,7 +25,15 @@ describe('AuthGuard', () => {
     inject([AuthService],
       (service: AuthService) => {
         let res = service.canActivate();
-        expect(res).toBeDefined();
+        expect(res).toBe(false);
+      })
+  );
+  it('isAuthenticatedNot',
+    inject([AuthService],
+      (service: AuthService) => {
+      service.auth = 'ddd'
+        let res = service.canActivate();
+        expect(res).toBe(true);
       })
   );
 });

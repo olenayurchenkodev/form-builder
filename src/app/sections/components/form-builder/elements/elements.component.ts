@@ -1,7 +1,6 @@
 import {Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Store } from "@ngrx/store";
-import { map } from "rxjs/operators";
 import { takeUntil } from "rxjs";
 
 import { getFieldStyle } from "src/store/selectors/form.selectors";
@@ -42,17 +41,16 @@ export class ElementsComponent extends BaseClass implements OnInit, OnChanges{
   ngOnInit(): void{
     this.store.select(getFieldStyle(this.id))
       .pipe(
-        takeUntil(this.unsubscribe$),
-        map(s => {
-          if (s && !this.isCompleted) {
-            this.styles = s;
-            this.backgroundColor = `rgb(${s['backcolour']})`;
-            this.styles ? (this.required = s.required): null
-            this.styles ? (this.options = s.newOption): null
-          }
-        })
+        takeUntil(this.unsubscribe$)
       )
-      .subscribe()
+      .subscribe(s => {
+        if (!this.isCompleted) {
+          this.styles = s;
+          this.backgroundColor = `rgb(${s['backcolour']})`;
+          this.styles ? (this.required = s.required): null
+          this.styles ? (this.options = s.newOption): null
+        }
+      })
   }
 
   ngOnChanges(changes: SimpleChanges) {

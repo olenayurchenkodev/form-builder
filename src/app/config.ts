@@ -45,7 +45,7 @@ export const initialState: FieldStyle = {
     border: 'none',
     newOption: []
   },
-  select:{
+  select: {
     label: 'select label',
     backcolour: '255, 255, 255',
     width: '400',

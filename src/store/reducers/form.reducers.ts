@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import {addOption, createField, deleteField, setAuth, setField, setForm, setValue} from "../actions/form.actions";
+import {addOption, createField, deleteField, setAuth, setField, setForm } from "../actions/form.actions";
 import { initialState } from "../../app/config";
 
 
@@ -33,13 +33,7 @@ export const FormReducer = createReducer<FieldStyle>(
   on(setField, (state, {id, styles})=>{
     let newStyles: any = {};
     for (let item in styles){
-      styles[item] && (item !== 'newOption' && item !== 'required')?
-        newStyles[item] = styles[item]:
-        newStyles[item] = state.styles[state.id.indexOf(id[0])][item]
-      if (item === 'newOption')
-      { newStyles.newOption = state.styles[state.id.indexOf(id[0])].newOption }
-      if (item === 'required')
-      { newStyles[item] = styles[item] }
+      newStyles[item] = styles[item]
     }
     let entrie = JSON.parse(JSON.stringify(state.styles));
     entrie[state.id.indexOf(id[0])] = newStyles;
@@ -59,30 +53,16 @@ export const FormReducer = createReducer<FieldStyle>(
   }),
   on(setForm, (state, {styles})=>{
     let newStyles: any = {};
-    if (state.Form){
-      for (let item in styles){
-        styles[item]?
-          newStyles[item] = styles[item]:
-          newStyles[item] = state.Form[item]
-      }
-      return  {...state,
-       Form: newStyles
-      };
+    for (let item in styles){
+      newStyles[item] = styles[item];
     }
-    return  {...state};
+    return  {...state,
+     Form: newStyles
+    };
   }),
   on(addOption, (state, {id, option})=>{
-    // console.log('in reducer',state.styles, option)
     let entrie = JSON.parse(JSON.stringify(state.styles));
-    entrie[state.id.indexOf(id[0])].newOption.push(option);
-    return {...state,
-      styles: entrie
-    }
-  }),
-  on(setValue, (state, {id, value})=>{
-    console.log('in reducer', value, id)
-    let entrie = JSON.parse(JSON.stringify(state.styles));
-    entrie[state.id.indexOf(id[0])].value = value;
+    entrie[state.id.indexOf(id)].newOption.push(option);
     return {...state,
       styles: entrie
     }

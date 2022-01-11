@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ElementStylesComponent } from './element-styles.component';
-import {createFeatureSelector, StoreModule} from "@ngrx/store";
+import { StoreModule} from "@ngrx/store";
 import {Router, RouterModule} from "@angular/router";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {AuthComponent} from "../../../../../auth/auth.component";
@@ -65,38 +65,12 @@ describe('ElementStylesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('onChanges', (async () => {
-    const selectFieldStyles = createFeatureSelector<
-      { [key: string]: string | boolean | []  }
-      >('fieldStyles');
-    const mockAuthState = store.overrideSelector(
-      selectFieldStyles,
-      {
-        label: 'input label',
-        backcolour: '255, 255, 255',
-        placeholder: '',
-        width: '400',
-        height: '40',
-        border: 'none',
-        required: false,
-        newOption: []
-      }
-    );
-    await store.select(mockAuthState).subscribe(s => {
-      component.formStyle.setValue(s)
-    })
-    expect(component.formStyle.value).toEqual({
-      label: 'input label',
-      backcolour: '255, 255, 255',
-      placeholder: '',
-      width: '400',
-      height: '40',
-      border: 'none',
-      required: false,
-      newOption: []
-    });
-  }));
+  // it('onChanges', (async () => {
+  //   component.ngOnChanges({
+  //     prop1: new SimpleChange('old', 'new', false),
+  //   });
+  //   expect(component.selectedClass).toEqual('active');
+  // }));
   it('sendStyles', () => {
     spyOn(store, 'dispatch')
     component.customStyles = {

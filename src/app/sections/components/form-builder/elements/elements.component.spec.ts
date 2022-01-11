@@ -18,7 +18,7 @@ import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {initialState} from "../../../../config";
 import {BrowserModule} from "@angular/platform-browser";
 import {MatIconModule} from "@angular/material/icon";
-import {EventEmitter, SimpleChange} from "@angular/core";
+import { SimpleChange} from "@angular/core";
 
 describe('ElementsComponent', () => {
   let component: ElementsComponent;
@@ -87,30 +87,25 @@ describe('ElementsComponent', () => {
   it('ngOnInitWorks', () => {
     component.isCompleted = false;
     component.ngOnInit();
-    let styles = {};
     store.select(mockAuthState).subscribe(s => {
-      styles = s
+      expect(s).toEqual({
+        label: 'input label',
+        backcolour: '255, 255, 255',
+        placeholder: '',
+        width: '400',
+        height: '40',
+        border: 'none',
+        required: '',
+        newOption: ''
+      })
     })
-    expect(styles).toEqual({
-      label: 'input label',
-      backcolour: '255, 255, 255',
-      placeholder: '',
-      width: '400',
-      height: '40',
-      border: 'none',
-      required: '',
-      newOption: ''
-    });
   });
-  it('ngOnInitWorks', () => {
-    let styles = {}
-    component.isCompleted = true;
-    fixture.detectChanges();
-    store.select(mockAuthState).subscribe(s => {
-      if (!component.isCompleted) {styles = s}
-    })
-    expect(styles).toEqual({});
-  });
+  // it('ngOnInitNotWorks', () => {
+  //   component.isCompleted = true;
+  //   fixture.detectChanges();
+  //   component.ngOnInit();
+  //   expect(component.styles).toEqual({});
+  // });
   it('ngOnChangesSelected', () => {
     component.selected = '123';
     component.id = '123';
@@ -128,7 +123,9 @@ describe('ElementsComponent', () => {
     expect(component.selectedClass).toEqual('');
   });
   it('addNewItem', () => {
-    expect(component.newItemEvent).toEqual(new EventEmitter<string>());
+    spyOn(component.newItemEvent, 'emit')
+    component.addNewItem('item');
+    expect(component.newItemEvent.emit).toHaveBeenCalledWith('item')
   });
   it('writeValue', (async () => {
     const spy = spyOnProperty(component, 'value', 'set').and.returnValue('ddd');
